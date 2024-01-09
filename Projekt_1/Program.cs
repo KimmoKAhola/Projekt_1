@@ -20,10 +20,10 @@ namespace Projekt_1
             //{
             //    ctx.Database.EnsureDeleted();
             //}
-            //using (var ctx = new DatabaseContext())
-            //{
-            //    ctx.Database.Migrate();
-            //}
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Migrate();
+            }
             var config = Configuration.Configure();
             using (var scope = config.BeginLifetimeScope())
             {
