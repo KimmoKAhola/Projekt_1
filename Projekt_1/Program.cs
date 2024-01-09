@@ -8,6 +8,7 @@ using Calculator.Mathematics;
 using Calculator.Interfaces;
 using Projekt_1.Container;
 using Autofac;
+using Database.Services;
 
 namespace Projekt_1
 {
@@ -26,18 +27,17 @@ namespace Projekt_1
             var config = Configuration.Configure();
             using (var scope = config.BeginLifetimeScope())
             {
-                var test = scope.Resolve<MathContext>();
+                var mathContext = scope.Resolve<MathContext>();
+                var databaseService = scope.Resolve<DatabaseService>();
                 using (var ctx = new DatabaseContext())
                 {
                     while (true)
                     {
                         Console.Write("Enter a number 1-6: ");
                         var choice = Convert.ToInt32(Console.ReadLine());
-                        IMathStrategy? math = test.SetStrategy(choice);
+                        IMathStrategy? math = mathContext.SetStrategy(choice);
 
-                        var mathCtx = new MathContext(math);
-
-                        var mathResult = mathCtx.Calculate(15, 35);
+                        var mathResult = mathContext.Calculate(15, 35);
 
                         var calculation = new MathCalculation
                         {
@@ -52,10 +52,8 @@ namespace Projekt_1
                             }
                         };
 
-                        ctx.Add(calculation);
-                        ctx.SaveChanges();
+                        databaseService.AddMathCalculation(calculation);
                         Console.WriteLine($"The result is: {mathResult}");
-
                     }
                 }
             }

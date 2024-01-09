@@ -2,6 +2,8 @@
 using Calculator.Interfaces;
 using Calculator.Mathematics;
 using Calculator.Mathematics.Operations;
+using Database.DatabaseConfiguration;
+using Database.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,9 @@ namespace Projekt_1.Container
             myBuilder.RegisterType<SquareRoot>().As<IMathStrategy>();
 
             myBuilder.RegisterType<MathContext>().AsSelf();
+
+            myBuilder.RegisterType<DatabaseContext>().AsSelf();
+            myBuilder.RegisterType<DatabaseService>().AsSelf();
 
             return myBuilder.Build();
         }
