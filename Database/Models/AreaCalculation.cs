@@ -17,5 +17,10 @@ namespace Database.Models
 
         [Required]
         public Result Result { get; set; } = null!;
+
+        public override string ToString()
+        {
+            return $"{Area} {Circumference}";
+        }
     }
 }
