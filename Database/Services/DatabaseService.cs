@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database.Services
 {
-    public class DatabaseService
+    public class DatabaseService : IDatabaseService
     {
         private DatabaseContext _dbContext;
 
@@ -17,10 +17,30 @@ namespace Database.Services
             _dbContext = new DatabaseContext();
         }
 
-        public void AddMathCalculation(MathCalculation calculation)
+        public void AddCalculation(MathCalculation calculation)
         {
             _dbContext.Calculation.Add(calculation);
             _dbContext.SaveChanges();
+        }
+
+        public void DeleteCalculation(MathCalculation calculation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadAllCalculations(MathCalculation calculation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadCalculation(MathCalculation calculation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCalculation(MathCalculation calculation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

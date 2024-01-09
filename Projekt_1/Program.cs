@@ -52,7 +52,7 @@ namespace Projekt_1
                             }
                         };
 
-                        databaseService.AddMathCalculation(calculation);
+                        databaseService.AddCalculation(calculation);
                         Console.WriteLine($"The result is: {mathResult}");
                     }
                 }
