@@ -20,6 +20,21 @@ namespace Projekt_1.Container
         {
             var myBuilder = new ContainerBuilder();
 
+            MathBuilder(myBuilder);
+            ShapeBuilder(myBuilder);
+            DatabaseBuilder(myBuilder);
+
+            return myBuilder.Build();
+        }
+
+        private static void DatabaseBuilder(ContainerBuilder myBuilder)
+        {
+            myBuilder.RegisterType<DatabaseContext>().AsSelf();
+            myBuilder.RegisterType<DatabaseService>().AsSelf();
+        }
+
+        private static void MathBuilder(ContainerBuilder myBuilder)
+        {
             myBuilder.RegisterType<Addition>().As<IMathStrategy>();
             myBuilder.RegisterType<Subtraction>().As<IMathStrategy>();
             myBuilder.RegisterType<Multiplication>().As<IMathStrategy>();
@@ -28,20 +43,16 @@ namespace Projekt_1.Container
             myBuilder.RegisterType<SquareRoot>().As<IMathStrategy>();
 
             myBuilder.RegisterType<MathContext>().AsSelf();
+        }
 
-
-
+        private static void ShapeBuilder(ContainerBuilder myBuilder)
+        {
             myBuilder.RegisterType<Parallelogram>().As<IShape>();
-            myBuilder.RegisterType<Rectangle>().As<AreaStrategy>();
+            myBuilder.RegisterType<Rectangle>().As<IShape>();
             myBuilder.RegisterType<Rhomboid>().As<IShape>();
             myBuilder.RegisterType<Triangle>().As<IShape>();
 
             myBuilder.RegisterType<AreaCalculatorContext>().AsSelf();
-
-            myBuilder.RegisterType<DatabaseContext>().AsSelf();
-            myBuilder.RegisterType<DatabaseService>().AsSelf();
-
-            return myBuilder.Build();
         }
     }
 }

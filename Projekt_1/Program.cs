@@ -66,26 +66,28 @@ namespace Projekt_1
                 {
                     using (var ctx = new DatabaseContext())
                     {
-                        Console.Write("Enter a number 1-4: ");
-                        var choice = Convert.ToInt32(Console.ReadLine());
-                        IShape shape = areaContext.SetStrategy(choice);
-
-                        var mathResult = areaContext.Calculate(15, 25);
-
-                        var calculation = new AreaCalculation
+                        while (true)
                         {
-                            Area = mathResult.area,
-                            Circumference = mathResult.circumference,
-                            Result = new Result
+                            Console.Write("Enter a number 1-4: ");
+                            var choice = Convert.ToInt32(Console.ReadLine());
+                            IShape shape = areaContext.SetStrategy(choice);
+
+                            var mathResult = areaContext.Calculate(15, 25);
+
+                            var calculation = new AreaCalculation
                             {
-                                DateCreated = DateTime.Now,
-                                ResultType = ResultTypes.AreaCalculation.ToString(),
-                            }
-                        };
+                                Area = mathResult.area,
+                                Circumference = mathResult.circumference,
+                                Result = new Result
+                                {
+                                    DateCreated = DateTime.Now,
+                                    ResultType = ResultTypes.AreaCalculation.ToString(),
+                                }
+                            };
 
-                        databaseService.AddCalculation(calculation);
-                        Console.WriteLine($"The resulting area is: {mathResult}");
-
+                            databaseService.AddCalculation(calculation);
+                            Console.WriteLine($"The resulting area is: {mathResult}");
+                        }
                     }
                 }
             }
