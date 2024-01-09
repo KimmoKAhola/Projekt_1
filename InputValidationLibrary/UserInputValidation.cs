@@ -99,9 +99,9 @@ namespace InputValidationLibrary
             }
             return value;
         }
-        public static decimal? AskForValidNumber(decimal minimumInput, decimal maximumInput, string promptMessage)
+        public static double? AskForValidNumber(double minimumInput, double maximumInput, string promptMessage)
         {
-            decimal choice;
+            double choice;
             while (true)
             {
                 Console.WriteLine(promptMessage);
@@ -111,7 +111,7 @@ namespace InputValidationLibrary
                 {
                     return null;
                 }
-                if (decimal.TryParse(input, out choice))
+                if (double.TryParse(input, out choice))
                 {
                     if (choice >= minimumInput && choice <= maximumInput)
                     {
