@@ -17,6 +17,11 @@ namespace Calculator.Shapes
             _strategy = strategy;
         }
 
+        public double Calculate(double first, double second)
+        {
+            return _strategy.CalculateArea(first, second);
+        }
+
         public IShape SetStrategy(int choice)
         {
             switch (choice)

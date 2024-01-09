@@ -9,15 +9,15 @@ namespace Calculator.Shapes
 {
     public class Triangle : IShape
     {
-        public decimal Width { get; set; }
-        public decimal Height { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
 
-        public decimal CalculateArea(decimal width, decimal height)
+        public double CalculateArea(double width, double height)
         {
             return (width * height) / 2;
         }
 
-        public decimal CalculateCircumference(decimal width, decimal height)
+        public double CalculateCircumference(double width, double height)
         {
             return 3 * width; //Asume equilaterial triangle
         }

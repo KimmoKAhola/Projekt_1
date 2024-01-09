@@ -2,6 +2,7 @@
 using Calculator.Interfaces;
 using Calculator.Mathematics;
 using Calculator.Mathematics.Operations;
+using Calculator.Shapes;
 using Database.DatabaseConfiguration;
 using Database.Services;
 using System;
@@ -27,6 +28,15 @@ namespace Projekt_1.Container
             myBuilder.RegisterType<SquareRoot>().As<IMathStrategy>();
 
             myBuilder.RegisterType<MathContext>().AsSelf();
+
+
+
+            myBuilder.RegisterType<Parallelogram>().As<IShape>();
+            myBuilder.RegisterType<Rectangle>().As<AreaStrategy>();
+            myBuilder.RegisterType<Rhomboid>().As<IShape>();
+            myBuilder.RegisterType<Triangle>().As<IShape>();
+
+            myBuilder.RegisterType<AreaCalculatorContext>().AsSelf();
 
             myBuilder.RegisterType<DatabaseContext>().AsSelf();
             myBuilder.RegisterType<DatabaseService>().AsSelf();

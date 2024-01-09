@@ -9,12 +9,12 @@ namespace Calculator.Shapes
 {
     public class Rectangle : AreaStrategy
     {
-        public override decimal CalculateArea(decimal width, decimal height)
+        public override double CalculateArea(double width, double height)
         {
             return width * height;
         }
 
-        public override decimal CalculateCircumference(decimal width, decimal height)
+        public override double CalculateCircumference(double width, double height)
         {
             return width * 2 + height * 2;
         }

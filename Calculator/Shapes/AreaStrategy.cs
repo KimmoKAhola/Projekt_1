@@ -9,10 +9,10 @@ namespace Calculator.Shapes
 {
     public abstract class AreaStrategy : IShape
     {
-        public decimal Width { get; set; }
-        public decimal Height { get; set; }
-        public abstract decimal CalculateArea(decimal width, decimal height);
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public abstract double CalculateArea(double width, double height);
 
-        public abstract decimal CalculateCircumference(decimal width, decimal height);
+        public abstract double CalculateCircumference(double width, double height);
     }
 }
