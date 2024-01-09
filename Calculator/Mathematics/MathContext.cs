@@ -22,7 +22,7 @@ namespace Calculator.Mathematics
             return _strategy.Execute(first, second);
         }
 
-        public IMathStrategy? SetStrategy(int choice)
+        public IMathStrategy SetStrategy(int choice)
         {
             switch (choice)
             {
