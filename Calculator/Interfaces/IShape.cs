@@ -10,7 +10,7 @@ namespace Calculator.Interfaces
     {
         public decimal Width { get; set; }
         public decimal Height { get; set; }
-        public decimal CalculateArea();
-        public decimal CalculateCircumference();
+        public decimal CalculateArea(decimal width, decimal height);
+        public decimal CalculateCircumference(decimal width, decimal height);
     }
 }

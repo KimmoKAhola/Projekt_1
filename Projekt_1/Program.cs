@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Database;
 using Calculator.Shapes;
 using Calculator.Mathematics.Operations;
+using Calculator.Mathematics;
+using Calculator.Interfaces;
 
 namespace Projekt_1
 {
@@ -19,8 +21,13 @@ namespace Projekt_1
             {
                 ctx.Database.Migrate();
             }
+            IMathStrategy mathStrategy = new Addition();
 
-            var
+            var addition = (Addition)mathStrategy;
+
+            var mathCtx = new MathContext(addition);
+
+            Console.WriteLine(mathCtx.Calculate(15, 35));
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Calculator.Shapes
     {
         public decimal Width { get; set; }
         public decimal Height { get; set; }
-        public abstract decimal CalculateArea();
+        public abstract decimal CalculateArea(decimal width, decimal height);
 
-        public abstract decimal CalculateCircumference();
+        public abstract decimal CalculateCircumference(decimal width, decimal height);
     }
 }
