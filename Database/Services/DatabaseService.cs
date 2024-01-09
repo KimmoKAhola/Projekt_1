@@ -17,9 +17,18 @@ namespace Database.Services
             _dbContext = new DatabaseContext();
         }
 
-        public void AddCalculation(MathCalculation calculation)
+        public void AddCalculation(ICalculation calculation)
         {
-            _dbContext.Calculation.Add(calculation);
+            if (calculation is MathCalculation)
+            {
+                var temp = (MathCalculation)calculation;
+                _dbContext.Calculation.Add(temp);
+            }
+            else
+            {
+                var temp = (AreaCalculation)calculation;
+                _dbContext.AreaCalculation.Add(temp);
+            }
             _dbContext.SaveChanges();
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class MathCalculation
+    public class MathCalculation : ICalculation
     {
         public int Id { get; set; }
         public char Operator { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class AreaCalculation
+    public class AreaCalculation : ICalculation
     {
         public int Id { get; set; }
 
