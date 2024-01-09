@@ -68,17 +68,17 @@ namespace InputValidationLibrary
         /// <returns></returns>
         public static string? AskForValidName(string data, int minimumLength, int maximumLength)
         {
-            var value = "";
+            string? value = "";
 
             while (true)
             {
                 Console.Write($"Enter a value for {data},\nat least {minimumLength} and at most {maximumLength} characters without any special characters or numbers\n(type e to exit to main menu): ");
                 value = Console.ReadLine();
-                if (value.ToLower() == "e")
+                if (value?.ToLower() == "e")
                 {
                     return null;
                 }
-                if (value.Length >= 2 && value.All(char.IsLetter))
+                if (value?.Length >= 2 && value.All(char.IsLetter))
                 {
                     Console.WriteLine();
                     return value;
@@ -92,7 +92,7 @@ namespace InputValidationLibrary
         /// <returns></returns>
         public static string? AskForValidUsername(string data, int minimumLength, int maximumLength) // , HotelContext ctx
         {
-            var value = "";
+            string? value = "";
             while (true)
             {
                 Console.Write($"Enter a unique value for {data},\nat least {minimumLength} and at most {maximumLength} characters without whitespace\n(type e to exit to the main menu): ");
