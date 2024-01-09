@@ -12,6 +12,10 @@ namespace Projekt_1
         {
             using (var ctx = new DatabaseContext())
             {
+                ctx.Database.EnsureDeleted();
+            }
+            using (var ctx = new DatabaseContext())
+            {
                 ctx.Database.Migrate();
             }
 
@@ -23,8 +27,14 @@ namespace Projekt_1
                     Circumference = AreaCalculator.CalculateArea(5, 10),
 
                 };
-                ctx.SaveChanges();
+
+                var result = new Result
+                {
+
+                };
                 ctx.Add(test);
+                ctx.SaveChanges();
+                result.AreaCalculations.Add(test);
                 ctx.SaveChanges();
             }
         }

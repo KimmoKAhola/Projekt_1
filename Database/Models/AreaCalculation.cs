@@ -10,8 +10,6 @@ namespace Database.Models
     {
         public int Id { get; set; }
 
-        public List<Result>? Results { get; set; }
-
         public decimal Circumference { get; set; }
 
         public decimal Area { get; set; }

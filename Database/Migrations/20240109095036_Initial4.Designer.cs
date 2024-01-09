@@ -4,6 +4,7 @@ using Database.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240109095036_Initial4")]
+    partial class Initial4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,12 +39,7 @@ namespace Database.Migrations
                     b.Property<decimal>("Circumference")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("AreaCalculation");
                 });
@@ -64,15 +62,10 @@ namespace Database.Migrations
                     b.Property<decimal>("Result")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("SecondInput")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("Calculator");
                 });
@@ -85,33 +78,43 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AreaCalculationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CalculatorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AreaCalculationId");
+
+                    b.HasIndex("CalculatorId");
+
                     b.ToTable("Result");
-                });
-
-            modelBuilder.Entity("Database.Models.AreaCalculation", b =>
-                {
-                    b.HasOne("Database.Models.Result", null)
-                        .WithMany("AreaCalculations")
-                        .HasForeignKey("ResultId");
-                });
-
-            modelBuilder.Entity("Database.Models.Calculator", b =>
-                {
-                    b.HasOne("Database.Models.Result", null)
-                        .WithMany("MathCalculations")
-                        .HasForeignKey("ResultId");
                 });
 
             modelBuilder.Entity("Database.Models.Result", b =>
                 {
-                    b.Navigation("AreaCalculations");
+                    b.HasOne("Database.Models.AreaCalculation", null)
+                        .WithMany("Results")
+                        .HasForeignKey("AreaCalculationId");
 
-                    b.Navigation("MathCalculations");
+                    b.HasOne("Database.Models.Calculator", null)
+                        .WithMany("Results")
+                        .HasForeignKey("CalculatorId");
+                });
+
+            modelBuilder.Entity("Database.Models.AreaCalculation", b =>
+                {
+                    b.Navigation("Results");
+                });
+
+            modelBuilder.Entity("Database.Models.Calculator", b =>
+                {
+                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

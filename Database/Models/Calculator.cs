@@ -9,8 +9,6 @@ namespace Database.Models
     public class Calculator
     {
         public int Id { get; set; }
-        public List<Result>? Results { get; set; }
-
         public char Operator { get; set; }
 
         public decimal Result { get; set; }
