@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator
+namespace Calculator.Shapes
 {
     public class Rectangle : CalculatorStrategy, IShape
     {

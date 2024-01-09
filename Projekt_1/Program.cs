@@ -2,7 +2,8 @@
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Database;
-using Calculator;
+using Calculator.Shapes;
+using Calculator.Math.Operations;
 
 namespace Projekt_1
 {
@@ -52,7 +53,7 @@ namespace Projekt_1
                         Operator = '+',
                         FirstInput = firstInput,
                         SecondInput = secondInput,
-                        Answer = MathOperations.Addition(firstInput, secondInput),
+                        Answer = Addition.Addition(firstInput, secondInput),
                         Result = result
                     };
                     ctx.Result.Add(result);

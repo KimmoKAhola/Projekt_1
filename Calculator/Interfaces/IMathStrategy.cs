@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator
+namespace Calculator.Interfaces
 {
-    public class Parallelogram
+    public interface IMathStrategy
     {
+        public decimal Execute(decimal first, decimal second);
     }
 }

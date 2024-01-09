@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator
+namespace Calculator.Shapes
 {
-    public class AreaCalculatorContext(CalculatorStrategy strategy)
+    public class AreaCalculatorContext
     {
-        private IShape _shapeStrategy = strategy;
+        private IShape _shapeStrategy;
 
-        public void SetCalculatorStrategy(CalculatorStrategy strategy)
+        public AreaCalculatorContext(IShape strategy)
         {
             _shapeStrategy = strategy;
         }
