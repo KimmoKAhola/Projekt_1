@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt_1", "Projekt_1\Proj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{94EC6008-6BC1-416B-AE1A-F87A197CEDEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputValidationLibrary", "InputValidationLibrary\InputValidationLibrary.csproj", "{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{94EC6008-6BC1-416B-AE1A-F87A197CEDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94EC6008-6BC1-416B-AE1A-F87A197CEDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94EC6008-6BC1-416B-AE1A-F87A197CEDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
