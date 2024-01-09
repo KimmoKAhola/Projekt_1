@@ -20,5 +20,17 @@ namespace Database.Models
 
         [Required]
         public Result Result { get; set; } = null!;
+
+        public override string ToString()
+        {
+            if (Operator != '√')
+            {
+                return $"{FirstInput} {Operator} {SecondInput} = {Answer}";
+            }
+            else
+            {
+                return $"{Operator}{FirstInput} = {Answer}";
+            }
+        }
     }
 }

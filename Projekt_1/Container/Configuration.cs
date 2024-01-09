@@ -4,6 +4,7 @@ using Calculator.Mathematics;
 using Calculator.Mathematics.Operations;
 using Calculator.Shapes;
 using Database.DatabaseConfiguration;
+using Database.Models;
 using Database.Services;
 using Projekt_1.Menus;
 using System;
@@ -24,6 +25,7 @@ namespace Projekt_1.Container
             MathBuilder(myBuilder);
             ShapeBuilder(myBuilder);
             DatabaseBuilder(myBuilder);
+            CalculationBuilder(myBuilder);
             MenuBuilder(myBuilder);
 
             return myBuilder.Build();
@@ -35,6 +37,12 @@ namespace Projekt_1.Container
             myBuilder.RegisterType<CalculatorMenu>().AsSelf();
             myBuilder.RegisterType<MainMenu>().AsSelf();
             myBuilder.RegisterType<AreaCalculatorMenu>().AsSelf();
+        }
+
+        private static void CalculationBuilder(ContainerBuilder myBuilder)
+        {
+            myBuilder.RegisterType<MathCalculation>().AsSelf();
+            myBuilder.RegisterType<AreaCalculation>().AsSelf();
         }
         private static void DatabaseBuilder(ContainerBuilder myBuilder)
         {

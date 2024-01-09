@@ -11,6 +11,7 @@ using Autofac;
 using Database.Services;
 using InputValidationLibrary;
 using Projekt_1.Menus;
+using System.Text;
 
 namespace Projekt_1
 {
@@ -22,6 +23,7 @@ namespace Projekt_1
             //{
             //    ctx.Database.EnsureDeleted();
             //}
+            Console.OutputEncoding = Encoding.UTF8;
             using (var ctx = new DatabaseContext())
             {
                 ctx.Database.Migrate();
