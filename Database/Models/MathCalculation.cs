@@ -10,6 +10,7 @@ namespace Database.Models
     public class MathCalculation : ICalculation
     {
         public int Id { get; set; }
+        [Required]
         public char Operator { get; set; }
 
         public double Answer { get; set; }

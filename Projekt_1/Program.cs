@@ -10,6 +10,7 @@ using Projekt_1.Container;
 using Autofac;
 using Database.Services;
 using InputValidationLibrary;
+using Projekt_1.Menus;
 
 namespace Projekt_1
 {
@@ -31,6 +32,7 @@ namespace Projekt_1
                 var mathContext = scope.Resolve<MathContext>();
                 var areaContext = scope.Resolve<AreaCalculatorContext>();
                 var databaseService = scope.Resolve<DatabaseService>();
+                var menuService = scope.Resolve<CalculatorMenu>();
 
                 if (UserInputValidation.PromptYesOrNo("Press y to do math, n to do area: "))
                 {
@@ -68,25 +70,7 @@ namespace Projekt_1
                     {
                         while (true)
                         {
-                            Console.Write("Enter a number 1-4: ");
-                            var choice = Convert.ToInt32(Console.ReadLine());
-                            IShape shape = areaContext.SetStrategy(choice);
-
-                            var mathResult = areaContext.Calculate(15, 25);
-
-                            var calculation = new AreaCalculation
-                            {
-                                Area = mathResult.area,
-                                Circumference = mathResult.circumference,
-                                Result = new Result
-                                {
-                                    DateCreated = DateTime.Now,
-                                    ResultType = ResultTypes.AreaCalculation.ToString(),
-                                }
-                            };
-
-                            databaseService.AddCalculation(calculation);
-                            Console.WriteLine($"The resulting area is: {mathResult}");
+                            menuService.Display();
                         }
                     }
                 }
