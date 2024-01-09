@@ -14,13 +14,13 @@ namespace Projekt_1
                 ctx.Database.Migrate();
             }
 
-            //using (var ctx = new DatabaseContext())
-            //{
-            //    var test = new AreaCalculation
-            //    {
+            using (var ctx = new DatabaseContext())
+            {
+                var test = new AreaCalculation
+                {
 
-            //    };
-            //}
+                };
+            }
         }
     }
 }

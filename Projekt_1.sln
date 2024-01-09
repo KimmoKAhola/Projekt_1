@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputValidationLibrary", "InputValidationLibrary\InputValidationLibrary.csproj", "{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{89735310-4B14-4D7B-8E74-F1E676EA900B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C22BFC1-60C2-4A75-ACCA-2F3DB445C911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89735310-4B14-4D7B-8E74-F1E676EA900B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89735310-4B14-4D7B-8E74-F1E676EA900B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89735310-4B14-4D7B-8E74-F1E676EA900B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89735310-4B14-4D7B-8E74-F1E676EA900B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
