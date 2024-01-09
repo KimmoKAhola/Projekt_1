@@ -44,5 +44,7 @@ namespace Calculator.Shapes
             }
             return _strategy;
         }
+
+
     }
 }

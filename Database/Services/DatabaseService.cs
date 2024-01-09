@@ -1,5 +1,6 @@
 ﻿using Database.DatabaseConfiguration;
 using Database.Models;
+using InputValidationLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,20 @@ namespace Database.Services
 
         public void ReadAllCalculations(ICalculation calculation)
         {
-            throw new NotImplementedException();
+            List<ICalculation> temp = new List<ICalculation>();
+            if (calculation is MathCalculation)
+            {
+                temp = _dbContext.Calculation.OfType<MathCalculation>().Cast<ICalculation>().ToList();
+            }
+            else
+            {
+                temp = _dbContext.AreaCalculation.OfType<AreaCalculation>().Cast<ICalculation>().ToList();
+            }
+            foreach (var item in temp)
+            {
+                Console.WriteLine(item);
+            }
+            PrintMessages.PressAnyKeyToContinue();
         }
 
         public void ReadCalculation(ICalculation calculation)
