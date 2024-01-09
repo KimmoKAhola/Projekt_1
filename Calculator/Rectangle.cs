@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class AreaCalculator
+    public class Rectangle
     {
-        //        1. Rektangel
-        //2. Parallellogram
-        //3. Triangel
-        //4. Romb
         public static decimal CalculateArea(decimal width, decimal height)
         {
             return width * height;

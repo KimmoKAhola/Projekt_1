@@ -29,8 +29,8 @@ namespace Projekt_1
                     };
                     var rectangleCalculation = new AreaCalculation
                     {
-                        Area = AreaCalculator.CalculateArea(5, 10),
-                        Circumference = AreaCalculator.CalculateCircumference(5, 10),
+                        Area = Rectangle.CalculateArea(5, 10),
+                        Circumference = Rectangle.CalculateCircumference(5, 10),
                         Result = result
                     };
                     ctx.Result.Add(result);
