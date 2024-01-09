@@ -12,9 +12,12 @@ namespace Database.Models
         public int Id { get; set; }
         public char Operator { get; set; }
 
-        public decimal Result { get; set; }
+        public decimal Answer { get; set; }
 
         public decimal FirstInput { get; set; }
         public decimal SecondInput { get; set; }
+
+        [Required]
+        public Result Result { get; set; } = null!;
     }
 }

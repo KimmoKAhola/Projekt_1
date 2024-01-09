@@ -10,15 +10,15 @@ namespace Projekt_1
     {
         static void Main(string[] args)
         {
-            //using (var ctx = new DatabaseContext())
-            //{
-            //    ctx.Database.EnsureDeleted();
-            //}
-            //using (var ctx = new DatabaseContext())
-            //{
-            //    ctx.Database.Migrate();
-            //}
-            for (int i = 0; i < 25; i++)
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.EnsureDeleted();
+            }
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Migrate();
+            }
+            for (int i = 0; i < 100; i++)
             {
 
                 using (var ctx = new DatabaseContext())
@@ -49,10 +49,11 @@ namespace Projekt_1
                     var secondInput = 25m;
                     var mathCalculation = new MathCalculation
                     {
-                        Operator = '*',
+                        Operator = '+',
                         FirstInput = firstInput,
                         SecondInput = secondInput,
-                        Result = MathOperations.Addition(firstInput, secondInput),
+                        Answer = MathOperations.Addition(firstInput, secondInput),
+                        Result = result
                     };
                     ctx.Result.Add(result);
                     ctx.Add(mathCalculation);
