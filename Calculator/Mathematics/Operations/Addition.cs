@@ -1,6 +1,6 @@
 ﻿using Calculator.Interfaces;
 
-namespace Calculator.Math.Operations
+namespace Calculator.Mathematics.Operations
 {
     public class Addition : IMathStrategy
     {

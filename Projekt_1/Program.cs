@@ -3,7 +3,7 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Database;
 using Calculator.Shapes;
-using Calculator.Math.Operations;
+using Calculator.Mathematics.Operations;
 
 namespace Projekt_1
 {
