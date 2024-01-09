@@ -22,8 +22,8 @@ namespace Database.DatabaseConfiguration
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Projekt_1;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
+            var connectionString = ConnectionConfiguration.GetConnectionString();
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
