@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculator.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class Rectangle
+    public class Rectangle : CalculatorStrategy, IShape
     {
         public static decimal CalculateArea(decimal width, decimal height)
         {

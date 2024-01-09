@@ -9,14 +9,10 @@ namespace Calculator
 {
     public abstract class CalculatorStrategy : IShape
     {
-        public decimal CalculateArea()
-        {
-            throw new NotImplementedException();
-        }
+        public decimal Width { get; set; }
+        public decimal Height { get; set; }
+        public abstract decimal CalculateArea();
 
-        public decimal CalculateCircumference()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract decimal CalculateCircumference();
     }
 }
