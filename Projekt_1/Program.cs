@@ -2,6 +2,7 @@
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Database;
+using Calculator;
 
 namespace Projekt_1
 {
@@ -18,8 +19,13 @@ namespace Projekt_1
             {
                 var test = new AreaCalculation
                 {
+                    Area = AreaCalculator.CalculateArea(5, 10),
+                    Circumference = AreaCalculator.CalculateArea(5, 10),
 
                 };
+                ctx.SaveChanges();
+                ctx.Add(test);
+                ctx.SaveChanges();
             }
         }
     }

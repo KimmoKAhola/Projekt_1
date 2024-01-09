@@ -12,6 +12,14 @@ namespace Calculator
         //2. Parallellogram
         //3. Triangel
         //4. Romb
+        public static decimal CalculateArea(decimal width, decimal height)
+        {
+            return width * height;
+        }
 
+        public static decimal CalculateCircumference(decimal width, decimal height)
+        {
+            return width * 2 + height * 2;
+        }
     }
 }
