@@ -13,5 +13,7 @@ namespace Database.Models
         public decimal Circumference { get; set; }
 
         public decimal Area { get; set; }
+
+        public Result Result { get; set; } = null!;
     }
 }

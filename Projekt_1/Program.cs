@@ -21,10 +21,10 @@ namespace Projekt_1
 
             using (var ctx = new DatabaseContext())
             {
-                var test = new AreaCalculation
+                var rectangleCalculation = new AreaCalculation
                 {
                     Area = AreaCalculator.CalculateArea(5, 10),
-                    Circumference = AreaCalculator.CalculateArea(5, 10),
+                    Circumference = AreaCalculator.CalculateCircumference(5, 10),
 
                 };
 
@@ -32,9 +32,10 @@ namespace Projekt_1
                 {
 
                 };
-                ctx.Add(test);
+                ctx.Add(rectangleCalculation);
                 ctx.SaveChanges();
-                result.AreaCalculations.Add(test);
+                result.AreaCalculations.Add(rectangleCalculation);
+                ctx.Add(result);
                 ctx.SaveChanges();
             }
         }
