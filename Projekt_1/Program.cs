@@ -6,6 +6,8 @@ using Calculator.Shapes;
 using Calculator.Mathematics.Operations;
 using Calculator.Mathematics;
 using Calculator.Interfaces;
+using Projekt_1.Container;
+using Autofac;
 
 namespace Projekt_1
 {
@@ -21,65 +23,42 @@ namespace Projekt_1
             //{
             //    ctx.Database.Migrate();
             //}
-            using (var ctx = new DatabaseContext())
+            var config = Configuration.Configure();
+            using (var scope = config.BeginLifetimeScope())
             {
-                while (true)
+                var test = scope.Resolve<MathContext>();
+                using (var ctx = new DatabaseContext())
                 {
-                    IMathStrategy? math = SetStrategy();
-
-                    var mathCtx = new MathContext(math);
-
-                    var mathResult = mathCtx.Calculate(15, 35);
-
-                    var calculation = new MathCalculation
+                    while (true)
                     {
-                        FirstInput = 15,
-                        SecondInput = 35,
-                        Answer = mathResult,
-                        Operator = math.Operator,
-                        Result = new Result
+                        Console.Write("Enter a number 1-6: ");
+                        var choice = Convert.ToInt32(Console.ReadLine());
+                        IMathStrategy? math = test.SetStrategy(choice);
+
+                        var mathCtx = new MathContext(math);
+
+                        var mathResult = mathCtx.Calculate(15, 35);
+
+                        var calculation = new MathCalculation
                         {
-                            DateCreated = DateTime.Now,
-                            ResultType = ResultTypes.MathCalculation.ToString(),
-                        }
-                    };
+                            FirstInput = 15,
+                            SecondInput = 35,
+                            Answer = mathResult,
+                            Operator = math.Operator,
+                            Result = new Result
+                            {
+                                DateCreated = DateTime.Now,
+                                ResultType = ResultTypes.MathCalculation.ToString(),
+                            }
+                        };
 
-                    ctx.Add(calculation);
-                    ctx.SaveChanges();
-                    Console.WriteLine($"The result is: {mathResult}");
+                        ctx.Add(calculation);
+                        ctx.SaveChanges();
+                        Console.WriteLine($"The result is: {mathResult}");
 
+                    }
                 }
             }
-        }
-
-        public static IMathStrategy? SetStrategy()
-        {
-            Console.Write("Enter 1-6: ");
-            var input = Convert.ToInt32(Console.ReadLine());
-            IMathStrategy? mathStrategy = null;
-            switch (input)
-            {
-                case 1:
-                    mathStrategy = new Addition();
-                    break;
-                case 2:
-                    mathStrategy = new Subtraction();
-                    break;
-                case 3:
-                    mathStrategy = new Multiplication();
-                    break;
-                case 4:
-                    mathStrategy = new Division();
-                    break;
-                case 5:
-                    mathStrategy = new Modulus();
-                    break;
-                case 6:
-                    mathStrategy = new SquareRoot();
-                    break;
-            }
-
-            return mathStrategy;
         }
     }
 }
