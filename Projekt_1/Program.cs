@@ -31,8 +31,21 @@ namespace Projekt_1
 
                     var mathResult = mathCtx.Calculate(15, 35);
 
-                    ctx.Add(mathResult);
+                    var calculation = new MathCalculation
+                    {
+                        FirstInput = 15,
+                        SecondInput = 35,
+                        Answer = mathResult,
+                        Operator = math.Operator,
+                        Result = new Result
+                        {
+                            DateCreated = DateTime.Now,
+                            ResultType = "Math Operation",
+                        }
+                    };
 
+                    ctx.Add(calculation);
+                    ctx.SaveChanges();
                     Console.WriteLine($"The result is: {mathResult}");
 
                 }
@@ -62,7 +75,7 @@ namespace Projekt_1
                     mathStrategy = new Modulus();
                     break;
                 case 6:
-                    mathStrategy = new InverseExponent();
+                    mathStrategy = new SquareRoot();
                     break;
             }
 
