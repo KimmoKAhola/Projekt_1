@@ -21,7 +21,7 @@ namespace Database.DatabaseConfiguration
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=TheSuiteSpot;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Projekt_1;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
         }
     }
 }
