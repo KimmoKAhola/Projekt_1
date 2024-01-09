@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class Calculator
+    public class MathCalculation
     {
         public int Id { get; set; }
         public char Operator { get; set; }

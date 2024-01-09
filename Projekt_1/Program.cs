@@ -18,27 +18,46 @@ namespace Projekt_1
             //{
             //    ctx.Database.Migrate();
             //}
-
-            using (var ctx = new DatabaseContext())
+            for (int i = 0; i < 25; i++)
             {
-                var result = new Result();
-                var rectangleCalculation = new AreaCalculation
+
+                using (var ctx = new DatabaseContext())
                 {
-                    Area = AreaCalculator.CalculateArea(5, 10),
-                    Circumference = AreaCalculator.CalculateCircumference(5, 10),
-                    Result = result
-                };
-                ctx.Result.Add(result);
-                ctx.Add(rectangleCalculation);
-                ctx.SaveChanges();
-            }
+                    var result = new Result
+                    {
+                        ResultType = "Area Calculation"
+                    };
+                    var rectangleCalculation = new AreaCalculation
+                    {
+                        Area = AreaCalculator.CalculateArea(5, 10),
+                        Circumference = AreaCalculator.CalculateCircumference(5, 10),
+                        Result = result
+                    };
+                    ctx.Result.Add(result);
+                    ctx.Add(rectangleCalculation);
+                    ctx.SaveChanges();
+                }
 
-            using (var ctx = new DatabaseContext())
-            {
-                var ac = ctx.AreaCalculation.ToList();
-                var r = ctx.Result.ToList();
+                using (var ctx = new DatabaseContext())
+                {
+                    var result = new Result
+                    {
+                        ResultType = "Math Calculation",
 
-                Console.ReadKey();
+                    };
+                    var firstInput = 15m;
+                    var secondInput = 25m;
+                    var mathCalculation = new MathCalculation
+                    {
+                        Operator = '*',
+                        FirstInput = firstInput,
+                        SecondInput = secondInput,
+                        Result = MathOperations.Addition(firstInput, secondInput),
+                    };
+                    ctx.Result.Add(result);
+                    ctx.Add(mathCalculation);
+                    ctx.SaveChanges();
+                }
             }
         }
     }
