@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class AreaCalculation
+    public class Calculator
     {
         public int Id { get; set; }
-
         public List<Result>? Results { get; set; }
 
-        public decimal Circumference { get; set; }
+        public char Operator { get; set; }
 
-        public decimal Area { get; set; }
+        public decimal Result { get; set; }
+
+        public decimal FirstInput { get; set; }
+        public decimal SecondInput { get; set; }
     }
 }
