@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Shapes
 {
-    public class Rectangle : CalculatorStrategy, IShape
+    public class Rectangle : AreaStrategy, IShape
     {
         public static decimal CalculateArea(decimal width, decimal height)
         {
