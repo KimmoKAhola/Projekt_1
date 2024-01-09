@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\Calculator.csproj" />
+    <ProjectReference Include="..\Calculator\Calculations.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\InputValidationLibrary\InputValidationLibrary.csproj" />
   </ItemGroup>

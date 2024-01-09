@@ -17,17 +17,25 @@ namespace Projekt_1
             //{
             //    ctx.Database.EnsureDeleted();
             //}
+            //using (var ctx = new DatabaseContext())
+            //{
+            //    ctx.Database.Migrate();
+            //}
             using (var ctx = new DatabaseContext())
             {
-                ctx.Database.Migrate();
-            }
-            while (true)
-            {
-                IMathStrategy math = SetStrategy();
+                while (true)
+                {
+                    IMathStrategy math = SetStrategy();
 
-                var mathCtx = new MathContext(math);
+                    var mathCtx = new MathContext(math);
 
-                Console.WriteLine($"The result is: {mathCtx.Calculate(15, 35)}");
+                    var mathResult = mathCtx.Calculate(15, 35);
+
+                    ctx.Add(mathResult);
+
+                    Console.WriteLine($"The result is: {mathResult}");
+
+                }
             }
         }
 
@@ -54,7 +62,7 @@ namespace Projekt_1
                     mathStrategy = new Modulus();
                     break;
                 case 6:
-                    mathStrategy = new SquareRoot();
+                    mathStrategy = new InverseExponent();
                     break;
             }
 
