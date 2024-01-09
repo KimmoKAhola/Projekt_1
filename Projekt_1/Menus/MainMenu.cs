@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class ConsoleMenu
+    public class MainMenu
     {
 
     }

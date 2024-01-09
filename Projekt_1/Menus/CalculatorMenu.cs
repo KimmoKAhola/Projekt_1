@@ -3,6 +3,7 @@ using Calculator.Mathematics;
 using Database.Models;
 using Database.Services;
 using InputValidationLibrary;
+using Projekt_1.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class CalculatorMenu
+    public class CalculatorMenu : IMenu
     {
         private MathContext _context;
         DatabaseService _databaseService;
@@ -61,4 +62,6 @@ namespace Projekt_1.Menus
             _databaseService.AddCalculation(calculation);
         }
     }
+
+
 }

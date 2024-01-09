@@ -33,7 +33,7 @@ namespace Projekt_1.Container
         private static void MenuBuilder(ContainerBuilder myBuilder)
         {
             myBuilder.RegisterType<CalculatorMenu>().AsSelf();
-            myBuilder.RegisterType<ConsoleMenu>().AsSelf();
+            myBuilder.RegisterType<MainMenu>().AsSelf();
             myBuilder.RegisterType<AreaCalculatorMenu>().AsSelf();
         }
         private static void DatabaseBuilder(ContainerBuilder myBuilder)

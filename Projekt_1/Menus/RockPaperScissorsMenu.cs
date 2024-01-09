@@ -9,15 +9,8 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu : IMenu
+    public class RockPaperScissorsMenu : IMenu
     {
-        private MathContext _context;
-        DatabaseService _databaseService;
-        public AreaCalculatorMenu(MathContext context, DatabaseService databaseService)
-        {
-            _context = context;
-            _databaseService = databaseService;
-        }
         public void Display()
         {
             throw new NotImplementedException();
