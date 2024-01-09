@@ -1,19 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Database.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Database.DatabaseConfiguration
 {
-    public class Database : DbContext
+    public class DatabaseContext : DbContext
     {
-        public Database()
+        public DatabaseContext()
         {
 
         }
 
-        public Database(DbContextOptions<Database> options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
 
         }
+
+        public DbSet<Result> Result { get; set; }
+        public DbSet<AreaCalculation> AreaCalculation { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
