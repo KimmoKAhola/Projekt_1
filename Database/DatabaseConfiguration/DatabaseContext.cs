@@ -18,6 +18,7 @@ namespace Database.DatabaseConfiguration
 
         public DbSet<Result> Result { get; set; }
         public DbSet<AreaCalculation> AreaCalculation { get; set; }
+        public DbSet<Calculator> Calculator { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
