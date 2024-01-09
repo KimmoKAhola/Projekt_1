@@ -74,8 +74,8 @@ namespace Projekt_1
 
                         var calculation = new AreaCalculation
                         {
-                            Area = mathResult,
-                            Circumference = mathResult,
+                            Area = mathResult.area,
+                            Circumference = mathResult.circumference,
                             Result = new Result
                             {
                                 DateCreated = DateTime.Now,

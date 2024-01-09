@@ -17,9 +17,12 @@ namespace Calculator.Shapes
             _strategy = strategy;
         }
 
-        public double Calculate(double first, double second)
+        public (double area, double circumference) Calculate(double first, double second)
         {
-            return _strategy.CalculateArea(first, second);
+            double area = _strategy.CalculateArea(first, second);
+            double circumference = _strategy.CalculateCircumference(first, second);
+
+            return (area, circumference);
         }
 
         public IShape SetStrategy(int choice)
