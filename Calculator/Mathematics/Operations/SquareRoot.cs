@@ -10,11 +10,10 @@ namespace Calculator.Mathematics.Operations
     public class SquareRoot : IMathStrategy
     {
         public char Operator { get; set; } = '√';
-        public decimal Execute(decimal first, decimal second)
+        public double Execute(double first, double second)
         {
-            var bas = Convert.ToDouble(first);
-            var exponent = Convert.ToDouble(2);
-            return Math.Round(Convert.ToDecimal(Math.Pow(bas, (1 / exponent))), 2); //this is beautiful
+            var exponent = (double)2.0;
+            return Math.Round(Math.Pow(first, exponent)); //this is beautiful
         }
     }
 }

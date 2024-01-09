@@ -10,9 +10,9 @@ namespace Database.Models
     {
         public int Id { get; set; }
 
-        public decimal Circumference { get; set; }
+        public double Circumference { get; set; }
 
-        public decimal Area { get; set; }
+        public double Area { get; set; }
 
         public Result Result { get; set; } = null!;
     }
