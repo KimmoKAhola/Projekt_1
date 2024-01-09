@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculator.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,11 @@ namespace Calculator
 {
     public class AreaCalculatorContext(CalculatorStrategy strategy)
     {
-        private CalculatorStrategy _strategy = strategy;
+        private IShape _shapeStrategy = strategy;
 
         public void SetCalculatorStrategy(CalculatorStrategy strategy)
         {
-            _strategy = strategy;
+            _shapeStrategy = strategy;
         }
     }
 }

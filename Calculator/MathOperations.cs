@@ -21,5 +21,15 @@
         {
             return first / second;
         }
+
+        public static double SquareRoot(double first)
+        {
+            return Math.Sqrt(first);
+        }
+
+        public static decimal Modulus(decimal first, decimal second)
+        {
+            return Decimal.Remainder(first, second);
+        }
     }
 }
