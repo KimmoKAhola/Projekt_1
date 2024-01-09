@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Calculator.Mathematics.Operations
 {
-    public class Substraction : IMathStrategy
+    public class Subtraction : IMathStrategy
     {
         public decimal Execute(decimal first, decimal second)
         {
-            return first - second;
+            return Math.Round(first - second, 2);
         }
     }
 }

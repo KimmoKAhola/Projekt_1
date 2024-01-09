@@ -21,13 +21,44 @@ namespace Projekt_1
             {
                 ctx.Database.Migrate();
             }
-            IMathStrategy mathStrategy = new Addition();
+            while (true)
+            {
+                IMathStrategy math = SetStrategy();
 
-            var addition = (Addition)mathStrategy;
+                var mathCtx = new MathContext(math);
 
-            var mathCtx = new MathContext(addition);
+                Console.WriteLine($"The result is: {mathCtx.Calculate(15, 35)}");
+            }
+        }
 
-            Console.WriteLine(mathCtx.Calculate(15, 35));
+        public static IMathStrategy SetStrategy()
+        {
+            Console.Write("Enter 1-6: ");
+            var input = Convert.ToInt32(Console.ReadLine());
+            IMathStrategy mathStrategy = null;
+            switch (input)
+            {
+                case 1:
+                    mathStrategy = new Addition();
+                    break;
+                case 2:
+                    mathStrategy = new Subtraction();
+                    break;
+                case 3:
+                    mathStrategy = new Multiplication();
+                    break;
+                case 4:
+                    mathStrategy = new Division();
+                    break;
+                case 5:
+                    mathStrategy = new Modulus();
+                    break;
+                case 6:
+                    mathStrategy = new SquareRoot();
+                    break;
+            }
+
+            return mathStrategy;
         }
     }
 }

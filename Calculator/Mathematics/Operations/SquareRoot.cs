@@ -13,7 +13,7 @@ namespace Calculator.Mathematics.Operations
         {
             var bas = Convert.ToDouble(first);
             var exponent = Convert.ToDouble(second);
-            return Convert.ToDecimal(Math.Pow(bas, (1 / exponent)));
+            return Math.Round(Convert.ToDecimal(Math.Pow(bas, (1 / exponent))), 2);
         }
     }
 }

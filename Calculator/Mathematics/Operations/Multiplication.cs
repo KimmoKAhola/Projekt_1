@@ -11,7 +11,7 @@ namespace Calculator.Mathematics.Operations
     {
         public decimal Execute(decimal first, decimal second)
         {
-            return first * second;
+            return Math.Round(first * second, 2);
         }
     }
 }
