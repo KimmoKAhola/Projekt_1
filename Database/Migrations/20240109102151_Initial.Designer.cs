@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240109094036_Initial3")]
-    partial class Initial3
+    [Migration("20240109102151_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,12 @@ namespace Database.Migrations
                     b.Property<decimal>("Circumference")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ResultId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ResultId");
 
                     b.ToTable("AreaCalculation");
                 });
@@ -78,40 +83,23 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AreaCalculationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CalculatorId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaCalculationId");
-
-                    b.HasIndex("CalculatorId");
 
                     b.ToTable("Result");
                 });
 
-            modelBuilder.Entity("Database.Models.Result", b =>
-                {
-                    b.HasOne("Database.Models.AreaCalculation", null)
-                        .WithMany("Results")
-                        .HasForeignKey("AreaCalculationId");
-
-                    b.HasOne("Database.Models.Calculator", null)
-                        .WithMany("Results")
-                        .HasForeignKey("CalculatorId");
-                });
-
             modelBuilder.Entity("Database.Models.AreaCalculation", b =>
                 {
-                    b.Navigation("Results");
-                });
+                    b.HasOne("Database.Models.Result", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Database.Models.Calculator", b =>
-                {
-                    b.Navigation("Results");
+                    b.Navigation("Result");
                 });
 #pragma warning restore 612, 618
         }

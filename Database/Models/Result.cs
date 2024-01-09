@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace Database.Models
     {
         public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public List<AreaCalculation>? AreaCalculations { get; set; } = new List<AreaCalculation>();
-        public List<Calculator>? MathCalculations { get; set; } = new List<Calculator>();
+        [Required]
+        public string ResultType { get; set; } = null!;
     }
 }

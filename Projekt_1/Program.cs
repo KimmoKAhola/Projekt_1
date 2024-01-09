@@ -10,33 +10,35 @@ namespace Projekt_1
     {
         static void Main(string[] args)
         {
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.EnsureDeleted();
-            }
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Migrate();
-            }
+            //using (var ctx = new DatabaseContext())
+            //{
+            //    ctx.Database.EnsureDeleted();
+            //}
+            //using (var ctx = new DatabaseContext())
+            //{
+            //    ctx.Database.Migrate();
+            //}
 
             using (var ctx = new DatabaseContext())
             {
+                var result = new Result();
                 var rectangleCalculation = new AreaCalculation
                 {
                     Area = AreaCalculator.CalculateArea(5, 10),
                     Circumference = AreaCalculator.CalculateCircumference(5, 10),
-
+                    Result = result
                 };
-
-                var result = new Result
-                {
-
-                };
+                ctx.Result.Add(result);
                 ctx.Add(rectangleCalculation);
                 ctx.SaveChanges();
-                result.AreaCalculations.Add(rectangleCalculation);
-                ctx.Add(result);
-                ctx.SaveChanges();
+            }
+
+            using (var ctx = new DatabaseContext())
+            {
+                var ac = ctx.AreaCalculation.ToList();
+                var r = ctx.Result.ToList();
+
+                Console.ReadKey();
             }
         }
     }

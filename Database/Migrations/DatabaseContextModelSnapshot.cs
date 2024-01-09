@@ -36,7 +36,7 @@ namespace Database.Migrations
                     b.Property<decimal>("Circumference")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ResultId")
+                    b.Property<int>("ResultId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -64,15 +64,10 @@ namespace Database.Migrations
                     b.Property<decimal>("Result")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("SecondInput")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("Calculator");
                 });
@@ -95,23 +90,13 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Database.Models.AreaCalculation", b =>
                 {
-                    b.HasOne("Database.Models.Result", null)
-                        .WithMany("AreaCalculations")
-                        .HasForeignKey("ResultId");
-                });
+                    b.HasOne("Database.Models.Result", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Database.Models.Calculator", b =>
-                {
-                    b.HasOne("Database.Models.Result", null)
-                        .WithMany("MathCalculations")
-                        .HasForeignKey("ResultId");
-                });
-
-            modelBuilder.Entity("Database.Models.Result", b =>
-                {
-                    b.Navigation("AreaCalculations");
-
-                    b.Navigation("MathCalculations");
+                    b.Navigation("Result");
                 });
 #pragma warning restore 612, 618
         }
