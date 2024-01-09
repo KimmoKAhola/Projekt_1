@@ -20,6 +20,8 @@ namespace Database.Models
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
+        public DateTime? DateLastModified { get; set; }
+
         [Required]
         public string ResultType { get; set; } = null!;
     }

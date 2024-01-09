@@ -25,7 +25,7 @@ namespace Projekt_1
             {
                 while (true)
                 {
-                    IMathStrategy math = SetStrategy();
+                    IMathStrategy? math = SetStrategy();
 
                     var mathCtx = new MathContext(math);
 
