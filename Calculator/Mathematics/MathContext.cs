@@ -17,12 +17,12 @@ namespace Calculator.Mathematics
             _strategy = strategy;
         }
 
-        public decimal Calculate(decimal first, decimal second)
+        public double Calculate(double first, double second)
         {
             return _strategy.Execute(first, second);
         }
 
-        public IMathStrategy? SetStrategy(int choice)
+        public IMathStrategy SetStrategy(int choice)
         {
             switch (choice)
             {
@@ -45,7 +45,6 @@ namespace Calculator.Mathematics
                     _strategy = new SquareRoot();
                     break;
             }
-
             return _strategy;
         }
     }

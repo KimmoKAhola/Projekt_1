@@ -10,9 +10,9 @@ namespace Calculator.Mathematics.Operations
     public class Modulus : IMathStrategy
     {
         public char Operator { get; set; } = '%';
-        public decimal Execute(decimal first, decimal second)
+        public double Execute(double first, double second)
         {
-            return Math.Round(decimal.Remainder(first, second), 2);
+            return Math.Round((first % second), 2);
         }
     }
 }

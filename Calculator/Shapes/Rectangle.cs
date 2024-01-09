@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace Calculator.Shapes
 {
-    public class Rectangle : AreaStrategy
+    public class Rectangle : IShape
     {
-        public override decimal CalculateArea(decimal width, decimal height)
+        public double Width { get; set; }
+        public double Height { get; set; }
+
+        public double CalculateArea(double width, double height)
         {
             return width * height;
         }
 
-        public override decimal CalculateCircumference(decimal width, decimal height)
+        public double CalculateCircumference(double width, double height)
         {
             return width * 2 + height * 2;
         }

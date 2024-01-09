@@ -32,22 +32,22 @@ namespace Database.Services
             _dbContext.SaveChanges();
         }
 
-        public void DeleteCalculation(MathCalculation calculation)
+        public void DeleteCalculation(ICalculation calculation)
         {
             throw new NotImplementedException();
         }
 
-        public void ReadAllCalculations(MathCalculation calculation)
+        public void ReadAllCalculations(ICalculation calculation)
         {
             throw new NotImplementedException();
         }
 
-        public void ReadCalculation(MathCalculation calculation)
+        public void ReadCalculation(ICalculation calculation)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateCalculation(MathCalculation calculation)
+        public void UpdateCalculation(ICalculation calculation)
         {
             throw new NotImplementedException();
         }
