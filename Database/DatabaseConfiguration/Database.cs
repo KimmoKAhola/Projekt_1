@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
-namespace Database
+namespace Database.DatabaseConfiguration
 {
     public class Database : DbContext
     {
