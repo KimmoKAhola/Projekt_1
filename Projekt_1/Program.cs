@@ -40,7 +40,7 @@ namespace Projekt_1
                         Result = new Result
                         {
                             DateCreated = DateTime.Now,
-                            ResultType = "Math Operation",
+                            ResultType = ResultTypes.MathCalculation.ToString(),
                         }
                     };
 
@@ -52,11 +52,11 @@ namespace Projekt_1
             }
         }
 
-        public static IMathStrategy SetStrategy()
+        public static IMathStrategy? SetStrategy()
         {
             Console.Write("Enter 1-6: ");
             var input = Convert.ToInt32(Console.ReadLine());
-            IMathStrategy mathStrategy = null;
+            IMathStrategy? mathStrategy = null;
             switch (input)
             {
                 case 1:

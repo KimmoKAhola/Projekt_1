@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
+    public enum ResultTypes
+    {
+        MathCalculation,
+        AreaCalculation,
+        RockPapperScissors
+    };
+
     public class Result
     {
         public int Id { get; set; }
