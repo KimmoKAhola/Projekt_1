@@ -1,6 +1,4 @@
-﻿using Database.Models;
-
-namespace Database.Services
+﻿namespace Database.Interfaces
 {
     public interface IDatabaseService
     {

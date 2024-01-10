@@ -1,4 +1,4 @@
-﻿namespace Database.Models
+﻿namespace Database.Interfaces
 {
     public interface ICalculation
     {
