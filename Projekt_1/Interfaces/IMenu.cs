@@ -9,7 +9,10 @@ namespace Projekt_1.Interfaces
     public interface IMenu
     {
         void Display();
-        void PrintOptions();
+        void Menuchoice(int choice);
         void Run();
+        void PrintBanner();
+
+        int PromptUser();
     }
 }
