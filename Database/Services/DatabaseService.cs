@@ -24,11 +24,13 @@ namespace Database.Services
             {
                 var temp = (MathCalculation)calculation;
                 _dbContext.Calculation.Add(temp);
+                PrintMessages.PrintSuccessMessage($"{temp} has been added to the system.");
             }
             else
             {
                 var temp = (AreaCalculation)calculation;
                 _dbContext.AreaCalculation.Add(temp);
+                PrintMessages.PrintSuccessMessage($"{temp} has been added to the system.");
             }
             _dbContext.SaveChanges();
         }
