@@ -1,5 +1,6 @@
 ﻿using Calculator.Interfaces;
 using Calculator.Mathematics;
+using Database.Interfaces;
 using Database.Models;
 using Database.Services;
 using InputValidationLibrary;

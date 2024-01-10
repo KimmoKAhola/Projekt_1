@@ -1,4 +1,4 @@
-﻿namespace Projekt_1
+﻿namespace Projekt_1.Interfaces
 {
     public interface IApplication
     {
