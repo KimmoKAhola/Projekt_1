@@ -16,7 +16,17 @@ namespace Projekt_1.Menus
             throw new NotImplementedException();
         }
 
-        public void PrintOptions()
+        public void PrintBanner()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Menuchoice(int choice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int PromptUser()
         {
             throw new NotImplementedException();
         }

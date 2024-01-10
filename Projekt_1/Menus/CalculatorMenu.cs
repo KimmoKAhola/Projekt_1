@@ -14,7 +14,7 @@ namespace Projekt_1.Menus
 {
     public class CalculatorMenu : IMenu
     {
-        private MathContext _context;
+        MathContext _context;
         DatabaseService _databaseService;
         ICalculation _calculation;
         public CalculatorMenu(MathContext context, DatabaseService databaseService, MathCalculation calculation)
@@ -26,50 +26,63 @@ namespace Projekt_1.Menus
 
         public void Display()
         {
-            PrintOptions();
-            Run();
+            PrintBanner();
         }
 
-        public void PrintOptions()
+
+        public void Menuchoice(int choice)
         {
-            Console.WriteLine("1. Calculate");
-            Console.WriteLine("2. Read all");
-            Console.WriteLine("1. _----");
-            Console.WriteLine("1. ------");
-            Console.WriteLine("1. ------");
+            Console.Write("Enter a number 1-6: ");
+            var input = Convert.ToInt32(Console.ReadLine());
+            IMathStrategy? math = _context.SetStrategy(input);
+
+            var mathResult = _context.Calculate(15, 35);
+            var calculation = new MathCalculation
+            {
+                FirstInput = 15,
+                SecondInput = 35,
+                Answer = mathResult,
+                Operator = math.Operator,
+                Result = new Result
+                {
+                    DateCreated = DateTime.Now,
+                    ResultType = ResultTypes.MathCalculation.ToString(),
+                }
+            };
+            _databaseService.AddCalculation(calculation);
+        }
+
+        public int PromptUser()
+        {
+            return 1;
         }
 
         public void Run()
         {
-            //Console.Write("Enter 1-6: ");
-            //var choice = Convert.ToInt32(Console.ReadLine());
-
-            //var temp = _context.SetStrategy(choice);
-            ////_context.SetStrategy(choice);
-            //Console.Write("Enter first number: ");
-            //var first = Convert.ToDouble(Console.ReadLine());
-            //Console.Write("Enter second number: ");
-            //var second = Convert.ToDouble(Console.ReadLine());
-            //var answer = _context.Calculate(first, second);
-
-            //var calculation = new MathCalculation
-            //{
-            //    FirstInput = first,
-            //    SecondInput = second,
-            //    Answer = answer,
-            //    Operator = temp.Operator,
-            //    Result = new Result
-            //    {
-            //        DateCreated = DateTime.Now,
-            //        ResultType = ResultTypes.MathCalculation.ToString(),
-            //    }
-            //};
-
-            //_databaseService.AddCalculation(calculation);
-
-            _databaseService.ReadAllCalculations(_calculation);
+            while (true)
+            {
+                Console.Clear();
+                Display();
+                var choice = PromptUser();
+                Menuchoice(choice);
+                PrintMessages.PressAnyKeyToContinue();
+            }
+        }
+        public void PrintBanner()
+        {
+            string banner = @"***********************************************************************************************
+*                                                                                             *
+*      ██████╗ █████╗ ██╗      ██████╗██╗   ██╗██╗      █████╗ ████████╗ ██████╗ ██████╗      *
+*     ██╔════╝██╔══██╗██║     ██╔════╝██║   ██║██║     ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗     *
+*     ██║     ███████║██║     ██║     ██║   ██║██║     ███████║   ██║   ██║   ██║██████╔╝     *
+*     ██║     ██╔══██║██║     ██║     ██║   ██║██║     ██╔══██║   ██║   ██║   ██║██╔══██╗     *
+*     ╚██████╗██║  ██║███████╗╚██████╗╚██████╔╝███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║     *
+*      ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝     *
+*                                                                                             *
+***********************************************************************************************";
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(banner);
+            Console.ResetColor();
         }
     }
-
-
 }
