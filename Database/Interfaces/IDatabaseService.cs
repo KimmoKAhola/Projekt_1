@@ -9,7 +9,6 @@ namespace Database.Interfaces
         void ReadAllCalculations(ICalculation calculation);
         void UpdateCalculation(ICalculation calculation);
         void DeleteCalculation(ICalculation calculation);
-
         void AddRockPaperScissorsResult(Game game);
         void AddRockPaperScissorsHighScore(Game game);
     }
