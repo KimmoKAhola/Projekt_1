@@ -34,9 +34,16 @@ namespace Projekt_1.Container
 
         private static void MenuBuilder(ContainerBuilder myBuilder)
         {
-            myBuilder.RegisterType<CalculatorMenu>().AsSelf();
-            myBuilder.RegisterType<MainMenu>().AsSelf();
-            myBuilder.RegisterType<AreaCalculatorMenu>().AsSelf();
+            var assembly = Assembly.GetExecutingAssembly();
+
+            //Tim corey tip
+            myBuilder.RegisterAssemblyTypes(assembly)
+                .Where(t => t.Namespace != null && t.Namespace.StartsWith("Projekt_1.Menus"))
+                .AsSelf();
+
+            //myBuilder.RegisterType<CalculatorMenu>().AsSelf();
+            //myBuilder.RegisterType<MainMenu>().AsSelf();
+            //myBuilder.RegisterType<AreaCalculatorMenu>().AsSelf();
         }
 
         private static void CalculationBuilder(ContainerBuilder myBuilder)
