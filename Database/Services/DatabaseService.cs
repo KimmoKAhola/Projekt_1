@@ -2,6 +2,7 @@
 using Database.Interfaces;
 using Database.Models;
 using InputValidationLibrary;
+using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,15 +64,25 @@ namespace Database.Services
         {
             throw new NotImplementedException();
         }
-        public void AddRockPaperScissorsHighScore()
+        public void AddRockPaperScissorsHighScore(Game game)
         {
             throw new NotImplementedException();
         }
 
-        public void AddRockPaperScissorsResult()
+        public void AddRockPaperScissorsResult(Game game)
         {
-            throw new NotImplementedException();
+            var rps = new RockPaperScissors
+            {
+                PlayerMove = game.PlayerMove,
+                ComputerMove = game.ComputerMove,
+                Outcome = game.Outcome,
+                Result = new Result
+                {
+                    ResultType = ResultTypes.RockPapperScissors.ToString(),
+                }
+            };
+            DbContext.Add(rps);
+            DbContext.SaveChanges();
         }
-
     }
 }

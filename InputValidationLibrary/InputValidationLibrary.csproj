@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Rock_Paper_Scissors\Rock_Paper_Scissors.csproj" />
+  </ItemGroup>
+
 </Project>
