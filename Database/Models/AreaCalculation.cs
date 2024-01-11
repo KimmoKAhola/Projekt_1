@@ -17,6 +17,9 @@ namespace Database.Models
         public double Area { get; set; }
 
         [Required]
+        public string ShapeName { get; set; } = null!;
+
+        [Required]
         public Result Result { get; set; } = null!;
 
         public override string ToString()
