@@ -40,6 +40,7 @@ namespace Projekt_1.Menus
             Game game = new Game();
             game.RunGame();
             DatabaseService.AddRockPaperScissorsResult(game);
+            DatabaseService.AddRockPaperScissorsHighScore(game);
             PrintMessages.PressAnyKeyToContinue();
         }
         public void PrintBanner()

@@ -67,6 +67,15 @@ namespace Database.Migrations
                     b.Property<byte>("AverageScore")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("NumberOfLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfWins")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("HighScore");

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240109142830_Initial9")]
-    partial class Initial9
+    [Migration("20240111204223_Initial123")]
+    partial class Initial123
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,20 +33,55 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Area")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("Circumference")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Circumference")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
 
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ShapeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ResultId");
 
                     b.ToTable("AreaCalculation");
+                });
+
+            modelBuilder.Entity("Database.Models.HighScore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte>("AverageScore")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("NumberOfLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfWins")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HighScore");
                 });
 
             modelBuilder.Entity("Database.Models.MathCalculation", b =>
@@ -57,11 +92,11 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Answer")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Answer")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("FirstInput")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("FirstInput")
+                        .HasColumnType("float");
 
                     b.Property<string>("Operator")
                         .IsRequired()
@@ -70,8 +105,8 @@ namespace Database.Migrations
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SecondInput")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SecondInput")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -103,6 +138,36 @@ namespace Database.Migrations
                     b.ToTable("Result");
                 });
 
+            modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ComputerMove")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Outcome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlayerMove")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResultId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResultId");
+
+                    b.ToTable("RockPaperScissors");
+                });
+
             modelBuilder.Entity("Database.Models.AreaCalculation", b =>
                 {
                     b.HasOne("Database.Models.Result", "Result")
@@ -115,6 +180,17 @@ namespace Database.Migrations
                 });
 
             modelBuilder.Entity("Database.Models.MathCalculation", b =>
+                {
+                    b.HasOne("Database.Models.Result", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Result");
+                });
+
+            modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
                 {
                     b.HasOne("Database.Models.Result", "Result")
                         .WithMany()
