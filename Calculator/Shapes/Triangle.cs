@@ -11,16 +11,11 @@ namespace Calculator.Shapes
     {
         public double Width { get; set; }
         public double Height { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "Triangle";
 
-        public double CalculateArea(double width, double height)
+        public (double area, double circumference) Calculate(double width, double height)
         {
-            return (width * height) / 2;
-        }
-
-        public double CalculateCircumference(double width, double height)
-        {
-            return 3 * width; //Asume equilaterial triangle
+            return ((width * height) / 2, width * 3);
         }
     }
 }
