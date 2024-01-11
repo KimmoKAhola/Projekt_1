@@ -1,4 +1,6 @@
 ﻿using Calculator.Mathematics;
+using Calculator.Shapes;
+using Database.Interfaces;
 using Database.Models;
 using Database.Services;
 using InputValidationLibrary;
@@ -11,22 +13,26 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class MainMenu(MathContext context, DatabaseService service, MathCalculation calculation) : IMenu
+    public class MainMenu(DatabaseService service) : IMenu
     {
-        private List<IMenu> _menus = new List<IMenu>()
-        {
-            new CalculatorMenu(context, service, calculation),
-            new AreaCalculatorMenu(context, service),
+        private List<IMenu> _menus =
+        [
+            new CalculatorMenu(new MathContext(), service, new MathCalculation()),
+            new AreaCalculatorMenu(new AreaCalculatorContext(), service, new AreaCalculation()),
             new RockPaperScissorsMenu(),
-        };
+        ];
+
+        public string MenuName => "Main menu";
+
         public void Display()
         {
             PrintBanner();
         }
 
 
-        public void Menuchoice(int choice)
+        public void Menuchoice()
         {
+            var choice = PromptUser();
             _menus[choice - 1].Run();
         }
 
@@ -36,8 +42,7 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                var choice = PromptUser();
-                Menuchoice(choice);
+                Menuchoice();
             }
         }
         public void PrintBanner()
@@ -56,6 +61,10 @@ namespace Projekt_1.Menus
         public int PromptUser()
         {
             return UserInputValidation.MenuValidation(_menus, "Choose which game to start: ");
+        }
+        public override string ToString()
+        {
+            return MenuName;
         }
     }
 }

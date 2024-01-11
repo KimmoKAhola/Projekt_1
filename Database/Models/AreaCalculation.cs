@@ -15,6 +15,8 @@ namespace Database.Models
         public double Circumference { get; set; }
 
         public double Area { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
 
         [Required]
         public string ShapeName { get; set; } = null!;
@@ -24,7 +26,7 @@ namespace Database.Models
 
         public override string ToString()
         {
-            return $"{Area} {Circumference}";
+            return $"{ShapeName} {Width} {Height} {Area} {Circumference}";
         }
     }
 }
