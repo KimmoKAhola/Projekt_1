@@ -10,30 +10,25 @@ using System.Threading.Tasks;
 
 namespace Database.Services
 {
-    public class DatabaseService : IDatabaseService
+    public class DatabaseService(DatabaseContext context) : IDatabaseService
     {
-        private DatabaseContext _dbContext;
-
-        public DatabaseService()
-        {
-            _dbContext = new DatabaseContext();
-        }
+        private DatabaseContext DbContext { get; set; } = context;
 
         public void AddCalculation(ICalculation calculation)
         {
             if (calculation is MathCalculation)
             {
                 var temp = (MathCalculation)calculation;
-                _dbContext.Calculation.Add(temp);
+                DbContext.Calculation.Add(temp);
                 PrintMessages.PrintSuccessMessage($"{temp} has been added to the system.");
             }
             else
             {
                 var temp = (AreaCalculation)calculation;
-                _dbContext.AreaCalculation.Add(temp);
+                DbContext.AreaCalculation.Add(temp);
                 PrintMessages.PrintSuccessMessage($"{temp} has been added to the system.");
             }
-            _dbContext.SaveChanges();
+            DbContext.SaveChanges();
         }
 
         public void DeleteCalculation(ICalculation calculation)
@@ -43,14 +38,14 @@ namespace Database.Services
 
         public void ReadAllCalculations(ICalculation calculation)
         {
-            List<ICalculation> temp = new List<ICalculation>();
+            List<ICalculation> temp;
             if (calculation is MathCalculation)
             {
-                temp = _dbContext.Calculation.OfType<MathCalculation>().Cast<ICalculation>().ToList();
+                temp = DbContext.Calculation.OfType<MathCalculation>().Cast<ICalculation>().ToList();
             }
             else
             {
-                temp = _dbContext.AreaCalculation.OfType<AreaCalculation>().Cast<ICalculation>().ToList();
+                temp = DbContext.AreaCalculation.OfType<AreaCalculation>().Cast<ICalculation>().ToList();
             }
             foreach (var item in temp)
             {
@@ -68,5 +63,15 @@ namespace Database.Services
         {
             throw new NotImplementedException();
         }
+        public void AddRockPaperScissorsHighScore()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddRockPaperScissorsResult()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -60,7 +60,30 @@ namespace InputValidationLibrary
                 }
             }
         }
+        public static double[]? ReturnTwoNumbers(string msg)
+        {
+            double[] numbers;
+            while (true)
+            {
+                Console.Write(msg);
+                string? input = Console.ReadLine();
+                if (input?.ToLower() == "e" || input == null)
+                {
+                    return null;
+                }
 
+                string[] userInput = input.Split(' ');
+                if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && double.TryParse(userInput[1], out double second))
+                {
+                    numbers = [first, second];
+                    return numbers;
+                }
+                else
+                {
+                    PrintMessages.PrintErrorMessage("Invalid input!");
+                }
+            }
+        }
         /// <summary>
         /// Asks for a general input string. Will truncate its answer to 30 characters. Business rules.
         /// </summary>

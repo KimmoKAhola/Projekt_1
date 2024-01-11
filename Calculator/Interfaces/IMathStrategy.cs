@@ -8,7 +8,7 @@ namespace Calculator.Interfaces
 {
     public interface IMathStrategy
     {
-        public char Operator { get; set; }
-        public double Execute(double first, double second);
+        public char Operator { get; }
+        public double Calculate(double first, double second);
     }
 }

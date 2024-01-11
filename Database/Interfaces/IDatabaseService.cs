@@ -7,5 +7,8 @@
         void ReadAllCalculations(ICalculation calculation);
         void UpdateCalculation(ICalculation calculation);
         void DeleteCalculation(ICalculation calculation);
+
+        void AddRockPaperScissorsResult();
+        void AddRockPaperScissorsHighScore();
     }
 }

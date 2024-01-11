@@ -4,6 +4,7 @@ using Database.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240110203924_Initial123")]
+    partial class Initial123
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,18 +39,12 @@ namespace Database.Migrations
                     b.Property<double>("Circumference")
                         .HasColumnType("float");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShapeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
