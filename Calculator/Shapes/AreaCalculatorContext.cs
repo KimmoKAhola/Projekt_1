@@ -10,41 +10,34 @@ namespace Calculator.Shapes
 {
     public class AreaCalculatorContext
     {
-        private IShape _strategy;
+        private IShape? _strategy;
+        public string ShapeName { get; private set; } = string.Empty;
 
-        public AreaCalculatorContext(IShape strategy)
+        public AreaCalculatorContext()
         {
-            _strategy = strategy;
+            _strategy = null;
         }
-
-        public (double area, double circumference) Calculate(double first, double second)
+        private static IShape CreateStrategy(char choice)
         {
-            double area = _strategy.CalculateArea(first, second);
-            double circumference = _strategy.CalculateCircumference(first, second);
-
-            return (area, circumference);
-        }
-
-        public IShape SetStrategy(int choice)
-        {
-            switch (choice)
+            return choice switch //'▬', '▲', 'P', '♦'
             {
-                case 1:
-                    _strategy = new Rectangle();
-                    break;
-                case 2:
-                    _strategy = new Parallelogram();
-                    break;
-                case 3:
-                    _strategy = new Triangle();
-                    break;
-                case 4:
-                    _strategy = new Rhomboid();
-                    break;
-            }
-            return _strategy;
+                '▬' => new Rectangle(),
+                'P' => new Parallelogram(),
+                '▲' => new Triangle(),
+                '♦' => new Rhomboid(),
+                _ => throw new NotImplementedException(),
+            };
         }
 
+        public void SetStrategy(char choice)
+        {
+            _strategy = CreateStrategy(choice);
+            ShapeName = _strategy.Name;
+        }
 
+        public (double area, double circumference) ExecuteStrategy(double width, double height)
+        {
+            return _strategy.Calculate(width, height);
+        }
     }
 }
