@@ -10,42 +10,35 @@ namespace Calculator.Mathematics
 {
     public class MathContext
     {
-        private IMathStrategy _strategy;
-
-        public MathContext(IMathStrategy strategy)
+        private IMathStrategy? _strategy;
+        public char Operator { get; private set; }
+        public MathContext()
         {
-            _strategy = strategy;
+            _strategy = null;
         }
-
-        public double Calculate(double first, double second)
+        private static IMathStrategy CreateStrategy(char choice)
         {
-            return _strategy.Execute(first, second);
-        }
-
-        public IMathStrategy SetStrategy(int choice)
-        {
-            switch (choice)
+            return choice switch
             {
-                case 1:
-                    _strategy = new Addition();
-                    break;
-                case 2:
-                    _strategy = new Subtraction();
-                    break;
-                case 3:
-                    _strategy = new Multiplication();
-                    break;
-                case 4:
-                    _strategy = new Division();
-                    break;
-                case 5:
-                    _strategy = new Modulus();
-                    break;
-                case 6:
-                    _strategy = new SquareRoot();
-                    break;
-            }
-            return _strategy;
+                '+' => new Addition(),
+                '-' => new Subtraction(),
+                '*' => new Multiplication(),
+                '÷' => new Division(),
+                '%' => new Modulus(),
+                '√' => new SquareRoot(),
+                _ => throw new BajskorvException("Bajskorv!"),
+            };
+        }
+
+        public void SetStrategy(char choice)
+        {
+            _strategy = CreateStrategy(choice);
+            Operator = _strategy.Operator;
+        }
+
+        public double ExecuteStrategy(double first, double second)
+        {
+            return _strategy.Calculate(first, second);
         }
     }
 }
