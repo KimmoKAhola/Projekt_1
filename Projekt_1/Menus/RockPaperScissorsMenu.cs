@@ -1,6 +1,9 @@
 ﻿using Calculator.Mathematics;
 using Database.Services;
+using InputValidationLibrary;
+using Microsoft.EntityFrameworkCore.Storage;
 using Projekt_1.Interfaces;
+using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +12,16 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class RockPaperScissorsMenu : IMenu
+    public class RockPaperScissorsMenu(DatabaseService databaseService) : IMenu
     {
         public string MenuName => "Rock, Paper, Scissors";
 
+        public DatabaseService DatabaseService { get; set; } = databaseService;
         public void Display()
         {
-            throw new NotImplementedException();
+            PrintBanner();
         }
 
-        public void PrintBanner()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Menuchoice()
         {
@@ -35,7 +35,44 @@ namespace Projekt_1.Menus
 
         public void Run()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Display();
+            Game game = new Game();
+            game.RunGame();
+            DatabaseService.AddRockPaperScissorsResult(game);
+            DatabaseService.AddRockPaperScissorsHighScore(game);
+            PrintMessages.PressAnyKeyToContinue();
+        }
+        public void PrintBanner()
+        {
+            string banner = @" _____                                                              _____ 
+( ___ )                                                            ( ___ )
+ |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | 
+ |   |             ██████╗  ██████╗  ██████╗██╗  ██╗                |   | 
+ |   |             ██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝                |   | 
+ |   |             ██████╔╝██║   ██║██║     █████╔╝                 |   | 
+ |   |             ██╔══██╗██║   ██║██║     ██╔═██╗                 |   | 
+ |   |             ██║  ██║╚██████╔╝╚██████╗██║  ██╗                |   | 
+ |   |             ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝                |   | 
+ |   |                                                              |   | 
+ |   |         ██████╗  █████╗ ██████╗ ███████╗██████╗              |   | 
+ |   |         ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗             |   | 
+ |   |         ██████╔╝███████║██████╔╝█████╗  ██████╔╝             |   | 
+ |   |         ██╔═══╝ ██╔══██║██╔═══╝ ██╔══╝  ██╔══██╗             |   | 
+ |   |         ██║     ██║  ██║██║     ███████╗██║  ██║             |   | 
+ |   |         ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝             |   | 
+ |   |                                                              |   | 
+ |   | ███████╗ ██████╗██╗███████╗███████╗ ██████╗ ██████╗ ███████╗ |   | 
+ |   | ██╔════╝██╔════╝██║██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝ |   | 
+ |   | ███████╗██║     ██║███████╗███████╗██║   ██║██████╔╝███████╗ |   | 
+ |   | ╚════██║██║     ██║╚════██║╚════██║██║   ██║██╔══██╗╚════██║ |   | 
+ |   | ███████║╚██████╗██║███████║███████║╚██████╔╝██║  ██║███████║ |   | 
+ |   | ╚══════╝ ╚═════╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ |   | 
+ |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| 
+(_____)                                                            (_____)";
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(banner);
+            Console.ResetColor();
         }
         public override string ToString()
         {

@@ -5,6 +5,7 @@ using Database.Models;
 using Database.Services;
 using InputValidationLibrary;
 using Projekt_1.Interfaces;
+using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Projekt_1.Menus
         [
             new CalculatorMenu(new MathContext(), service, new MathCalculation()),
             new AreaCalculatorMenu(new AreaCalculatorContext(), service, new AreaCalculation()),
-            new RockPaperScissorsMenu(),
+            new RockPaperScissorsMenu(service),
         ];
 
         public string MenuName => "Main menu";

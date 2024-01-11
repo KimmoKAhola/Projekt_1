@@ -67,6 +67,15 @@ namespace Database.Migrations
                     b.Property<byte>("AverageScore")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("NumberOfLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfWins")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("HighScore");
@@ -134,7 +143,24 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ComputerMove")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Outcome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlayerMove")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResultId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ResultId");
 
                     b.ToTable("RockPaperScissors");
                 });
@@ -151,6 +177,17 @@ namespace Database.Migrations
                 });
 
             modelBuilder.Entity("Database.Models.MathCalculation", b =>
+                {
+                    b.HasOne("Database.Models.Result", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Result");
+                });
+
+            modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
                 {
                     b.HasOne("Database.Models.Result", "Result")
                         .WithMany()

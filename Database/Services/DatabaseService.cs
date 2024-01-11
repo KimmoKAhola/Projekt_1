@@ -2,6 +2,7 @@
 using Database.Interfaces;
 using Database.Models;
 using InputValidationLibrary;
+using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,15 +64,51 @@ namespace Database.Services
         {
             throw new NotImplementedException();
         }
-        public void AddRockPaperScissorsHighScore()
+        public void AddRockPaperScissorsHighScore(Game game)
         {
-            throw new NotImplementedException();
+            var allRPSGames = DbContext.RockPaperScissors.ToList();
+
+            var count = allRPSGames.Count;
+            var allWins = allRPSGames.Where(x => x.Outcome == GameState.Win.ToString()).Count();
+            var allLosses = allRPSGames.Where(x => x.Outcome == GameState.Loss.ToString()).Count();
+            var allTies = allRPSGames.Where(x => x.Outcome == GameState.Tie.ToString()).Count();
+
+            Console.WriteLine();
+            if (DbContext.HighScore.Count() == 0)
+            {
+                var highScore = new HighScore
+                {
+                    AverageScore = 0,
+                    NumberOfWins = allWins,
+                    NumberOfLosses = allLosses,
+                    NumberOfTies = allTies,
+                };
+                DbContext.Add(highScore);
+            }
+            else
+            {
+                var highScore = DbContext.HighScore.First();
+                highScore.NumberOfWins += allWins - highScore.NumberOfWins;
+                highScore.NumberOfLosses += allLosses - highScore.NumberOfLosses;
+                highScore.NumberOfTies += allTies - highScore.NumberOfTies;
+            }
+            DbContext.SaveChanges();
         }
 
-        public void AddRockPaperScissorsResult()
+        public void AddRockPaperScissorsResult(Game game)
         {
-            throw new NotImplementedException();
+            var rps = new RockPaperScissors
+            {
+                PlayerMove = game.PlayerMove,
+                ComputerMove = game.ComputerMove,
+                Outcome = game.Outcome,
+                Result = new Result
+                {
+                    ResultType = ResultTypes.RockPapperScissors.ToString(),
+                }
+            };
+            DbContext.Add(rps);
+            DbContext.SaveChanges();
         }
-
     }
 }
