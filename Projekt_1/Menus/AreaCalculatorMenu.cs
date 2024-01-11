@@ -1,11 +1,5 @@
-﻿using Calculations.Services;
-using Calculator.Interfaces;
-using Calculator.Mathematics;
-using Calculator.Shapes;
-using Database.Interfaces;
-using Database.Models;
+﻿using Calculator.Mathematics;
 using Database.Services;
-using InputValidationLibrary;
 using Projekt_1.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,46 +9,24 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, DatabaseService databaseService, AreaCalculation calculation) : IMenu
+    public class AreaCalculatorMenu : IMenu
     {
-
-        public DatabaseService DatabaseService { get; set; } = databaseService;
-        public AreaCalculation Calculation { get; set; } = calculation;
-        public AreaCalculatorContext AreaContext { get; set; } = areaContext;
-
-        public string MenuName => "Area Calculator";
-
+        private MathContext _context;
+        DatabaseService _databaseService;
+        public AreaCalculatorMenu(MathContext context, DatabaseService databaseService)
+        {
+            _context = context;
+            _databaseService = databaseService;
+        }
         public void Display()
         {
             PrintBanner();
         }
 
 
-        public void Menuchoice()
+        public void Menuchoice(int choice)
         {
-            Console.Write("Enter a number: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    var chosenShape = MenuChoice.ChooseGeometricShape();
-                    AreaContext.SetStrategy(chosenShape);
-                    ICalculation? areaCalculation = CalculationServices.CreateAreaCalculation(AreaContext);
-                    if (areaCalculation != null)
-                        DatabaseService.AddCalculation(areaCalculation);
-                    else
-                        PrintMessages.PrintErrorMessage("User chose to discard.");
-                    break;
-                case 2:
-                    DatabaseService.ReadAllCalculations(Calculation);
-                    break;
-                case 3:
-                    //Update
-                    break;
-                case 4:
-                    //Delete
-                    break;
-            }
+            throw new NotImplementedException();
         }
 
         public int PromptUser()
@@ -64,12 +36,9 @@ namespace Projekt_1.Menus
 
         public void Run()
         {
-            while (true)
-            {
-                Console.Clear();
-                Display();
-                Menuchoice();
-            }
+            Console.Clear();
+            Display();
+            Console.ReadKey();
         }
         public void PrintBanner()
         {
@@ -93,10 +62,6 @@ namespace Projekt_1.Menus
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(banner);
             Console.ResetColor();
-        }
-        public override string ToString()
-        {
-            return MenuName;
         }
     }
 }

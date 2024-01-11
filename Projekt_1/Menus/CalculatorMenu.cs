@@ -1,5 +1,4 @@
-﻿using Calculations.Services;
-using Calculator.Interfaces;
+﻿using Calculator.Interfaces;
 using Calculator.Mathematics;
 using Database.Interfaces;
 using Database.Models;
@@ -14,61 +13,59 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class CalculatorMenu(MathContext mathContext, DatabaseService databaseService, MathCalculation calculation) : IMenu
+    public class CalculatorMenu : IMenu
     {
-        public DatabaseService DatabaseService { get; set; } = databaseService;
-        public MathCalculation Calculation { get; set; } = calculation;
-        public MathContext MathContext { get; set; } = mathContext;
-
-        public string MenuName => "Calculator";
+        MathContext _context;
+        DatabaseService _databaseService;
+        ICalculation _calculation;
+        public CalculatorMenu(MathContext context, DatabaseService databaseService, MathCalculation calculation)
+        {
+            _context = context;
+            _databaseService = databaseService;
+            _calculation = calculation;
+        }
 
         public void Display()
         {
             PrintBanner();
         }
 
-        public void Menuchoice()
+
+        public void Menuchoice(int choice)
         {
-            Console.Write("Enter a number: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            Console.Write("Enter a number 1-6: ");
+            var input = Convert.ToInt32(Console.ReadLine());
+            IMathStrategy? math = _context.SetStrategy(input);
+
+            var mathResult = _context.Calculate(15, 35);
+            var calculation = new MathCalculation
             {
-                case 1:
-                    var chosenOperator = MenuChoice.ChooseMathOperator();
-                    MathContext.SetStrategy(chosenOperator);
-                    ICalculation? mathCalculation = CalculationServices.CreateMathCalculation(MathContext);
-                    if (mathCalculation != null)
-                        DatabaseService.AddCalculation(mathCalculation);
-                    else
-                        PrintMessages.PrintErrorMessage("User chose to discard.");
-                    break;
-                case 2:
-                    DatabaseService.ReadAllCalculations(Calculation);
-                    break;
-                case 3:
-                    //Update
-                    break;
-                case 4:
-                    //Delete
-                    break;
-                case 0:
-                    PrintMessages.PrintNotification("Returning back to the main menu.");
-                    PrintMessages.PressAnyKeyToContinue();
-                    break;
-            }
+                FirstInput = 15,
+                SecondInput = 35,
+                Answer = mathResult,
+                Operator = math.Operator,
+                Result = new Result
+                {
+                    DateCreated = DateTime.Now,
+                    ResultType = ResultTypes.MathCalculation.ToString(),
+                }
+            };
+            _databaseService.AddCalculation(calculation);
         }
 
         public int PromptUser()
         {
             return 1;
         }
+
         public void Run()
         {
             while (true)
             {
                 Console.Clear();
                 Display();
-                Menuchoice();
+                var choice = PromptUser();
+                Menuchoice(choice);
                 PrintMessages.PressAnyKeyToContinue();
             }
         }
@@ -87,11 +84,6 @@ namespace Projekt_1.Menus
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine(banner);
             Console.ResetColor();
-        }
-
-        public override string ToString()
-        {
-            return MenuName;
         }
     }
 }

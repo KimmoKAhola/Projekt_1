@@ -36,18 +36,12 @@ namespace Database.Migrations
                     b.Property<double>("Circumference")
                         .HasColumnType("float");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShapeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
