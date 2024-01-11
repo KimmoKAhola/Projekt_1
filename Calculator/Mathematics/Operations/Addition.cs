@@ -4,9 +4,9 @@ namespace Calculator.Mathematics.Operations
 {
     public class Addition : IMathStrategy
     {
-        public char Operator { get; set; } = '+';
+        public char Operator => '+';
 
-        public double Execute(double first, double second)
+        public double Calculate(double first, double second)
         {
             return Math.Round(first + second, 2);
         }

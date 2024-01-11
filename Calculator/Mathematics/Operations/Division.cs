@@ -9,8 +9,8 @@ namespace Calculator.Mathematics.Operations
 {
     public class Division : IMathStrategy
     {
-        public char Operator { get; set; } = '÷';
-        public double Execute(double first, double second)
+        public char Operator => '÷';
+        public double Calculate(double first, double second)
         {
             return Math.Round(first / second, 2);
         }
