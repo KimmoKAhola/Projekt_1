@@ -8,8 +8,9 @@ namespace Projekt_1.Interfaces
 {
     public interface IMenu
     {
+        public string MenuName { get; }
         void Display();
-        void Menuchoice(int choice);
+        void Menuchoice();
         void Run();
         void PrintBanner();
 

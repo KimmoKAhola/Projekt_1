@@ -11,6 +11,8 @@ namespace Projekt_1.Menus
 {
     public class RockPaperScissorsMenu : IMenu
     {
+        public string MenuName => "Rock, Paper, Scissors";
+
         public void Display()
         {
             throw new NotImplementedException();
@@ -21,7 +23,7 @@ namespace Projekt_1.Menus
             throw new NotImplementedException();
         }
 
-        public void Menuchoice(int choice)
+        public void Menuchoice()
         {
             throw new NotImplementedException();
         }
@@ -34,6 +36,10 @@ namespace Projekt_1.Menus
         public void Run()
         {
             throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return MenuName;
         }
     }
 }
