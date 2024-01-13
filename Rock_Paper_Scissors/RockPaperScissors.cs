@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Rock_Paper_Scissors
 {
-    public class Game
+    public class RockPaperScissors
     {
-        public string PlayerMove { get; set; }
-        public string ComputerMove { get; set; }
-        public string Outcome { get; set; }
+        public string PlayerMove { get; set; } = string.Empty;
+        public string ComputerMove { get; set; } = string.Empty;
+        public string Outcome { get; set; } = string.Empty;
 
         public void RunGame()
         {
