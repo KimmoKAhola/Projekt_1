@@ -10,12 +10,8 @@ namespace Calculator.Mathematics
 {
     public class MathContext
     {
-        private IMathStrategy? _strategy;
+        private IMathStrategy? _strategy = null;
         public char Operator { get; private set; }
-        public MathContext()
-        {
-            _strategy = null;
-        }
         private static IMathStrategy CreateStrategy(char choice)
         {
             return choice switch
@@ -38,7 +34,7 @@ namespace Calculator.Mathematics
 
         public double ExecuteStrategy(double first, double second)
         {
-            return _strategy.Calculate(first, second);
+            return Math.Round(_strategy.Calculate(first, second), 2);
         }
     }
 }

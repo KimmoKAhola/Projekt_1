@@ -12,7 +12,7 @@ namespace Calculator.Mathematics.Operations
         public char Operator => '*';
         public double Calculate(double first, double second)
         {
-            return Math.Round(first * second, 2);
+            return first * second;
         }
     }
 }

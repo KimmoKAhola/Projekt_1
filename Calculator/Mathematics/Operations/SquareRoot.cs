@@ -12,8 +12,7 @@ namespace Calculator.Mathematics.Operations
         public char Operator => '√';
         public double Calculate(double first, double second)
         {
-            var exponent = (double)2.0;
-            return Math.Round(Math.Pow(first, 1 / exponent), 2); //this is beautiful
+            return Math.Pow(first, 1 / second);
         }
     }
 }
