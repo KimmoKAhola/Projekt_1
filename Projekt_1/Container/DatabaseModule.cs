@@ -14,7 +14,9 @@ namespace Projekt_1.Container
         protected override void Load(ContainerBuilder myBuilder)
         {
             myBuilder.RegisterType<DatabaseContext>().AsSelf();
-            myBuilder.RegisterType<DatabaseService>().AsSelf();
+            myBuilder.RegisterType<MathCalculationService>().AsSelf();
+            myBuilder.RegisterType<AreaCalculationService>().AsSelf();
+            myBuilder.RegisterType<RPSService>().AsSelf();
         }
     }
 }
