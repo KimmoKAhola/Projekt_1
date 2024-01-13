@@ -19,6 +19,8 @@ namespace Database.Models
         public double FirstInput { get; set; }
         public double SecondInput { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
         [Required]
         public Result Result { get; set; } = null!;
 
@@ -26,11 +28,11 @@ namespace Database.Models
         {
             if (Operator != '√')
             {
-                return $"{FirstInput} {Operator} {SecondInput} = {Answer}";
+                return $"{Id} {FirstInput} {Operator} {SecondInput} = {Answer}";
             }
             else
             {
-                return $"{Operator}{FirstInput} = {Answer}";
+                return $"{Id} {Operator}{FirstInput} = {Answer}";
             }
         }
     }
