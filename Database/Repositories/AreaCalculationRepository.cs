@@ -1,6 +1,8 @@
 ﻿using Database.DatabaseConfiguration;
 using Database.Interfaces;
 using Database.Models;
+using InputValidationLibrary;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +45,49 @@ namespace Database.Repositories
 
         public void Update(AreaCalculation entity)
         {
-            throw new NotImplementedException();
+            int? choice = PromptUpdate();
+            if (choice == null)
+            {
+
+            }
+            else
+            {
+                ChangeOption(choice, entity);
+            }
         }
+
+        private static void ChangeOption(int? choice, AreaCalculation entity)
+        {
+            switch (choice - 1)
+            {
+                case 0:
+                    entity.Width = 10;
+                    break;
+                case 1:
+                    entity.Height = 10;
+                    break;
+                case 2:
+                    entity.IsDeleted = true;
+                    break;
+                case 3:
+                    entity.ShapeName = "Test";
+                    break;
+                case 4:
+                    break;
+            }
+        }
+
+        private static int? PromptUpdate()
+        {
+            Dictionary<int, string> options = new()
+            {
+                {1, "Width" },
+                {2, "Height" },
+                {3, "Delete" },
+                {4, "Shape" },
+            };
+            return UserInputValidation.MenuValidation(options, "Bajs 123456");
+        }
+
     }
 }

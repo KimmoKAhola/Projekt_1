@@ -1,6 +1,7 @@
 ﻿using Database.Interfaces;
 using Database.Models;
 using Database.Repositories;
+using InputValidationLibrary;
 using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Database.Services
         {
             _areaCalculationRepository.Add(calculation);
             _areaCalculationRepository.Save();
+            PrintMessages.PrintSuccessMessage($"Added {calculation} to the database.");
         }
 
         public void DeleteCalculation(AreaCalculation calculation)
