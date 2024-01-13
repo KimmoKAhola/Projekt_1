@@ -39,6 +39,9 @@ namespace Database.Migrations
                     b.Property<double>("Height")
                         .HasColumnType("float");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
 
@@ -94,6 +97,9 @@ namespace Database.Migrations
 
                     b.Property<double>("FirstInput")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Operator")
                         .IsRequired()
