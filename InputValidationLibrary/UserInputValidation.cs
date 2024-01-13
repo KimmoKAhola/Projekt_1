@@ -32,18 +32,17 @@ namespace InputValidationLibrary
         /// </summary>
         /// <param name="maximumInput"></param>
         /// <returns></returns>
-        public static int ReturnNumberChoice(int maximumInput)
+        public static int? ReturnNumberChoice(int maximumInput)
         {
-            var choice = 0;
-            Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit: ");
+            Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit to the main menu: ");
             while (true)
             {
                 string? input = Console.ReadLine();
                 if (input?.ToLower() == "e")
                 {
-                    return -1;
+                    return null;
                 }
-                if (int.TryParse(input, out choice))
+                if (int.TryParse(input, out int choice))
                 {
                     if (choice >= 1 && choice <= maximumInput)
                     {
@@ -151,7 +150,7 @@ namespace InputValidationLibrary
                 }
             }
         }
-        public static int MenuValidation(Dictionary<int, string> choices, string promptMessage)
+        public static int? MenuValidation(Dictionary<int, string> choices, string promptMessage)
         {
             var maxValue = choices.Count;
             foreach (var kvp in choices)
@@ -163,7 +162,7 @@ namespace InputValidationLibrary
             var choice = ReturnNumberChoice(maxValue);
             return choice;
         }
-        public static int MenuValidation<T>(List<T> choices, string promptMessage)
+        public static int? MenuValidation<T>(List<T> choices, string promptMessage)
         {
             var maxValue = choices.Count;
             for (int i = 0; i < choices.Count; i++)
