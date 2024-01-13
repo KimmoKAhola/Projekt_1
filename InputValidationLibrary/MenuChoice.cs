@@ -13,7 +13,7 @@ namespace InputValidationLibrary
             Console.CursorVisible = false;
             Console.WriteLine("Choose an operator:");
             int yPos = Console.CursorTop;
-            char[] operators = ['+', '-', '*', '÷', '%', '√',];
+            char[] operators = ['+', '-', '*', '÷', '%', '√', '➡'];
 
             int currentColumn = 0;
 
@@ -59,7 +59,7 @@ namespace InputValidationLibrary
             Console.CursorVisible = false;
             Console.WriteLine("Choose a geometric shape:");
             int yPos = Console.CursorTop;
-            char[] operators = ['▬', '▲', 'P', '♦']; //▰
+            char[] operators = ['▬', '▲', 'P', '♦', '➡']; //▰
 
             int currentColumn = 0;
 
