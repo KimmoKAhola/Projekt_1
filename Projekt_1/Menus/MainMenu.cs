@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class MainMenu(DatabaseService service) : IMenu
+    public class MainMenu(MathCalculationService mathService, AreaCalculationService areaService, RPSService rpsService) : IMenu
     {
         private List<IMenu> _menus =
         [
-            new CalculatorMenu(new MathContext(), service, new MathCalculation()),
-            new AreaCalculatorMenu(new AreaCalculatorContext(), service, new AreaCalculation()),
-            new RockPaperScissorsMenu(service),
+            new CalculatorMenu(new MathContext(), mathService, new MathCalculation()),
+            new AreaCalculatorMenu(new AreaCalculatorContext(), areaService, new AreaCalculation()),
+            new RockPaperScissorsMenu(rpsService),
         ];
 
         public string MenuName => "Main menu";
@@ -34,7 +34,11 @@ namespace Projekt_1.Menus
         public void Menuchoice()
         {
             var choice = PromptUser();
-            _menus[choice - 1].Run();
+            if (choice == null)
+            {
+                Environment.Exit(0);
+            }
+            _menus[(int)choice - 1].Run();
         }
 
         public void Run()
@@ -59,7 +63,7 @@ namespace Projekt_1.Menus
             Console.WriteLine(banner);
         }
 
-        public int PromptUser()
+        public int? PromptUser()
         {
             return UserInputValidation.MenuValidation(_menus, "Choose which game to start: ");
         }

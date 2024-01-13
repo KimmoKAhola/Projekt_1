@@ -15,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, DatabaseService databaseService, AreaCalculation calculation) : IMenu
+    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, AreaCalculationService databaseService, AreaCalculation calculation) : IMenu
     {
 
-        public DatabaseService DatabaseService { get; set; } = databaseService;
+        public AreaCalculationService DatabaseService { get; set; } = databaseService;
         public AreaCalculation Calculation { get; set; } = calculation;
         public AreaCalculatorContext AreaContext { get; set; } = areaContext;
 
@@ -41,7 +41,7 @@ namespace Projekt_1.Menus
                     AreaContext.SetStrategy(chosenShape);
                     ICalculation? areaCalculation = CalculationServices.CreateAreaCalculation(AreaContext);
                     if (areaCalculation != null)
-                        DatabaseService.AddCalculation(areaCalculation);
+                        DatabaseService.AddCalculation((AreaCalculation)areaCalculation);
                     else
                         PrintMessages.PrintErrorMessage("User chose to discard.");
                     break;
@@ -52,12 +52,16 @@ namespace Projekt_1.Menus
                     //Update
                     break;
                 case 4:
-                    //Delete
+                    DatabaseService.DeleteCalculation(Calculation);
+                    break;
+                case 0:
+
                     break;
             }
+            PrintMessages.PressAnyKeyToContinue();
         }
 
-        public int PromptUser()
+        public int? PromptUser()
         {
             throw new NotImplementedException();
         }
