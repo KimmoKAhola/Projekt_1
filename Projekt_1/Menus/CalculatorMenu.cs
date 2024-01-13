@@ -45,17 +45,25 @@ namespace Projekt_1.Menus
                 switch (choice)
                 {
                     case 1:
-                        var mathCalculation = Bajs();
-                        if (mathCalculation != null)
-                            DatabaseService.AddCalculation((MathCalculation)mathCalculation);
-                        else
-                            PrintMessages.PrintErrorMessage("User chose to discard.");
+                        while (true)
+                        {
+                            var mathCalculation = Bajs();
+                            if (mathCalculation != null)
+                                DatabaseService.AddCalculation((MathCalculation)mathCalculation);
+                            else
+                            {
+                                PrintMessages.PrintErrorMessage("User chose to exit.");
+                                break;
+                            }
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
                         break;
                     case 2:
                         DatabaseService.ReadAllCalculations(Calculation);
                         break;
                     case 3:
-                        //Update
+                        DatabaseService.UpdateCalculation(Calculation);
                         break;
                     case 4:
                         DatabaseService.DeleteCalculation(Calculation);
@@ -77,9 +85,11 @@ namespace Projekt_1.Menus
         {
             var chosenOperator = MenuChoice.ChooseMathOperator();
             MathContext.SetStrategy(chosenOperator);
-            return CalculationServices.CreateMathCalculation(MathContext);
+            if (MathContext.Strategy != null)
+                return CalculationServices.CreateMathCalculation(MathContext);
+            else
+                return null;
         }
-
         public int? PromptUser()
         {
             return 1;
@@ -109,6 +119,5 @@ namespace Projekt_1.Menus
         {
             return MenuName;
         }
-
     }
 }
