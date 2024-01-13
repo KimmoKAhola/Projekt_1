@@ -10,9 +10,9 @@ namespace Calculator.Mathematics
 {
     public class MathContext
     {
-        private IMathStrategy? _strategy = null;
+        public IMathStrategy? Strategy { get; private set; } = null;
         public char Operator { get; private set; }
-        private static IMathStrategy CreateStrategy(char choice)
+        private static IMathStrategy? CreateStrategy(char choice)
         {
             return choice switch
             {
@@ -22,19 +22,21 @@ namespace Calculator.Mathematics
                 '÷' => new Division(),
                 '%' => new Modulus(),
                 '√' => new SquareRoot(),
+                '➡' => null,
                 _ => throw new BajskorvException("Bajskorv!"),
             };
         }
 
         public void SetStrategy(char choice)
         {
-            _strategy = CreateStrategy(choice);
-            Operator = _strategy.Operator;
+            Strategy = CreateStrategy(choice);
+            if (Strategy != null)
+                Operator = Strategy.Operator;
         }
 
         public double ExecuteStrategy(double first, double second)
         {
-            return Math.Round(_strategy.Calculate(first, second), 2);
+            return Math.Round(Strategy.Calculate(first, second), 2);
         }
     }
 }

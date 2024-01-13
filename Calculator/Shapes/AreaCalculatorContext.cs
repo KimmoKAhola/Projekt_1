@@ -10,7 +10,7 @@ namespace Calculator.Shapes
 {
     public class AreaCalculatorContext
     {
-        private IShape? _strategy = null;
+        public IShape? Strategy { get; private set; } = null;
         public string ShapeName { get; private set; } = string.Empty;
         private static IShape CreateStrategy(char choice)
         {
@@ -26,13 +26,13 @@ namespace Calculator.Shapes
 
         public void SetStrategy(char choice)
         {
-            _strategy = CreateStrategy(choice);
-            ShapeName = _strategy.Name;
+            Strategy = CreateStrategy(choice);
+            ShapeName = Strategy.Name;
         }
 
         public (double area, double circumference) ExecuteStrategy(double width, double height)
         {
-            var (area, circumference) = _strategy.Calculate(width, height);
+            var (area, circumference) = Strategy.Calculate(width, height);
             return (Math.Round(area, 2), Math.Round(circumference, 2));
         }
     }
