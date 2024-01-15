@@ -12,9 +12,9 @@ namespace InputValidationLibrary
         public static char ChooseMathOperator()
         {
             Console.CursorVisible = false;
-            Console.WriteLine("Choose an operator:");
+            Console.WriteLine("Choose an operator, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
-            char[] operators = ['+', '-', '*', '÷', '%', '√', '➡'];
+            char[] operators = ['+', '-', '*', '÷', '%', '√', 'E'];
 
             int currentColumn = 0;
 

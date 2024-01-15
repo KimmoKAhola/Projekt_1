@@ -147,7 +147,7 @@ namespace Database.Services
         public static ICalculation? CreateAreaCalculation(AreaCalculatorContext areaContext)
         {
             PrintMessages.PrintNotification($"You chose {areaContext.ShapeName}.");
-            double[]? numbers = UserInputValidation.ReturnTwoNumbers("Enter two positive numbers for width and height, separated by a space: ");
+            double[]? numbers = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
             if (numbers == null) { return null; }
 
             ICalculation calculation = new AreaCalculation

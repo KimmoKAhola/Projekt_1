@@ -22,8 +22,15 @@ namespace Database.Services
         private readonly MathContext _context = context;
         public void AddCalculation(MathCalculation calculation)
         {
-            _calculationRepository.Add(calculation);
-            _calculationRepository.Save();
+            if (!double.IsNaN(calculation.Answer))
+            {
+                _calculationRepository.Add(calculation);
+                _calculationRepository.Save();
+            }
+            else
+            {
+                PrintMessages.PrintErrorMessage("Invalid operation.");
+            }
         }
 
         public void DeleteCalculation(int id)
@@ -44,7 +51,8 @@ namespace Database.Services
 
         public void ReadCalculation(int id)
         {
-            throw new NotImplementedException();
+            var entity = _calculationRepository.Get(id);
+            Console.WriteLine(entity);
         }
 
         public void UpdateCalculation(int id)
@@ -57,7 +65,7 @@ namespace Database.Services
 
         public static ICalculation? CreateMathCalculation(MathContext mathStrategy)
         {
-            double[]? numbers = UserInputValidation.ReturnTwoNumbers("Enter two numbers: ");
+            double[]? numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers: ");
             if (numbers == null) { return null; }
             ICalculation calculation = new MathCalculation
             {
@@ -73,7 +81,7 @@ namespace Database.Services
             return calculation;
         }
 
-        public static List<char> Bajskorv()
+        public static List<char> GetMathOperators()
         {
             var shapeInterfaceType = typeof(IMathStrategy);
             var shapeTypes = Assembly.GetAssembly(typeof(IMathStrategy)).GetTypes()
