@@ -39,7 +39,7 @@ namespace Database.Services
             {
                 _context.SetStrategy(item.ShapeName.ToString());
                 var (area, circumference) = _context.ExecuteStrategy(item.Width, item.Height);
-                Console.WriteLine($"{item} + area {area} + circumference {circumference}");
+                Console.WriteLine($"{item}\tArea: {area}\tCircumference: {circumference}");
             }
         }
 
