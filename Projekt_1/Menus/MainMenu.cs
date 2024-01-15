@@ -34,7 +34,7 @@ namespace Projekt_1.Menus
 
         public void Menuchoice()
         {
-            var choice = PromptUser();
+            var choice = PromptUserForId();
             if (choice == null)
             {
                 Environment.Exit(0);
@@ -64,7 +64,7 @@ namespace Projekt_1.Menus
             Console.WriteLine(banner);
         }
 
-        public int? PromptUser()
+        public int? PromptUserForId()
         {
             return UserInputValidation.MenuValidation(_menus, "Choose which game to start: ");
         }

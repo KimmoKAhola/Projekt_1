@@ -27,31 +27,36 @@ namespace Database.Services
             PrintMessages.PrintSuccessMessage($"Added {calculation} to the database.");
         }
 
-        public void DeleteCalculation(AreaCalculation calculation)
+        public void DeleteCalculation(int id)
         {
-            _areaCalculationRepository.SoftDelete(calculation.Id);
+            _areaCalculationRepository.SoftDelete(id);
             _areaCalculationRepository.Save();
         }
 
-        public void ReadAllCalculations(AreaCalculation calculation)
+        public void ReadAllCalculations()
         {
             foreach (var item in _areaCalculationRepository.GetAll().ToList())
             {
                 _context.SetStrategy(item.ShapeName.ToString());
                 var (area, circumference) = _context.ExecuteStrategy(item.Width, item.Height);
-                Console.WriteLine($"{item} + area {area} + circumference {circumference}");
+                Console.WriteLine($"{item}\tArea: {area}\tCircumference: {circumference}");
             }
-            Console.ReadKey();
         }
 
-        public void ReadCalculation(AreaCalculation calculation)
+        public List<AreaCalculation> GetAllCalculations()
         {
-            //return _areaCalculationRepository.Get(calculation.Id);
+            return _areaCalculationRepository.GetAll().ToList();
+        }
+
+        public void ReadCalculation(int id)
+        {
+            var entity = _areaCalculationRepository.Get(id);
+            Console.WriteLine(entity);
         }
 
         public void UpdateCalculation(int id)
         {
-            var entityToUpdate = _areaCalculationRepository.Get(id);
+            AreaCalculation? entityToUpdate = _areaCalculationRepository.Get(id);
             var chosenProperty = PromptUpdate();
             if (entityToUpdate != null)
             {
@@ -79,7 +84,7 @@ namespace Database.Services
                     UpdateShape(entity);
                     break;
                 case 3:
-                    DeleteCalculation(entity);
+                    DeleteCalculation(entity.Id);
                     break;
                 case 4:
                     break;
@@ -141,7 +146,8 @@ namespace Database.Services
 
         public static ICalculation? CreateAreaCalculation(AreaCalculatorContext areaContext)
         {
-            double[]? numbers = UserInputValidation.ReturnTwoNumbers("Enter two numbers: ");
+            PrintMessages.PrintNotification($"You chose {areaContext.ShapeName}.");
+            double[]? numbers = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
             if (numbers == null) { return null; }
 
             ICalculation calculation = new AreaCalculation

@@ -12,7 +12,9 @@ namespace Calculator.Mathematics.Operations
         public char Operator => '÷';
         public double Calculate(double first, double second)
         {
-            return first / second;
+            if (second != 0.0)
+                return first / second;
+            else return double.NaN;
         }
     }
 }

@@ -23,8 +23,8 @@ namespace Calculations.StrategyContexts
                 '÷' => new Division(),
                 '%' => new Modulus(),
                 '√' => new SquareRoot(),
-                '➡' => null,
-                _ => throw new BajskorvException("Bajskorv!"),
+                'E' => null,
+                _ => null,
             };
         }
 

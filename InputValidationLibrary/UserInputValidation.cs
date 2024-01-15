@@ -47,7 +47,60 @@ namespace InputValidationLibrary
                 }
             }
         }
-        public static double[]? ReturnTwoNumbers(string msg)
+
+        public static int? ReturnNumberChoice()
+        {
+            Console.Write($"Enter a positive number, or press 'e' to exit to the main menu: ");
+            while (true)
+            {
+                string? input = Console.ReadLine();
+                if (input?.ToLower() == "e")
+                {
+                    return null;
+                }
+                if (int.TryParse(input, out int choice))
+                {
+                    if (choice >= 1)
+                    {
+                        return choice;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Please enter a positive number.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number or 'e' to exit.");
+                }
+            }
+        }
+        public static double[]? ReturnTwoNumbersForShapes(string msg)
+        {
+            double[] numbers;
+            while (true)
+            {
+                Console.Write(msg);
+                string? input = Console.ReadLine();
+                if (input?.ToLower() == "e" || input == null)
+                {
+                    return null;
+                }
+
+                string[] userInput = input.Split(' ');
+                if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && first > 0 && double.TryParse(userInput[1], out double second) && second > 0)
+                {
+                    numbers = [first, second];
+                    return numbers;
+                }
+                else
+                {
+                    PrintMessages.PrintErrorMessage("Invalid user input.");
+                }
+            }
+        }
+
+        public static double[]? ReturnTwoNumbersForMath(string msg)
         {
             double[] numbers;
             while (true)
@@ -67,7 +120,7 @@ namespace InputValidationLibrary
                 }
                 else
                 {
-                    PrintMessages.PrintErrorMessage("Invalid input!");
+                    PrintMessages.PrintErrorMessage("Invalid user input.");
                 }
             }
         }
@@ -86,13 +139,25 @@ namespace InputValidationLibrary
         public static int? MenuValidation<T>(List<T> choices, string promptMessage)
         {
             var maxValue = choices.Count;
-            for (int i = 0; i < choices.Count; i++)
+            if (choices.Count > 0)
             {
-                Console.WriteLine($"{i + 1}. {choices[i]}");
+                for (int i = 0; i < choices.Count; i++)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"{i + 1}. ");
+                    Console.ResetColor();
+                    Console.WriteLine($"{choices[i]}");
+                }
+                Console.Write(promptMessage);
+                var choice = ReturnNumberChoice(maxValue);
+                return choice;
             }
-            Console.Write(promptMessage);
-            var choice = ReturnNumberChoice(maxValue);
-            return choice;
+            else
+            {
+                PrintMessages.PrintErrorMessage("There are no entities to update.");
+                PrintMessages.PressAnyKeyToContinue();
+                return null;
+            }
         }
     }
 }

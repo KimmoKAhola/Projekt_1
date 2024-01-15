@@ -29,7 +29,7 @@ namespace Projekt_1.Menus
             throw new NotImplementedException();
         }
 
-        public int? PromptUser()
+        public int? PromptUserForId()
         {
             throw new NotImplementedException();
         }

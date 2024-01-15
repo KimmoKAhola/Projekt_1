@@ -42,33 +42,41 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "BAJS12345621");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
                 Console.Clear();
                 switch (choice)
                 {
                     case 1:
                         while (true)
                         {
-                            var areaCalculation = Bajs();
+                            var areaCalculation = GetStrategy();
                             if (areaCalculation != null)
                                 DatabaseService.AddCalculation((AreaCalculation)areaCalculation);
                             else
                             {
-                                PrintMessages.PrintErrorMessage("User chose to discard.");
+                                PrintMessages.PrintErrorMessage("User chose to exit.");
                                 break;
                             }
-                            Thread.Sleep(1000);
+                            Thread.Sleep(2000);
                             Console.Clear();
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAllCalculations(Calculation);
+                        DatabaseService.ReadAllCalculations();
                         break;
                     case 3:
-                        DatabaseService.UpdateCalculation(1);
+                        int? idToUpdate = PromptUserForId();
+                        if (idToUpdate != null)
+                            DatabaseService.UpdateCalculation((int)idToUpdate);
+                        else
+                        {
+                            PrintMessages.PrintErrorMessage("User chose to exit.");
+                        }
                         break;
                     case 4:
-                        DatabaseService.DeleteCalculation(Calculation);
+                        int? idToDelete = PromptUserForId();
+                        if (idToDelete != null)
+                            DatabaseService.DeleteCalculation((int)idToDelete);
                         break;
                     case null:
                         PrintMessages.PrintNotification("Returning back to the main menu.");
@@ -79,7 +87,7 @@ namespace Projekt_1.Menus
             }
         }
 
-        private ICalculation? Bajs()
+        private ICalculation? GetStrategy()
         {
             string? chosenShape = MenuChoice.ChooseGeometricShape();
             AreaContext.SetStrategy(chosenShape);
@@ -89,9 +97,15 @@ namespace Projekt_1.Menus
                 return null;
         }
 
-        public int? PromptUser()
+        public int? PromptUserForId()
         {
-            throw new NotImplementedException();
+            var test = DatabaseService.GetAllCalculations();
+            int? userChoice = UserInputValidation.MenuValidation(test, "");
+            if (userChoice != null)
+            {
+                return test[(int)userChoice - 1].Id;
+            }
+            return null;
         }
 
         public void Run()

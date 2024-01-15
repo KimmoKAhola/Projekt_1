@@ -12,9 +12,9 @@ namespace InputValidationLibrary
         public static char ChooseMathOperator()
         {
             Console.CursorVisible = false;
-            Console.WriteLine("Choose an operator:");
+            Console.WriteLine("Choose an operator, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
-            char[] operators = ['+', '-', '*', '÷', '%', '√', '➡'];
+            char[] operators = ['+', '-', '*', '÷', '%', '√', 'E'];
 
             int currentColumn = 0;
 
@@ -58,10 +58,10 @@ namespace InputValidationLibrary
         public static string? ChooseGeometricShape()
         {
             Console.CursorVisible = false;
-            Console.WriteLine("Choose a geometric shape:");
+            Console.WriteLine("Choose a geometric shape, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
-            char[] operators = ['▬', '▲', 'P', '♦', '➡']; //▰
-            string[] shapes = ["Rectangle", "Triangle", "Parallelogram", "Rhomboid", null];
+            char[] operators = ['▬', '▲', 'P', '♦', 'E']; //▰
+            string?[] shapes = ["Rectangle", "Triangle", "Parallelogram", "Rhomboid", null];
             int currentColumn = 0;
 
             while (true)
@@ -90,7 +90,7 @@ namespace InputValidationLibrary
                         currentColumn = (currentColumn + 1) % operators.GetLength(0);
                         break;
                     case ConsoleKey.Enter:
-                        string selectedOperator = shapes[currentColumn];
+                        string? selectedOperator = shapes[currentColumn];
                         Console.WriteLine();
                         Console.CursorVisible = true;
                         return selectedOperator;

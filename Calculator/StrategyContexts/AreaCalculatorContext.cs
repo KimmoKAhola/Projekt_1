@@ -26,7 +26,7 @@ namespace Calculations.StrategyContexts
             };
         }
 
-        public void SetStrategy(string choice)
+        public void SetStrategy(string? choice)
         {
             Strategy = CreateStrategy(choice);
             if (Strategy != null)

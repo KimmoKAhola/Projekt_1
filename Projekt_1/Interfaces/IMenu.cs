@@ -13,7 +13,6 @@ namespace Projekt_1.Interfaces
         void Menuchoice();
         void Run();
         void PrintBanner();
-
-        int? PromptUser();
+        int? PromptUserForId();
     }
 }
