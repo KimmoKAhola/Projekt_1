@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\Calculations.csproj" />
     <ProjectReference Include="..\InputValidationLibrary\InputValidationLibrary.csproj" />
     <ProjectReference Include="..\Rock_Paper_Scissors\Rock_Paper_Scissors.csproj" />
   </ItemGroup>

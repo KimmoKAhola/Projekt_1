@@ -14,7 +14,7 @@ namespace Database.Repositories
             _dbContext.Add(entity);
         }
 
-        public void SoftDelete(int id)
+        public void Delete(int id)
         {
             var entityToDelete = Get(id);
             if (entityToDelete != null)

@@ -7,7 +7,7 @@ namespace Database.Interfaces
         void AddCalculation(T calculation);
         void ReadCalculation(T calculation);
         void ReadAllCalculations(T calculation);
-        void UpdateCalculation(int id);
+        void UpdateCalculation(T calculation);
         void DeleteCalculation(T calculation);
     }
 }

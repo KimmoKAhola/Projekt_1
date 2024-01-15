@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Rock_Paper_Scissors
 {
-    public class RockPaperScissors(PlayerMoves moves)
+    public class RockPaperScissors
     {
-        public Move PlayerMove { get; set; }
-        public Move ComputerMove { get; set; }
+        public string PlayerMove { get; set; } = string.Empty;
+        public string ComputerMove { get; set; } = string.Empty;
         public string Outcome { get; set; } = string.Empty;
 
         public void RunGame()
         {
-            PlayerMove = moves.GetPlayerMove();
-            ComputerMove = moves.GetComputerMove();
-            Outcome = GameLogic.CheckForWin(PlayerMove, ComputerMove).ToString();
+            PlayerMove = PlayerMoves.GetPlayerMove();
+            ComputerMove = PlayerMoves.GetComputerMove().ToString();
+            Console.WriteLine(PlayerMove);
+            Console.WriteLine(ComputerMove);
+            Outcome = GameLogic.CheckForWin(PlayerMove, ComputerMove);
         }
     }
 }
