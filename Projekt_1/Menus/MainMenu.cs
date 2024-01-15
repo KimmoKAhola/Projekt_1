@@ -1,4 +1,5 @@
-﻿using Calculator.Mathematics;
+﻿using Calculations.StrategyContexts;
+using Calculator.Mathematics;
 using Calculator.Shapes;
 using Database.Interfaces;
 using Database.Models;
