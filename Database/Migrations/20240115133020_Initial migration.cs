@@ -48,8 +48,6 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Circumference = table.Column<double>(type: "float", nullable: false),
-                    Area = table.Column<double>(type: "float", nullable: false),
                     Width = table.Column<double>(type: "float", nullable: false),
                     Height = table.Column<double>(type: "float", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),

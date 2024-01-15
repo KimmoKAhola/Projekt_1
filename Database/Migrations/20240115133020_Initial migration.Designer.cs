@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240113121236_Initial migration")]
+    [Migration("20240115133020_Initial migration")]
     partial class Initialmigration
     {
         /// <inheritdoc />
@@ -32,12 +32,6 @@ namespace Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Area")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Circumference")
-                        .HasColumnType("float");
 
                     b.Property<double>("Height")
                         .HasColumnType("float");
