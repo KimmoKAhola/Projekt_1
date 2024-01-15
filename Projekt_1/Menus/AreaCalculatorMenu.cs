@@ -65,7 +65,7 @@ namespace Projekt_1.Menus
                         DatabaseService.ReadAllCalculations();
                         break;
                     case 3:
-                        int? idToUpdate = PromptUser();
+                        int? idToUpdate = PromptUserForId();
                         if (idToUpdate != null)
                             DatabaseService.UpdateCalculation((int)idToUpdate);
                         else
@@ -74,7 +74,7 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 4:
-                        int? idToDelete = PromptUser();
+                        int? idToDelete = PromptUserForId();
                         if (idToDelete != null)
                             DatabaseService.DeleteCalculation((int)idToDelete);
                         break;
@@ -97,7 +97,7 @@ namespace Projekt_1.Menus
                 return null;
         }
 
-        public int? PromptUser()
+        public int? PromptUserForId()
         {
             var test = DatabaseService.GetAllCalculations();
             int? userChoice = UserInputValidation.MenuValidation(test, "");

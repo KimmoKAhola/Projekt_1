@@ -75,7 +75,7 @@ namespace InputValidationLibrary
                 }
             }
         }
-        public static double[]? ReturnTwoNumbers(string msg)
+        public static double[]? ReturnTwoNumbersForShapes(string msg)
         {
             double[] numbers;
             while (true)
@@ -89,6 +89,31 @@ namespace InputValidationLibrary
 
                 string[] userInput = input.Split(' ');
                 if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && first > 0 && double.TryParse(userInput[1], out double second) && second > 0)
+                {
+                    numbers = [first, second];
+                    return numbers;
+                }
+                else
+                {
+                    PrintMessages.PrintErrorMessage("Invalid user input.");
+                }
+            }
+        }
+
+        public static double[]? ReturnTwoNumbersForMath(string msg)
+        {
+            double[] numbers;
+            while (true)
+            {
+                Console.Write(msg);
+                string? input = Console.ReadLine();
+                if (input?.ToLower() == "e" || input == null)
+                {
+                    return null;
+                }
+
+                string[] userInput = input.Split(' ');
+                if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && double.TryParse(userInput[1], out double second))
                 {
                     numbers = [first, second];
                     return numbers;
