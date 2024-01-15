@@ -36,7 +36,7 @@ namespace Database.Repositories
 
         public IEnumerable<AreaCalculation> GetAll()
         {
-            return _dbContext.AreaCalculation;
+            return _dbContext.AreaCalculation.Where(x => !x.IsDeleted);
         }
 
         public void Save()
