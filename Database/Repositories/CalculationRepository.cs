@@ -30,7 +30,7 @@ namespace Database.Repositories
 
         public IEnumerable<MathCalculation> GetAll()
         {
-            return _dbContext.Calculation;
+            return _dbContext.Calculation.Where(x => !x.IsDeleted);
         }
 
         public void Save()
@@ -40,7 +40,7 @@ namespace Database.Repositories
 
         public void Update(MathCalculation entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }
