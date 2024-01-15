@@ -24,22 +24,25 @@ namespace Database.Services
         {
             _calculationRepository.Add(calculation);
             _calculationRepository.Save();
-            PrintMessages.PrintSuccessMessage($"{calculation} has been added to the system.");
         }
 
-        public void DeleteCalculation(MathCalculation calculation)
+        public void DeleteCalculation(int id)
         {
-            _calculationRepository.SoftDelete(calculation.Id);
+            _calculationRepository.SoftDelete(id);
             _calculationRepository.Save();
-            PrintMessages.PrintNotification($"{calculation} has been deleted.");
         }
 
-        public void ReadAllCalculations(MathCalculation calculation)
+        public void ReadAllCalculations()
         {
             _calculationRepository.GetAll().ToList().ForEach(Console.WriteLine);
         }
 
-        public void ReadCalculation(MathCalculation calculation)
+        public List<MathCalculation> GetAllCalculations()
+        {
+            return _calculationRepository.GetAll().ToList();
+        }
+
+        public void ReadCalculation(int id)
         {
             throw new NotImplementedException();
         }
