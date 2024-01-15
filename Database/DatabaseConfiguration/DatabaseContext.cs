@@ -19,7 +19,6 @@ namespace Database.DatabaseConfiguration
         public DbSet<Result> Result { get; set; }
         public DbSet<AreaCalculation> AreaCalculation { get; set; }
         public DbSet<MathCalculation> Calculation { get; set; }
-
         public DbSet<RockPaperScissors> RockPaperScissors { get; set; }
         public DbSet<HighScore> HighScore { get; set; }
 
@@ -27,11 +26,6 @@ namespace Database.DatabaseConfiguration
         {
             var connectionString = ConnectionConfiguration.GetConnectionString();
             optionsBuilder.UseSqlServer(connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
         }
     }
 }

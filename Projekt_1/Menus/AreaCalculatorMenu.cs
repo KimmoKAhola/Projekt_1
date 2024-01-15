@@ -1,7 +1,6 @@
-﻿using Calculations.Services;
+﻿using Calculations.StrategyContexts;
 using Calculator.Interfaces;
 using Calculator.Mathematics;
-using Calculator.Shapes;
 using Database.Interfaces;
 using Database.Models;
 using Database.Services;
@@ -15,14 +14,21 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, DatabaseService databaseService, AreaCalculation calculation) : IMenu
+    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, AreaCalculationService databaseService, AreaCalculation calculation) : IMenu
     {
-
-        public DatabaseService DatabaseService { get; set; } = databaseService;
+        public AreaCalculationService DatabaseService { get; set; } = databaseService;
         public AreaCalculation Calculation { get; set; } = calculation;
         public AreaCalculatorContext AreaContext { get; set; } = areaContext;
 
         public string MenuName => "Area Calculator";
+
+        private readonly Dictionary<int, string> _menuChoices = new()
+        {
+            {1, "Add" },
+            {2, "Read" },
+            {3, "Update" },
+            {4, "Delete" },
+        };
 
         public void Display()
         {
@@ -32,44 +38,65 @@ namespace Projekt_1.Menus
 
         public void Menuchoice()
         {
-            Console.Write("Enter a number: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    var chosenShape = MenuChoice.ChooseGeometricShape();
-                    AreaContext.SetStrategy(chosenShape);
-                    ICalculation? areaCalculation = CalculationServices.CreateAreaCalculation(AreaContext);
-                    if (areaCalculation != null)
-                        DatabaseService.AddCalculation(areaCalculation);
-                    else
-                        PrintMessages.PrintErrorMessage("User chose to discard.");
-                    break;
-                case 2:
-                    DatabaseService.ReadAllCalculations(Calculation);
-                    break;
-                case 3:
-                    //Update
-                    break;
-                case 4:
-                    //Delete
-                    break;
+                Console.Clear();
+                Display();
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "BAJS12345621");
+                Console.Clear();
+                switch (choice)
+                {
+                    case 1:
+                        while (true)
+                        {
+                            var areaCalculation = Bajs();
+                            if (areaCalculation != null)
+                                DatabaseService.AddCalculation((AreaCalculation)areaCalculation);
+                            else
+                            {
+                                PrintMessages.PrintErrorMessage("User chose to discard.");
+                                break;
+                            }
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
+                        break;
+                    case 2:
+                        DatabaseService.ReadAllCalculations(Calculation);
+                        break;
+                    case 3:
+                        DatabaseService.UpdateCalculation(1);
+                        break;
+                    case 4:
+                        DatabaseService.DeleteCalculation(Calculation);
+                        break;
+                    case null:
+                        PrintMessages.PrintNotification("Returning back to the main menu.");
+                        PrintMessages.PressAnyKeyToContinue();
+                        return;
+                }
+                PrintMessages.PressAnyKeyToContinue();
             }
         }
 
-        public int PromptUser()
+        private ICalculation? Bajs()
+        {
+            string? chosenShape = MenuChoice.ChooseGeometricShape();
+            AreaContext.SetStrategy(chosenShape);
+            if (AreaContext.Strategy != null)
+                return AreaCalculationService.CreateAreaCalculation(AreaContext);
+            else
+                return null;
+        }
+
+        public int? PromptUser()
         {
             throw new NotImplementedException();
         }
 
         public void Run()
         {
-            while (true)
-            {
-                Console.Clear();
-                Display();
-                Menuchoice();
-            }
+            Menuchoice();
         }
         public void PrintBanner()
         {

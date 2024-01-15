@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,10 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AverageScore = table.Column<byte>(type: "tinyint", nullable: false)
+                    AverageScore = table.Column<byte>(type: "tinyint", nullable: false),
+                    NumberOfWins = table.Column<int>(type: "int", nullable: false),
+                    NumberOfLosses = table.Column<int>(type: "int", nullable: false),
+                    NumberOfTies = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,6 +52,7 @@ namespace Database.Migrations
                     Area = table.Column<double>(type: "float", nullable: false),
                     Width = table.Column<double>(type: "float", nullable: false),
                     Height = table.Column<double>(type: "float", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ShapeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ResultId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -73,6 +77,7 @@ namespace Database.Migrations
                     Answer = table.Column<double>(type: "float", nullable: false),
                     FirstInput = table.Column<double>(type: "float", nullable: false),
                     SecondInput = table.Column<double>(type: "float", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ResultId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

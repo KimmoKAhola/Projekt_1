@@ -14,6 +14,6 @@ namespace Projekt_1.Interfaces
         void Run();
         void PrintBanner();
 
-        int PromptUser();
+        int? PromptUser();
     }
 }

@@ -2,24 +2,21 @@
 {
     public static class GameLogic
     {
-        public static string CheckForWin(string userInput, string computerInput)
+        public static GameState CheckForWin(Move userMove, Move computerMove)
         {
-            if (userInput == computerInput)
+            if (userMove == computerMove)
             {
-                Console.WriteLine($"{GameState.Tie}");
-                return GameState.Tie.ToString();
+                return GameState.Tie;
             }
-            else if (userInput == Move.Rock.ToString() && computerInput == Move.Scissors.ToString()
-                || userInput == Move.Scissors.ToString() && computerInput == Move.Paper.ToString()
-                || userInput == Move.Paper.ToString() && computerInput == Move.Rock.ToString())
+            else if (userMove == Move.Rock && computerMove == Move.Scissors
+                || userMove == Move.Scissors && computerMove == Move.Paper
+                || userMove == Move.Paper && computerMove == Move.Rock)
             {
-                Console.WriteLine($"{GameState.Win}");
-                return GameState.Win.ToString();
+                return GameState.Win;
             }
             else
             {
-                Console.WriteLine($"{GameState.Loss}");
-                return GameState.Loss.ToString();
+                return GameState.Loss;
             }
         }
     }

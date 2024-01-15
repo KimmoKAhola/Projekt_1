@@ -31,6 +31,7 @@ namespace Projekt_1.Container
             myBuilder.RegisterModule<DatabaseModule>();
             myBuilder.RegisterModule<MathModule>();
             myBuilder.RegisterModule<StrategyContextModule>();
+            myBuilder.RegisterModule<RepositoryModule>();
 
             return myBuilder.Build();
         }

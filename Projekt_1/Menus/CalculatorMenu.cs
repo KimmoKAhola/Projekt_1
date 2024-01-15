@@ -1,6 +1,5 @@
-﻿using Calculations.Services;
+﻿using Calculations.StrategyContexts;
 using Calculator.Interfaces;
-using Calculator.Mathematics;
 using Database.Interfaces;
 using Database.Models;
 using Database.Services;
@@ -14,11 +13,19 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class CalculatorMenu(MathContext mathContext, DatabaseService databaseService, MathCalculation calculation) : IMenu
+    public class CalculatorMenu(MathContext mathContext, MathCalculationService databaseService, MathCalculation calculation) : IMenu
     {
-        public DatabaseService DatabaseService { get; set; } = databaseService;
+        public MathCalculationService DatabaseService { get; set; } = databaseService;
         public MathCalculation Calculation { get; set; } = calculation;
         public MathContext MathContext { get; set; } = mathContext;
+
+        private readonly Dictionary<int, string> _menuChoices = new()
+        {
+            {1, "Add" },
+            {2, "Read" },
+            {3, "Update" },
+            {4, "Delete" },
+        };
 
         public string MenuName => "Calculator";
 
@@ -29,48 +36,66 @@ namespace Projekt_1.Menus
 
         public void Menuchoice()
         {
-            Console.Write("Enter a number: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    var chosenOperator = MenuChoice.ChooseMathOperator();
-                    MathContext.SetStrategy(chosenOperator);
-                    ICalculation? mathCalculation = CalculationServices.CreateMathCalculation(MathContext);
-                    if (mathCalculation != null)
-                        DatabaseService.AddCalculation(mathCalculation);
-                    else
-                        PrintMessages.PrintErrorMessage("User chose to discard.");
-                    break;
-                case 2:
-                    DatabaseService.ReadAllCalculations(Calculation);
-                    break;
-                case 3:
-                    //Update
-                    break;
-                case 4:
-                    //Delete
-                    break;
-                case 0:
-                    PrintMessages.PrintNotification("Returning back to the main menu.");
-                    PrintMessages.PressAnyKeyToContinue();
-                    break;
+                Console.Clear();
+                Display();
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "BAjs1234");
+                switch (choice)
+                {
+                    case 1:
+                        while (true)
+                        {
+                            var mathCalculation = Bajs();
+                            if (mathCalculation != null)
+                                DatabaseService.AddCalculation((MathCalculation)mathCalculation);
+                            else
+                            {
+                                PrintMessages.PrintErrorMessage("User chose to exit.");
+                                break;
+                            }
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
+                        break;
+                    case 2:
+                        DatabaseService.ReadAllCalculations(Calculation);
+                        break;
+                    case 3:
+                        DatabaseService.UpdateCalculation(1);
+                        break;
+                    case 4:
+                        DatabaseService.DeleteCalculation(Calculation);
+                        break;
+                    case null:
+                        PrintMessages.PrintNotification("Returning back to the main menu.");
+                        PrintMessages.PressAnyKeyToContinue();
+                        return;
+                    default:
+                        PrintMessages.PrintNotification("Returning back to the main menu.");
+                        PrintMessages.PressAnyKeyToContinue();
+                        return;
+
+                }
+                PrintMessages.PressAnyKeyToContinue();
             }
         }
-
-        public int PromptUser()
+        private ICalculation? Bajs()
+        {
+            var chosenOperator = MenuChoice.ChooseMathOperator();
+            MathContext.SetStrategy(chosenOperator);
+            if (MathContext.Strategy != null)
+                return MathCalculationService.CreateMathCalculation(MathContext);
+            else
+                return null;
+        }
+        public int? PromptUser()
         {
             return 1;
         }
         public void Run()
         {
-            while (true)
-            {
-                Console.Clear();
-                Display();
-                Menuchoice();
-                PrintMessages.PressAnyKeyToContinue();
-            }
+            Menuchoice();
         }
         public void PrintBanner()
         {

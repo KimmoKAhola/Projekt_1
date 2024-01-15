@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class RockPaperScissorsMenu(DatabaseService databaseService) : IMenu
+    public class RockPaperScissorsMenu(RPSService databaseService, RockPaperScissors rockPaperScissors) : IMenu
     {
         public string MenuName => "Rock, Paper, Scissors";
 
-        public DatabaseService DatabaseService { get; set; } = databaseService;
+        public RPSService DatabaseService { get; set; } = databaseService;
+        public RockPaperScissors RockPaperScissors { get; set; } = rockPaperScissors;
         public void Display()
         {
             PrintBanner();
@@ -28,7 +29,7 @@ namespace Projekt_1.Menus
             throw new NotImplementedException();
         }
 
-        public int PromptUser()
+        public int? PromptUser()
         {
             throw new NotImplementedException();
         }
@@ -37,10 +38,9 @@ namespace Projekt_1.Menus
         {
             Console.Clear();
             Display();
-            Game game = new Game();
-            game.RunGame();
-            DatabaseService.AddRockPaperScissorsResult(game);
-            DatabaseService.AddRockPaperScissorsHighScore(game);
+            RockPaperScissors.RunGame();
+            DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
+            //DatabaseService.AddRockPaperScissorsHighScore(game);
             PrintMessages.PressAnyKeyToContinue();
         }
         public void PrintBanner()

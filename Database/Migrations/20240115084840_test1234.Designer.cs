@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240111202147_Initial")]
-    partial class Initial
+    [Migration("20240115084840_test1234")]
+    partial class test1234
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,14 +33,11 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Area")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Circumference")
-                        .HasColumnType("float");
-
                     b.Property<double>("Height")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ResultId")
                         .HasColumnType("int");
@@ -70,6 +67,15 @@ namespace Database.Migrations
                     b.Property<byte>("AverageScore")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("NumberOfLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfWins")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("HighScore");
@@ -88,6 +94,9 @@ namespace Database.Migrations
 
                     b.Property<double>("FirstInput")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Operator")
                         .IsRequired()
