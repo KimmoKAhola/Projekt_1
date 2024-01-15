@@ -118,7 +118,10 @@ namespace InputValidationLibrary
             {
                 for (int i = 0; i < choices.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {choices[i]}");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"{i + 1}. ");
+                    Console.ResetColor();
+                    Console.WriteLine($"{choices[i]}");
                 }
                 Console.Write(promptMessage);
                 var choice = ReturnNumberChoice(maxValue);
