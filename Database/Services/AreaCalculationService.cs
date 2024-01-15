@@ -40,7 +40,6 @@ namespace Database.Services
                 _context.SetStrategy(item.ShapeName.ToString());
                 var (area, circumference) = _context.ExecuteStrategy(item.Width, item.Height);
                 Console.WriteLine($"{item} + area {area} + circumference {circumference}");
-
             }
             Console.ReadKey();
         }
@@ -52,11 +51,18 @@ namespace Database.Services
 
         public void UpdateCalculation(int id)
         {
-            var item = _areaCalculationRepository.Get(id);
+            var entityToUpdate = _areaCalculationRepository.Get(id);
             var chosenProperty = PromptUpdate();
-            ChangeOption(chosenProperty, item);
-            _areaCalculationRepository.Update(item);
-            _areaCalculationRepository.Save();
+            if (entityToUpdate != null)
+            {
+                ChangeOption(chosenProperty, entityToUpdate);
+                _areaCalculationRepository.Update(entityToUpdate);
+                _areaCalculationRepository.Save();
+            }
+            else
+            {
+                PrintMessages.PrintErrorMessage("No entity with that ID was found.");
+            }
         }
 
         private void ChangeOption(int? choice, AreaCalculation entity)
