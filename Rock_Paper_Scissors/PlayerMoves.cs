@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rock_Paper_Scissors
 {
-    public static class PlayerMoves
+    public class PlayerMoves
     {
-        public static Move GetComputerMove()
+        public Move GetComputerMove()
         {
             var random = new Random();
             int chosenMove = random.Next(0, 3);
@@ -16,15 +16,20 @@ namespace Rock_Paper_Scissors
             return (Move)chosenMove;
         }
 
-        public static string GetPlayerMove()
+        public Move GetPlayerMove()
         {
             Console.CursorVisible = false;
             Console.WriteLine("Choose a player move: ");
-            int yPos = Console.CursorTop;
 
-            string[] playerMoves = [$"{Move.Rock}", $"{Move.Paper}", $"{Move.Scissors}",];
+            Move[] playerMoves = [Move.Rock, Move.Paper, Move.Scissors,];
 
+            return PlayerChoices(playerMoves);
+        }
+
+        private static Move PlayerChoices(Move[] playerMoves)
+        {
             int currentColumn = 0;
+            int yPos = Console.CursorTop;
 
             while (true)
             {
@@ -35,11 +40,9 @@ namespace Rock_Paper_Scissors
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
-
                     Console.Write($"{playerMoves[column]} ");
 
                     Console.ResetColor();
-
                 }
 
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -53,7 +56,7 @@ namespace Rock_Paper_Scissors
                         currentColumn = (currentColumn + 1) % playerMoves.GetLength(0);
                         break;
                     case ConsoleKey.Enter:
-                        string selectedMove = playerMoves[currentColumn];
+                        Move selectedMove = playerMoves[currentColumn];
                         Console.WriteLine();
                         Console.CursorVisible = true;
                         return selectedMove;
