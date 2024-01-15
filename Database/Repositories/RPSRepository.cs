@@ -14,7 +14,7 @@ namespace Database.Repositories
         private readonly DatabaseContext _dbContext = dbContext;
         public void Add(Rock_Paper_Scissors.RockPaperScissors entity)
         {
-            Console.WriteLine(entity);
+            Console.WriteLine(entity.GetType());
             _dbContext.Add(entity);
         }
 

@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class RockPaperScissorsMenu(RPSService databaseService) : IMenu
+    public class RockPaperScissorsMenu(RPSService databaseService, RockPaperScissors rockPaperScissors) : IMenu
     {
         public string MenuName => "Rock, Paper, Scissors";
 
         public RPSService DatabaseService { get; set; } = databaseService;
+        public RockPaperScissors RockPaperScissors { get; set; } = rockPaperScissors;
         public void Display()
         {
             PrintBanner();
@@ -37,9 +38,8 @@ namespace Projekt_1.Menus
         {
             Console.Clear();
             Display();
-            RockPaperScissors game = new RockPaperScissors();
-            game.RunGame();
-            DatabaseService.AddRockPaperScissorsResult(game);
+            RockPaperScissors.RunGame();
+            DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
             //DatabaseService.AddRockPaperScissorsHighScore(game);
             PrintMessages.PressAnyKeyToContinue();
         }

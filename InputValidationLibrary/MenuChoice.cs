@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,13 +55,13 @@ namespace InputValidationLibrary
             }
         }
 
-        public static char ChooseGeometricShape()
+        public static string? ChooseGeometricShape()
         {
             Console.CursorVisible = false;
             Console.WriteLine("Choose a geometric shape:");
             int yPos = Console.CursorTop;
             char[] operators = ['▬', '▲', 'P', '♦', '➡']; //▰
-
+            string[] shapes = ["Rectangle", "Triangle", "Parallelogram", "Rhomboid", null];
             int currentColumn = 0;
 
             while (true)
@@ -89,7 +90,7 @@ namespace InputValidationLibrary
                         currentColumn = (currentColumn + 1) % operators.GetLength(0);
                         break;
                     case ConsoleKey.Enter:
-                        char selectedOperator = operators[currentColumn];
+                        string selectedOperator = shapes[currentColumn];
                         Console.WriteLine();
                         Console.CursorVisible = true;
                         return selectedOperator;
@@ -99,5 +100,7 @@ namespace InputValidationLibrary
                 Console.SetCursorPosition(0, yPos);
             }
         }
+
+
     }
 }
