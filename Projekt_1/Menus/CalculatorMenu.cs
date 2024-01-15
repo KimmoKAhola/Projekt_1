@@ -59,13 +59,13 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAllCalculations(Calculation);
+                        DatabaseService.ReadAllCalculations();
                         break;
                     case 3:
                         DatabaseService.UpdateCalculation(1);
                         break;
                     case 4:
-                        DatabaseService.DeleteCalculation(Calculation);
+                        DatabaseService.DeleteCalculation(1);
                         break;
                     case null:
                         PrintMessages.PrintNotification("Returning back to the main menu.");

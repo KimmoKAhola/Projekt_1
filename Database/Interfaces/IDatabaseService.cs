@@ -5,9 +5,11 @@ namespace Database.Interfaces
     public interface IDatabaseService<T> where T : class
     {
         void AddCalculation(T calculation);
-        void ReadCalculation(T calculation);
-        void ReadAllCalculations(T calculation);
+        void ReadCalculation(int id);
+        void ReadAllCalculations();
+
+        List<T> GetAllCalculations();
         void UpdateCalculation(int id);
-        void DeleteCalculation(T calculation);
+        void DeleteCalculation(int id);
     }
 }
