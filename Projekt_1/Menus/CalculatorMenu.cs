@@ -40,13 +40,14 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "BAjs1234");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                Console.Clear();
                 switch (choice)
                 {
                     case 1:
                         while (true)
                         {
-                            var mathCalculation = Bajs();
+                            var mathCalculation = GetStrategy();
                             if (mathCalculation != null)
                                 DatabaseService.AddCalculation((MathCalculation)mathCalculation);
                             else
@@ -62,25 +63,28 @@ namespace Projekt_1.Menus
                         DatabaseService.ReadAllCalculations();
                         break;
                     case 3:
-                        DatabaseService.UpdateCalculation(1);
+                        int? idToUpdate = PromptUserForId();
+                        if (idToUpdate != null)
+                            DatabaseService.UpdateCalculation((int)idToUpdate);
+                        else
+                        {
+                            PrintMessages.PrintErrorMessage("User chose to exit.");
+                        }
                         break;
                     case 4:
-                        DatabaseService.DeleteCalculation(1);
+                        int? idToDelete = PromptUserForId();
+                        if (idToDelete != null)
+                            DatabaseService.DeleteCalculation((int)idToDelete);
                         break;
                     case null:
                         PrintMessages.PrintNotification("Returning back to the main menu.");
                         PrintMessages.PressAnyKeyToContinue();
                         return;
-                    default:
-                        PrintMessages.PrintNotification("Returning back to the main menu.");
-                        PrintMessages.PressAnyKeyToContinue();
-                        return;
-
                 }
                 PrintMessages.PressAnyKeyToContinue();
             }
         }
-        private ICalculation? Bajs()
+        private ICalculation? GetStrategy()
         {
             var chosenOperator = MenuChoice.ChooseMathOperator();
             MathContext.SetStrategy(chosenOperator);
@@ -89,9 +93,15 @@ namespace Projekt_1.Menus
             else
                 return null;
         }
-        public int? PromptUser()
+        public int? PromptUserForId()
         {
-            return 1;
+            var test = DatabaseService.GetAllCalculations();
+            int? userChoice = UserInputValidation.MenuValidation(test, "");
+            if (userChoice != null)
+            {
+                return test[(int)userChoice - 1].Id;
+            }
+            return null;
         }
         public void Run()
         {
@@ -113,7 +123,6 @@ namespace Projekt_1.Menus
             Console.WriteLine(banner);
             Console.ResetColor();
         }
-
         public override string ToString()
         {
             return MenuName;
