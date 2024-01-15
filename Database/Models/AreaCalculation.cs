@@ -11,10 +11,6 @@ namespace Database.Models
     public class AreaCalculation : ICalculation
     {
         public int Id { get; set; }
-
-        public double Circumference { get; set; }
-
-        public double Area { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
         public bool IsDeleted { get; set; } = false;
@@ -27,7 +23,7 @@ namespace Database.Models
 
         public override string ToString()
         {
-            return $"{Id} {ShapeName} {Width} {Height} {Area} {Circumference}";
+            return $"{Id} {ShapeName} {Width} {Height}";
         }
     }
 }

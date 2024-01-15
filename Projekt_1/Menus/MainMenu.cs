@@ -20,7 +20,7 @@ namespace Projekt_1.Menus
         [
             new CalculatorMenu(new MathContext(), mathService, new MathCalculation()),
             new AreaCalculatorMenu(new AreaCalculatorContext(), areaService, new AreaCalculation()),
-            new RockPaperScissorsMenu(rpsService),
+            new RockPaperScissorsMenu(rpsService, new Rock_Paper_Scissors.RockPaperScissors(new PlayerMoves())),
         ];
 
         public string MenuName => "Main menu";

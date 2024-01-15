@@ -1,7 +1,6 @@
-﻿using Calculations.Services;
+﻿using Calculations.StrategyContexts;
 using Calculator.Interfaces;
 using Calculator.Mathematics;
-using Calculator.Shapes;
 using Database.Interfaces;
 using Database.Models;
 using Database.Services;
@@ -44,6 +43,7 @@ namespace Projekt_1.Menus
                 Console.Clear();
                 Display();
                 int? choice = UserInputValidation.MenuValidation(_menuChoices, "BAJS12345621");
+                Console.Clear();
                 switch (choice)
                 {
                     case 1:
@@ -65,7 +65,7 @@ namespace Projekt_1.Menus
                         DatabaseService.ReadAllCalculations(Calculation);
                         break;
                     case 3:
-                        DatabaseService.UpdateCalculation(Calculation);
+                        DatabaseService.UpdateCalculation(1);
                         break;
                     case 4:
                         DatabaseService.DeleteCalculation(Calculation);
@@ -81,10 +81,10 @@ namespace Projekt_1.Menus
 
         private ICalculation? Bajs()
         {
-            var chosenShape = MenuChoice.ChooseGeometricShape();
+            string? chosenShape = MenuChoice.ChooseGeometricShape();
             AreaContext.SetStrategy(chosenShape);
             if (AreaContext.Strategy != null)
-                return CalculationServices.CreateAreaCalculation(AreaContext);
+                return AreaCalculationService.CreateAreaCalculation(AreaContext);
             else
                 return null;
         }

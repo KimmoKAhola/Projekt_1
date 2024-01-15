@@ -13,7 +13,7 @@ namespace Database.Interfaces
         IEnumerable<T> GetAll();
         void Add(T entity);
         void Update(T entity);
-        void Delete(int id);
+        void SoftDelete(int id);
         void Save();
     }
 }

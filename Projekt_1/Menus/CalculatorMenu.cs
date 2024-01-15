@@ -1,6 +1,5 @@
-﻿using Calculations.Services;
+﻿using Calculations.StrategyContexts;
 using Calculator.Interfaces;
-using Calculator.Mathematics;
 using Database.Interfaces;
 using Database.Models;
 using Database.Services;
@@ -63,7 +62,7 @@ namespace Projekt_1.Menus
                         DatabaseService.ReadAllCalculations(Calculation);
                         break;
                     case 3:
-                        DatabaseService.UpdateCalculation(Calculation);
+                        DatabaseService.UpdateCalculation(1);
                         break;
                     case 4:
                         DatabaseService.DeleteCalculation(Calculation);
@@ -86,7 +85,7 @@ namespace Projekt_1.Menus
             var chosenOperator = MenuChoice.ChooseMathOperator();
             MathContext.SetStrategy(chosenOperator);
             if (MathContext.Strategy != null)
-                return CalculationServices.CreateMathCalculation(MathContext);
+                return MathCalculationService.CreateMathCalculation(MathContext);
             else
                 return null;
         }

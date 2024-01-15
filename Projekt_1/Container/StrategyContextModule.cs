@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using Calculator.Mathematics;
-using Calculator.Shapes;
+using Calculations.StrategyContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
