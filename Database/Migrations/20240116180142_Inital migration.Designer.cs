@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240116105133_test")]
-    partial class test
+    [Migration("20240116180142_Inital migration")]
+    partial class Initalmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,43 +25,6 @@ namespace Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Database.Models.AreaCalculation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateLastUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ResultId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShapeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResultId");
-
-                    b.ToTable("AreaCalculation");
-                });
-
             modelBuilder.Entity("Database.Models.HighScore", b =>
                 {
                     b.Property<int>("Id")
@@ -70,8 +33,14 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte>("AverageScore")
-                        .HasColumnType("tinyint");
+                    b.Property<double>("AverageScore")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateLastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("NumberOfLosses")
                         .HasColumnType("int");
@@ -114,40 +83,12 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int>("ResultId")
-                        .HasColumnType("int");
-
                     b.Property<double>("SecondInput")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ResultId");
-
-                    b.ToTable("Calculation");
-                });
-
-            modelBuilder.Entity("Database.Models.Result", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateLastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResultType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Result");
+                    b.ToTable("Calculator");
                 });
 
             modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
@@ -165,9 +106,6 @@ namespace Database.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateLastUpdated")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Outcome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -176,47 +114,41 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ResultId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ResultId");
 
                     b.ToTable("RockPaperScissors");
                 });
 
-            modelBuilder.Entity("Database.Models.AreaCalculation", b =>
+            modelBuilder.Entity("Database.Models.ShapeCalculation", b =>
                 {
-                    b.HasOne("Database.Models.Result", "Result")
-                        .WithMany()
-                        .HasForeignKey("ResultId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Result");
-                });
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-            modelBuilder.Entity("Database.Models.MathCalculation", b =>
-                {
-                    b.HasOne("Database.Models.Result", "Result")
-                        .WithMany()
-                        .HasForeignKey("ResultId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
 
-                    b.Navigation("Result");
-                });
+                    b.Property<DateTime?>("DateLastUpdated")
+                        .HasColumnType("datetime2");
 
-            modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
-                {
-                    b.HasOne("Database.Models.Result", "Result")
-                        .WithMany()
-                        .HasForeignKey("ResultId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
 
-                    b.Navigation("Result");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ShapeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShapeCalculator");
                 });
 #pragma warning restore 612, 618
         }

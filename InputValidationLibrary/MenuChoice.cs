@@ -12,6 +12,7 @@ namespace InputValidationLibrary
         public static char ChooseMathOperator()
         {
             Console.CursorVisible = false;
+            PrintMessages.PrintNotification("Use the arrow keys to navigate and press enter to confirm your choice.");
             Console.WriteLine("Choose an operator, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
             char[] operators = ['+', '-', '*', '÷', '%', '√', 'E'];
@@ -58,10 +59,10 @@ namespace InputValidationLibrary
         public static string? ChooseGeometricShape()
         {
             Console.CursorVisible = false;
-            PrintMessages.PrintNotification("Use the arrow keys to navigate and enter to confirm your choice.");
+            PrintMessages.PrintNotification("Use the arrow keys to navigate and press enter to confirm your choice.");
             Console.WriteLine("Choose a geometric shape, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
-            char[] operators = ['▬', '▲', 'P', '♦', 'E']; //▰
+            char[] operators = ['▬', '▲', 'P', '♦', 'E'];
             string?[] shapes = ["Rectangle", "Triangle", "Parallelogram", "Rhomboid", null];
             int currentColumn = 0;
 
@@ -101,7 +102,5 @@ namespace InputValidationLibrary
                 Console.SetCursorPosition(0, yPos);
             }
         }
-
-
     }
 }
