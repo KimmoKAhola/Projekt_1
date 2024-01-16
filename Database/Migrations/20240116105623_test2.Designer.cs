@@ -4,6 +4,7 @@ using Database.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240116105623_test2")]
+    partial class test2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShapeCalculator");
+                    b.ToTable("AreaCalculation");
                 });
 
             modelBuilder.Entity("Database.Models.HighScore", b =>
@@ -62,8 +65,8 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("AverageScore")
-                        .HasColumnType("float");
+                    b.Property<byte>("AverageScore")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("NumberOfLosses")
                         .HasColumnType("int");
@@ -111,7 +114,7 @@ namespace Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Calculator");
+                    b.ToTable("Calculation");
                 });
 
             modelBuilder.Entity("Database.Models.RockPaperScissors", b =>
