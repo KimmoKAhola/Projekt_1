@@ -13,9 +13,9 @@ namespace Calculator.Shapes
         public double Height { get; set; }
         public string Name { get; set; } = "Triangle";
 
-        public (double area, double circumference) Calculate(double width, double height)
+        public (double area, double circumference) Calculate()
         {
-            return ((width * height) / 2, width * 3);
+            return ((Width * Height) / 2, Width * 3);
         }
     }
 }
