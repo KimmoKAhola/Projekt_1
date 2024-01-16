@@ -20,8 +20,12 @@ namespace Projekt_1
     {
         static void Main(string[] args)
         {
-            var app = new Application();
-            app.Run();
+            var config = Configuration.Configure();
+            using (var scope = config.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<Application>();
+                app.Run();
+            }
         }
     }
 }
