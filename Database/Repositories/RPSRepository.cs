@@ -12,15 +12,19 @@ namespace Database.Repositories
     public class RPSRepository(DatabaseContext dbContext)
     {
         private readonly DatabaseContext _dbContext = dbContext;
-        public void Add(Rock_Paper_Scissors.RockPaperScissors entity)
+        public void Add(RockPaperScissors entity)
         {
-            Console.WriteLine(entity.GetType());
             _dbContext.Add(entity);
         }
 
-        public IEnumerable<Models.RockPaperScissors> GetAll()
+        public IEnumerable<RockPaperScissors> GetAll()
         {
             return _dbContext.RockPaperScissors;
+        }
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }
