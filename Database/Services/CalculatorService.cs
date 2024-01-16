@@ -26,6 +26,7 @@ namespace Database.Services
             {
                 _calculationRepository.Add(calculation);
                 _calculationRepository.Save();
+                PrintMessages.PrintSuccessMessage("Save to database was successful.");
             }
             else
             {
@@ -37,11 +38,12 @@ namespace Database.Services
         {
             _calculationRepository.SoftDelete(id);
             _calculationRepository.Save();
+            PrintMessages.PrintNotification("Deletion was successful.");
         }
 
         public void ViewAllCalculations()
         {
-            _calculationRepository.GetAll().ToList().ForEach(Console.WriteLine);
+            PrintMathTable(_calculationRepository.GetAll());
         }
 
         public List<MathCalculation> GetAllCalculations()
@@ -58,6 +60,8 @@ namespace Database.Services
         public void UpdateCalculation(int id)
         {
             MathCalculation? entityToUpdate = _calculationRepository.Get(id);
+            Console.WriteLine("These are the properties you can update for your chosen entity:");
+            PrintMessages.PrintNotification($"\n{entityToUpdate}\n");
             int? chosenProperty = PromptUpdate();
             if (entityToUpdate != null)
             {
@@ -69,6 +73,7 @@ namespace Database.Services
                     _calculationRepository.Update(entityToUpdate);
                     entityToUpdate.DateLastUpdated = DateTime.Now;
                     _calculationRepository.Save();
+                    PrintMessages.PrintSuccessMessage("Update was successful.");
                 }
                 else
                 {
@@ -127,9 +132,8 @@ namespace Database.Services
 
         private static void UpdateOperator(MathCalculation entity)
         {
-            Console.Clear();
             var listOfOperators = GetMathOperators();
-            int? choice = UserInputValidation.MenuValidation(listOfOperators, "HEJ HOPP");
+            int? choice = UserInputValidation.MenuValidation(listOfOperators, "These are the operators you can choose from.\n");
             if (choice != null)
             {
                 var op = listOfOperators[(int)choice - 1];
@@ -147,11 +151,24 @@ namespace Database.Services
                 {3, "Operator input" },
                 {4, "Delete" },
             };
-            return UserInputValidation.MenuValidation(options, "TEMPORARY");
+            return UserInputValidation.MenuValidation(options, "\n");
         }
         public static ICalculation? CreateMathCalculation(CalculatorContext mathStrategy)
         {
-            double[]? numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers: ");
+            PrintMessages.PrintNotification($"You chose {mathStrategy.Operator}.");
+            double[]? numbers;
+            if (mathStrategy.Operator == '√')
+            {
+                PrintMessages.PrintNotification("You are about to calculate the nth root of a number." +
+                    "\nThe first number is the base and the second number is the inverse exponent." +
+                    "\nExample: 5 3 gives: (5)^(1/3)" +
+                    "\nand 4 2 gives: sqrt(4)");
+                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+            }
+            else
+            {
+                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+            }
             if (numbers == null) { return null; }
             ICalculation calculation = new MathCalculation
             {
@@ -173,6 +190,41 @@ namespace Database.Services
             var operatorNames = shapeTypes.Select(t => (IMathStrategy)Activator.CreateInstance(t)).Select(s => s.Operator).ToList();
 
             return operatorNames;
+        }
+
+        public void PrintMathTable(IEnumerable<MathCalculation> allCalculations)
+        {
+            if (allCalculations == null || !allCalculations.Any())
+            {
+                Console.WriteLine("No shapes to display.");
+                return;
+            }
+
+            string idHeader = "Id";
+            string firstHeader = "First";
+            string operatorHeader = "Operator";
+            string secondHeader = "Second";
+            string answerHeader = "Answer";
+            string dateHeader = "Date Created";
+            string dateModifiedHeader = "Date Last Modified";
+
+            int idColumnWidth = Math.Max(allCalculations.Max(r => r.Id.ToString().Length), idHeader.Length);
+            int firstInputWidth = Math.Max(allCalculations.Max(r => r.FirstInput.ToString().Length), firstHeader.Length);
+            int secondInputWidth = Math.Max(allCalculations.Max(r => r.SecondInput.ToString().Length), secondHeader.Length);
+            int operatorInputWidth = Math.Max(allCalculations.Max(r => r.SecondInput.ToString().Length), operatorHeader.Length);
+            int answerColumnWidth = Math.Max(allCalculations.Max(r => r.Answer.ToString().Length), answerHeader.Length);
+            int dateColumnWidth = Math.Max(allCalculations.Max(r => r.DateCreated.ToString().Length), dateHeader.Length);
+            int dateModifiedColumnWidth = Math.Max(allCalculations.Max(r => (r.DateLastUpdated?.ToString().Length) ?? 0), dateModifiedHeader.Length);
+            int totalWidth = $"{idHeader} | {firstHeader} | {operatorHeader} | {secondHeader} | {answerHeader} | {dateHeader} | {dateModifiedHeader}".Length + 7;
+
+            Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {firstHeader.PadRight(firstInputWidth)} | {operatorHeader.PadRight(operatorInputWidth)} | {secondHeader.PadRight(secondInputWidth)} | {answerHeader.PadRight(answerColumnWidth)} | {dateHeader.PadRight(dateColumnWidth)} | {dateModifiedHeader.PadRight(dateModifiedColumnWidth)}");
+            Console.WriteLine(new string('-', totalWidth));
+            foreach (var calculation in allCalculations)
+            {
+                _context.SetStrategy(calculation.Operator);
+                var answer = _context.ExecuteStrategy(calculation.FirstInput, calculation.SecondInput);
+                Console.WriteLine($"{calculation.Id.ToString().PadRight(idColumnWidth)} | {calculation.FirstInput.ToString().PadRight(firstInputWidth)} | {calculation.Operator.ToString().PadRight(operatorInputWidth)} | {calculation.SecondInput.ToString().PadRight(secondInputWidth)} | {calculation.Answer.ToString().PadRight(answerColumnWidth)} | {calculation.DateCreated.ToString().PadRight(dateColumnWidth)} | {calculation.DateLastUpdated.ToString()?.PadRight(dateModifiedColumnWidth)}");
+            }
         }
     }
 }
