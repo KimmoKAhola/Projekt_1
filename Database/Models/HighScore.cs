@@ -14,5 +14,7 @@ namespace Database.Models
         public int NumberOfWins { get; set; }
         public int NumberOfLosses { get; set; }
         public int NumberOfTies { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateLastUpdated { get; set; }
     }
 }

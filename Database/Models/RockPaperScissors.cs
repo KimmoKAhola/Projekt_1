@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class RockPaperScissors : IDatabaseEntity
+    public class RockPaperScissors
     {
         public int Id { get; set; }
 
@@ -20,6 +20,5 @@ namespace Database.Models
         public string Outcome { get; set; } = null!;
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
-        public DateTime? DateLastUpdated { get; set; }
     }
 }
