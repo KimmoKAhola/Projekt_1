@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    public class RockPaperScissors
+    public class RockPaperScissors : IDatabaseEntity
     {
         public int Id { get; set; }
 
@@ -18,7 +19,7 @@ namespace Database.Models
 
         public string Outcome { get; set; } = null!;
 
-        [Required]
-        public Result Result { get; set; } = null!;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateLastUpdated { get; set; }
     }
 }

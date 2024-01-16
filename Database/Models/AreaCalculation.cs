@@ -8,7 +8,7 @@ using Database.Interfaces;
 
 namespace Database.Models
 {
-    public class AreaCalculation : ICalculation
+    public class AreaCalculation : ICalculation, IDatabaseEntity
     {
         public int Id { get; set; }
         public double Width { get; set; }
@@ -18,8 +18,8 @@ namespace Database.Models
         [Required]
         public string ShapeName { get; set; } = null!;
 
-        [Required]
-        public Result Result { get; set; } = null!;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateLastUpdated { get; set; }
 
         public override string ToString()
         {

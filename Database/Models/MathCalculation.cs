@@ -8,7 +8,7 @@ using Database.Interfaces;
 
 namespace Database.Models
 {
-    public class MathCalculation : ICalculation
+    public class MathCalculation : ICalculation, IDatabaseEntity
     {
         public int Id { get; set; }
         [Required]
@@ -21,8 +21,8 @@ namespace Database.Models
 
         public bool IsDeleted { get; set; } = false;
 
-        [Required]
-        public Result Result { get; set; } = null!;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateLastUpdated { get; set; }
 
         public override string ToString()
         {
