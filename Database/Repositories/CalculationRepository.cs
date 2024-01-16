@@ -20,17 +20,18 @@ namespace Database.Repositories
             if (entityToDelete != null)
             {
                 entityToDelete.IsDeleted = true;
+                entityToDelete.DateLastUpdated = DateTime.Now;
             }
         }
 
         public MathCalculation? Get(int id)
         {
-            return _dbContext.Calculation.Find(id);
+            return _dbContext.Calculator.Find(id);
         }
 
         public IEnumerable<MathCalculation> GetAll()
         {
-            return _dbContext.Calculation.Where(x => !x.IsDeleted);
+            return _dbContext.Calculator.Where(x => !x.IsDeleted);
         }
 
         public void Save()
