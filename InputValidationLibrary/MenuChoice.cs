@@ -12,6 +12,7 @@ namespace InputValidationLibrary
         public static char ChooseMathOperator()
         {
             Console.CursorVisible = false;
+            PrintMessages.PrintNotification("Use the arrow keys to navigate and enter to confirm your choice.");
             Console.WriteLine("Choose an operator, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
             char[] operators = ['+', '-', '*', '÷', '%', '√', 'E'];
