@@ -33,6 +33,8 @@ namespace Projekt_1.Container
             myBuilder.RegisterModule<StrategyContextModule>();
             myBuilder.RegisterModule<RepositoryModule>();
 
+            myBuilder.RegisterType<Application>().SingleInstance();
+
             return myBuilder.Build();
         }
     }

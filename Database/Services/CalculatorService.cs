@@ -174,5 +174,41 @@ namespace Database.Services
 
             return operatorNames;
         }
+
+        public void PrintMathTable(IEnumerable<MathCalculation> allCalculations)
+        {
+            if (allCalculations == null || !allCalculations.Any())
+            {
+                Console.WriteLine("No shapes to display.");
+                return;
+            }
+
+            string idHeader = "Id";
+            string firstHeader = "First";
+            string operatorHeader = "Operator";
+            string secondHeader = "Second";
+            string answerHeader = "Answer";
+            string dateHeader = "Date Created";
+            string dateModifiedHeader = "Date Last Modified";
+
+            int idColumnWidth = Math.Max(allCalculations.Max(r => r.Id.ToString().Length), idHeader.Length);
+            int firstInputWidth = Math.Max(allCalculations.Max(r => r.FirstInput.ToString().Length), firstHeader.Length);
+            int secondInputWidth = Math.Max(allCalculations.Max(r => r.SecondInput.ToString().Length), secondHeader.Length);
+            int operatorInputWidth = Math.Max(allCalculations.Max(r => r.SecondInput.ToString().Length), operatorHeader.Length);
+            int answerColumnWidth = Math.Max(allCalculations.Max(r => r.Answer.ToString().Length), answerHeader.Length);
+            int dateColumnWidth = Math.Max(allCalculations.Max(r => r.DateCreated.ToString().Length), dateHeader.Length);
+            int dateModifiedColumnWidth = Math.Max(allCalculations.Max(r => (r.DateLastUpdated?.ToString().Length) ?? 0), dateModifiedHeader.Length);
+            int totalWidth = $"{idHeader} | {firstHeader} | {operatorHeader} | {secondHeader} | {answerHeader} | {dateHeader} | {dateModifiedHeader}".Length + 7;
+
+            Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {firstHeader.PadRight(firstInputWidth)} | {operatorHeader.PadRight(operatorInputWidth)} | {secondHeader.PadRight(secondInputWidth)} | {answerHeader.PadRight(answerColumnWidth)} | {dateHeader.PadRight(dateColumnWidth)} | {dateModifiedHeader.PadRight(dateModifiedColumnWidth)}");
+            Console.WriteLine(new string('-', totalWidth));
+            foreach (var calculation in allCalculations)
+            {
+                _context.SetStrategy(calculation.Operator);
+                var answer = _context.ExecuteStrategy(calculation.FirstInput, calculation.SecondInput);
+                Console.WriteLine($"{calculation.Id.ToString().PadRight(idColumnWidth)} | {calculation.FirstInput.ToString().PadRight(firstInputWidth)} | {calculation.Operator.ToString().PadRight(operatorInputWidth)} | {calculation.SecondInput.ToString().PadRight(secondInputWidth)} | {calculation.Answer.ToString().PadRight(answerColumnWidth)} | {calculation.DateCreated.ToString().PadRight(dateColumnWidth)} | {calculation.DateLastUpdated.ToString()?.PadRight(dateModifiedColumnWidth)}");
+            }
+            Console.WriteLine();
+        }
     }
 }

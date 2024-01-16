@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Database.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Projekt_1.Container;
 using Projekt_1.Interfaces;
 using Projekt_1.Menus;
@@ -12,15 +14,18 @@ using System.Threading.Tasks;
 
 namespace Projekt_1
 {
-    public class Application : IApplication
+    public class Application(DatabaseContext dbContext) : IApplication
     {
+        private readonly DatabaseContext _databaseContext = dbContext;
         public void Run()
         {
             Console.OutputEncoding = Encoding.UTF8;
-            using (var ctx = new DatabaseContext())
+
+            if (!(_databaseContext.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
             {
-                ctx.Database.Migrate();
+                _databaseContext.Database.Migrate();
             }
+
             var config = Configuration.Configure();
             using (var scope = config.BeginLifetimeScope())
             {

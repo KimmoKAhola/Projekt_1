@@ -36,7 +36,7 @@ namespace Database.Services
             var highScore = GetCurrentHighScore();
             if (highScore != null)
             {
-                Console.WriteLine($"W: {highScore.NumberOfWins} L: {highScore.NumberOfLosses} T: {highScore.NumberOfTies} - W % {highScore.AverageScore:P2}");
+                PrintHighScoreTable(highScore);
             }
             else
             {
@@ -76,6 +76,33 @@ namespace Database.Services
             double numberOfWins = allGames.Count(x => x.Outcome == GameState.Win.ToString());
             double numberOfGames = allGames.Count;
             return Math.Round(numberOfWins / numberOfGames, 5);
+        }
+
+        private static void PrintHighScoreTable(HighScore highScore)
+        {
+            string playerHeader = "Number of wins";
+            string computerHeader = "Number of losses";
+            string resultHeader = "Number of ties";
+            string winLossHeader = "Win/loss percentage";
+
+            int winsColumnWidth = Math.Max(highScore.NumberOfWins.ToString().Length, playerHeader.Length);
+            int lossColumnWidth = Math.Max(highScore.NumberOfLosses.ToString().Length, computerHeader.Length);
+            int tiesColumnWidth = Math.Max(highScore.NumberOfTies.ToString().Length, resultHeader.Length);
+            int winLossColumnWidth = Math.Max(highScore.AverageScore.ToString().Length, winLossHeader.Length);
+
+            int totalWidth = winsColumnWidth + lossColumnWidth + tiesColumnWidth + winLossColumnWidth + 6;
+            string banner = @"
+██╗  ██╗██╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ ██████╗ ██████╗ ███████╗
+██║  ██║██║██╔════╝ ██║  ██║    ██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝
+███████║██║██║  ███╗███████║    ███████╗██║     ██║   ██║██████╔╝█████╗  
+██╔══██║██║██║   ██║██╔══██║    ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  
+██║  ██║██║╚██████╔╝██║  ██║    ███████║╚██████╗╚██████╔╝██║  ██║███████╗
+╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝    ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝";
+            Console.WriteLine(banner + "\n");
+            Console.WriteLine($"{playerHeader.PadRight(winsColumnWidth)} | {computerHeader.PadRight(lossColumnWidth)} | {resultHeader.PadRight(tiesColumnWidth)} | {winLossHeader.PadRight(winLossColumnWidth)}");
+            Console.WriteLine(new string('-', totalWidth));
+            string avg = $"{highScore.AverageScore:P2}";
+            Console.WriteLine($"{highScore.NumberOfWins.ToString().PadRight(winsColumnWidth)} | {highScore.NumberOfLosses.ToString().PadRight(lossColumnWidth)} | {highScore.NumberOfTies.ToString().PadRight(tiesColumnWidth)} | {avg.PadRight(winLossColumnWidth)}\n");
         }
     }
 }

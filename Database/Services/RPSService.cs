@@ -59,8 +59,24 @@ namespace Database.Services
 
             foreach (var result in results)
             {
-                Console.WriteLine($"{result.PlayerMove.PadRight(playerColumnWidth)} | {result.ComputerMove.PadRight(computerColumnWidth)} | {result.Outcome.PadRight(resultColumnWidth)} | {result.DateCreated.ToString().PadRight(datePlayedColumnWidth)}");
+                Console.Write($"{result.PlayerMove.PadRight(playerColumnWidth)} | {result.ComputerMove.PadRight(computerColumnWidth)} | ");
+                if (result.Outcome == GameState.Win.ToString())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if (result.Outcome == GameState.Loss.ToString())
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                }
+                Console.Write($"{result.Outcome.PadRight(resultColumnWidth)}");
+                Console.ResetColor();
+                Console.WriteLine($" | {result.DateCreated.ToString().PadRight(datePlayedColumnWidth)}");
             }
+            Console.WriteLine();
         }
     }
 }
