@@ -6,15 +6,33 @@ namespace Database.Services
 {
     public class RPSService(RPSRepository repository)
     {
-        private RPSRepository _repository = repository;
-        public void AddRockPaperScissorsHighScore(Models.RockPaperScissors game)
+        private readonly RPSRepository _repository = repository;
+        public void AddRockPaperScissorsResult(Game game)
         {
-            throw new NotImplementedException();
+            var rps = CreateRockPaperScissors(game);
+            _repository.Add(rps);
+            _repository.Save();
         }
 
-        public void AddRockPaperScissorsResult(Rock_Paper_Scissors.RockPaperScissors game)
+        public void ReadAll()
         {
-            _repository.Add(game);
+            foreach (var item in _repository.GetAll())
+            {
+                var info = $"{item.Id} - P: {item.PlayerMove} C: {item.ComputerMove} - R: {item.Outcome}";
+                Console.WriteLine(info);
+            }
+        }
+
+        public static RockPaperScissors CreateRockPaperScissors(Game game)
+        {
+            var rps = new RockPaperScissors
+            {
+                PlayerMove = game.PlayerMove.ToString(),
+                ComputerMove = game.ComputerMove.ToString(),
+                Outcome = game.Outcome.ToString(),
+            };
+
+            return rps;
         }
     }
 }

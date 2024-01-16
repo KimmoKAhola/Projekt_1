@@ -28,7 +28,7 @@ namespace Projekt_1.Container
             myBuilder.RegisterModule<MenuModule>();
             myBuilder.RegisterModule<ShapeModule>();
             myBuilder.RegisterModule<CalculationModule>();
-            myBuilder.RegisterModule<DatabaseModule>();
+            myBuilder.RegisterModule<DatabaseServicesModule>();
             myBuilder.RegisterModule<MathModule>();
             myBuilder.RegisterModule<StrategyContextModule>();
             myBuilder.RegisterModule<RepositoryModule>();

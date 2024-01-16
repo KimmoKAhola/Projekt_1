@@ -1,5 +1,6 @@
 ﻿using Database.DatabaseConfiguration;
 using Database.Models;
+using Microsoft.EntityFrameworkCore;
 using Rock_Paper_Scissors;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace Database.Repositories
 {
-    public class RPSRepository(DatabaseContext dbContext)
+    public class HighScoreRepository(DatabaseContext dbContext)
     {
         private readonly DatabaseContext _dbContext = dbContext;
-        public void Add(RockPaperScissors entity)
+        public void Add(HighScore entity)
         {
             _dbContext.Add(entity);
         }
 
-        public IEnumerable<RockPaperScissors> GetAll()
+        public HighScore? Get()
         {
-            return _dbContext.RockPaperScissors;
+            return _dbContext.HighScore.FirstOrDefault();
         }
 
         public void Save()

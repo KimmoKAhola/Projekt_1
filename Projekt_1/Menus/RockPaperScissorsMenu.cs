@@ -12,12 +12,20 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class RockPaperScissorsMenu(RPSService databaseService, RockPaperScissors rockPaperScissors) : IMenu
+    public class RockPaperScissorsMenu(RPSService databaseService, HighScoreService highScoreService, Game rockPaperScissors) : IMenu
     {
         public string MenuName => "Rock, Paper, Scissors";
 
         public RPSService DatabaseService { get; set; } = databaseService;
-        public RockPaperScissors RockPaperScissors { get; set; } = rockPaperScissors;
+        public HighScoreService HighScoreService { get; set; } = highScoreService;
+        public Game RockPaperScissors { get; set; } = rockPaperScissors;
+
+        private readonly Dictionary<int, string> _menuChoices = new()
+        {
+            {1, "Play" },
+            {2, "Read" },
+            {3, "View Highscore" },
+        };
         public void Display()
         {
             PrintBanner();
@@ -26,7 +34,42 @@ namespace Projekt_1.Menus
 
         public void Menuchoice()
         {
-            throw new NotImplementedException();
+            while (true)
+            {
+                Console.Clear();
+                Display();
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                Console.Clear();
+                switch (choice)
+                {
+                    case 1:
+                        while (true)
+                        {
+                            Console.Clear();
+                            if (UserInputValidation.PromptYesOrNo("Press y to play a game, anything else to exit: "))
+                            {
+                                RockPaperScissors.RunGame();
+                                DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
+                            }
+                            else
+                            {
+                                PrintMessages.PrintNotification("User chose to exit.");
+                                HighScoreService.UpdateHighScore();
+                                break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        DatabaseService.ReadAll();
+                        break;
+                    case 3:
+                        HighScoreService.ViewHighScore();
+                        break;
+                    default:
+                        return;
+                }
+                PrintMessages.PressAnyKeyToContinue();
+            }
         }
 
         public int? PromptUserForId()
@@ -38,10 +81,7 @@ namespace Projekt_1.Menus
         {
             Console.Clear();
             Display();
-            RockPaperScissors.RunGame();
-            DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
-            //DatabaseService.AddRockPaperScissorsHighScore(game);
-            PrintMessages.PressAnyKeyToContinue();
+            Menuchoice();
         }
         public void PrintBanner()
         {

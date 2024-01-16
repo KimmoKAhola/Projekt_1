@@ -62,6 +62,7 @@ namespace Database.Services
             {
                 ChangeOption(chosenProperty, entityToUpdate);
                 _areaCalculationRepository.Update(entityToUpdate);
+                entityToUpdate.DateLastUpdated = DateTime.Now;
                 _areaCalculationRepository.Save();
             }
             else
@@ -155,10 +156,6 @@ namespace Database.Services
                 Width = numbers[0],
                 Height = numbers[1],
                 ShapeName = areaContext.ShapeName,
-                Result = new Result
-                {
-                    ResultType = ResultTypes.AreaCalculation.ToString(),
-                }
             };
             return calculation;
         }

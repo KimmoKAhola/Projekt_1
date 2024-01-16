@@ -16,6 +16,7 @@ namespace Projekt_1.Container
             builder.RegisterType<CalculationRepository>().AsSelf();
             builder.RegisterType<AreaCalculationRepository>().AsSelf();
             builder.RegisterType<RPSRepository>().AsSelf();
+            builder.RegisterType<HighScoreRepository>().AsSelf();
         }
     }
 }

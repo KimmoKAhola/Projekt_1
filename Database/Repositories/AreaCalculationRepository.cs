@@ -26,17 +26,18 @@ namespace Database.Repositories
             if (entityToDelete != null)
             {
                 entityToDelete.IsDeleted = true;
+                entityToDelete.DateLastUpdated = DateTime.Now;
             }
         }
 
         public AreaCalculation? Get(int id)
         {
-            return _dbContext.AreaCalculation.Find(id);
+            return _dbContext.ShapeCalculator.Find(id);
         }
 
         public IEnumerable<AreaCalculation> GetAll()
         {
-            return _dbContext.AreaCalculation.Where(x => !x.IsDeleted);
+            return _dbContext.ShapeCalculator.Where(x => !x.IsDeleted);
         }
 
         public void Save()
