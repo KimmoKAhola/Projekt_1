@@ -65,10 +65,9 @@ namespace Projekt_1.Menus
                     case 3:
                         int? idToUpdate = PromptUserForId();
                         if (idToUpdate != null)
-                            DatabaseService.UpdateCalculation((int)idToUpdate);
-                        else
                         {
-                            PrintMessages.PrintErrorMessage("User chose to exit.");
+                            Console.Clear();
+                            DatabaseService.UpdateCalculation((int)idToUpdate);
                         }
                         break;
                     case 4:
