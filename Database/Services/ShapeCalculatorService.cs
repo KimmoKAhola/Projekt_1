@@ -2,6 +2,7 @@
 using Calculator.Interfaces;
 using Calculator.Mathematics;
 using Database.Interfaces;
+using Database.Migrations;
 using Database.Models;
 using Database.Repositories;
 using InputValidationLibrary;
@@ -13,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Database.Services
 {
@@ -24,13 +26,14 @@ namespace Database.Services
         {
             _areaCalculationRepository.Add(calculation);
             _areaCalculationRepository.Save();
-            PrintMessages.PrintSuccessMessage($"Added {calculation} to the database.");
+            PrintMessages.PrintSuccessMessage("Save to database was successful.");
         }
 
         public void DeleteCalculation(int id)
         {
             _areaCalculationRepository.SoftDelete(id);
             _areaCalculationRepository.Save();
+            PrintMessages.PrintNotification("Deletion was successful.");
         }
 
         public void ViewAllCalculations()
@@ -52,6 +55,8 @@ namespace Database.Services
         public void UpdateCalculation(int id)
         {
             ShapeCalculation? entityToUpdate = _areaCalculationRepository.Get(id);
+            Console.WriteLine("These are the properties you can update for your chosen entity:");
+            PrintMessages.PrintNotification($"\n{entityToUpdate}\n");
             var chosenProperty = PromptUpdate();
             if (entityToUpdate != null)
             {
@@ -59,6 +64,7 @@ namespace Database.Services
                 _areaCalculationRepository.Update(entityToUpdate);
                 entityToUpdate.DateLastUpdated = DateTime.Now;
                 _areaCalculationRepository.Save();
+                PrintMessages.PrintSuccessMessage("Update was successful.");
             }
             else
             {
@@ -91,12 +97,12 @@ namespace Database.Services
         {
             Dictionary<int, string> options = new()
             {
-                {1, "Width" },
-                {2, "Height" },
-                {3, "Shape" },
-                {4, "Delete" },
+                {1, "Update Width" },
+                {2, "Update Height" },
+                {3, "Update Shape" },
+                {4, "Delete Calculation" },
             };
-            return UserInputValidation.MenuValidation(options, "Bajs 123456");
+            return UserInputValidation.MenuValidation(options, "\n");
         }
 
         private static void UpdateWidth(ShapeCalculation entity)

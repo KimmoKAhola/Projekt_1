@@ -43,22 +43,23 @@ namespace Database.Services
             string playerHeader = "Player's move";
             string computerHeader = "Computer's move";
             string resultHeader = "Result";
+            string datePlayedHeader = "Date played";
 
 
             int playerColumnWidth = Math.Max(results.Max(r => r.PlayerMove.Length), playerHeader.Length);
             int computerColumnWidth = Math.Max(results.Max(r => r.ComputerMove.Length), computerHeader.Length);
             int resultColumnWidth = Math.Max(results.Max(r => r.Outcome.Length), resultHeader.Length);
+            int datePlayedColumnWidth = Math.Max(results.Max(r => r.DateCreated.ToString().Length), datePlayedHeader.Length);
 
-            int totalWidth = playerColumnWidth + computerColumnWidth + resultColumnWidth + 6;
+            int totalWidth = playerColumnWidth + computerColumnWidth + resultColumnWidth + datePlayedColumnWidth + 9;
 
-            PrintMessages.PrintNotification("A complete list of all played games.");
-            Console.WriteLine($"{playerHeader.PadRight(playerColumnWidth)} | {computerHeader.PadRight(computerColumnWidth)} | {resultHeader.PadRight(resultColumnWidth)}");
+            PrintMessages.PrintNotification("A complete list of all played games.\n");
+            Console.WriteLine($"{playerHeader.PadRight(playerColumnWidth)} | {computerHeader.PadRight(computerColumnWidth)} | {resultHeader.PadRight(resultColumnWidth)} | {datePlayedHeader.PadRight(datePlayedColumnWidth)}");
             Console.WriteLine(new string('-', totalWidth));
 
-            // Print table rows
             foreach (var result in results)
             {
-                Console.WriteLine($"{result.PlayerMove.PadRight(playerColumnWidth)} | {result.ComputerMove.PadRight(computerColumnWidth)} | {result.Outcome.PadRight(resultColumnWidth)}");
+                Console.WriteLine($"{result.PlayerMove.PadRight(playerColumnWidth)} | {result.ComputerMove.PadRight(computerColumnWidth)} | {result.Outcome.PadRight(resultColumnWidth)} | {result.DateCreated.ToString().PadRight(datePlayedColumnWidth)}");
             }
         }
     }

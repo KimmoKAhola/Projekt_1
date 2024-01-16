@@ -55,6 +55,7 @@ namespace Database.Services
                 highScore.NumberOfLosses = allGames.Count(x => x.Outcome == GameState.Loss.ToString());
                 highScore.NumberOfTies = allGames.Count(x => x.Outcome == GameState.Tie.ToString());
                 highScore.AverageScore = CalculateAverageScore(allGames);
+                highScore.DateLastUpdated = DateTime.Now;
                 return highScore;
             }
             else
@@ -64,7 +65,8 @@ namespace Database.Services
                     NumberOfWins = allGames.Count(x => x.Outcome == GameState.Win.ToString()),
                     NumberOfLosses = allGames.Count(x => x.Outcome == GameState.Loss.ToString()),
                     NumberOfTies = allGames.Count(x => x.Outcome == GameState.Tie.ToString()),
-                    AverageScore = CalculateAverageScore(allGames)
+                    AverageScore = CalculateAverageScore(allGames),
+                    DateCreated = DateTime.Now,
                 };
             }
         }
@@ -73,7 +75,7 @@ namespace Database.Services
         {
             double numberOfWins = allGames.Count(x => x.Outcome == GameState.Win.ToString());
             double numberOfGames = allGames.Count;
-            return numberOfWins / numberOfGames;
+            return Math.Round(numberOfWins / numberOfGames, 5);
         }
     }
 }
