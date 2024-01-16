@@ -44,16 +44,10 @@ namespace Projekt_1.Menus
                     case 1:
                         while (true)
                         {
-                            Console.Clear();
-                            if (UserInputValidation.PromptYesOrNo("Press y to play a game of rock, paper, scissors.\nPress anything else to exit: "))
-                            {
-                                Console.Clear();
-                                RockPaperScissors.RunGame();
-                                RockPaperScissors.PrintResultsTable();
-                                DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
-                                PrintMessages.PressAnyKeyToContinue();
-                            }
-                            else
+                            RockPaperScissors.RunGame();
+                            RockPaperScissors.PrintResultsTable();
+                            DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
+                            if (!UserInputValidation.PromptYesOrNo("\nPress y to play again.\nPress anything else to exit: "))
                             {
                                 PrintMessages.PrintNotification("User chose to exit.");
                                 HighScoreService.UpdateHighScore();
