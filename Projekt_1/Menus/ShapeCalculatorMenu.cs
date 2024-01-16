@@ -57,7 +57,7 @@ namespace Projekt_1.Menus
                                 PrintMessages.PrintErrorMessage("User chose to exit.");
                                 break;
                             }
-                            Thread.Sleep(2000);
+                            Thread.Sleep(1500);
                             Console.Clear();
                         }
                         break;
