@@ -42,7 +42,14 @@ namespace Database.Repositories
 
         public void Save()
         {
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                PrintMessages.PrintErrorMessage($"Something went wrong: {ex.Message}");
+            }
         }
 
         public void Update(ShapeCalculation entity)
