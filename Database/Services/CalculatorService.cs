@@ -16,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace Database.Services
 {
-    public class MathCalculationService(CalculationRepository calculationRepository, MathContext context) : IDatabaseService<MathCalculation>
+    public class CalculatorService(CalculatorRepository calculationRepository, CalculatorContext context) : IDatabaseService<MathCalculation>
     {
-        private readonly CalculationRepository _calculationRepository = calculationRepository;
-        private readonly MathContext _context = context;
+        private readonly CalculatorRepository _calculationRepository = calculationRepository;
+        private readonly CalculatorContext _context = context;
         public void AddCalculation(MathCalculation calculation)
         {
             if (!double.IsNaN(calculation.Answer))
@@ -39,7 +39,7 @@ namespace Database.Services
             _calculationRepository.Save();
         }
 
-        public void ReadAllCalculations()
+        public void ViewAllCalculations()
         {
             _calculationRepository.GetAll().ToList().ForEach(Console.WriteLine);
         }
@@ -149,7 +149,7 @@ namespace Database.Services
             };
             return UserInputValidation.MenuValidation(options, "TEMPORARY");
         }
-        public static ICalculation? CreateMathCalculation(MathContext mathStrategy)
+        public static ICalculation? CreateMathCalculation(CalculatorContext mathStrategy)
         {
             double[]? numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers: ");
             if (numbers == null) { return null; }

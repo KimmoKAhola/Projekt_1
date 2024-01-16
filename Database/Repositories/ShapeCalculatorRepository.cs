@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Database.Repositories
 {
-    public class AreaCalculationRepository(DatabaseContext dbContext) : IRepository<AreaCalculation>
+    public class ShapeCalculatorRepository(DatabaseContext dbContext) : IRepository<ShapeCalculation>
     {
         private readonly DatabaseContext _dbContext = dbContext;
-        public void Add(AreaCalculation entity)
+        public void Add(ShapeCalculation entity)
         {
             _dbContext.Add(entity);
         }
@@ -30,12 +30,12 @@ namespace Database.Repositories
             }
         }
 
-        public AreaCalculation? Get(int id)
+        public ShapeCalculation? Get(int id)
         {
             return _dbContext.ShapeCalculator.Find(id);
         }
 
-        public IEnumerable<AreaCalculation> GetAll()
+        public IEnumerable<ShapeCalculation> GetAll()
         {
             return _dbContext.ShapeCalculator.Where(x => !x.IsDeleted);
         }
@@ -45,7 +45,7 @@ namespace Database.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(AreaCalculation entity)
+        public void Update(ShapeCalculation entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
         }

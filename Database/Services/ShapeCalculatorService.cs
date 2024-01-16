@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace Database.Services
 {
-    public class AreaCalculationService(AreaCalculationRepository areaCalculationRepository, AreaCalculatorContext context) : IDatabaseService<AreaCalculation>
+    public class ShapeCalculatorService(ShapeCalculatorRepository areaCalculationRepository, ShapeContext context) : IDatabaseService<ShapeCalculation>
     {
-        private readonly AreaCalculationRepository _areaCalculationRepository = areaCalculationRepository;
-        private readonly AreaCalculatorContext _context = context;
-        public void AddCalculation(AreaCalculation calculation)
+        private readonly ShapeCalculatorRepository _areaCalculationRepository = areaCalculationRepository;
+        private readonly ShapeContext _context = context;
+        public void AddCalculation(ShapeCalculation calculation)
         {
             _areaCalculationRepository.Add(calculation);
             _areaCalculationRepository.Save();
@@ -33,17 +33,12 @@ namespace Database.Services
             _areaCalculationRepository.Save();
         }
 
-        public void ReadAllCalculations()
+        public void ViewAllCalculations()
         {
-            foreach (var item in _areaCalculationRepository.GetAll().ToList())
-            {
-                _context.SetStrategy(item.ShapeName.ToString());
-                var (area, circumference) = _context.ExecuteStrategy(item.Width, item.Height);
-                Console.WriteLine($"{item}\tArea: {area}\tCircumference: {circumference}");
-            }
+            PrintShapeTable(_areaCalculationRepository.GetAll().ToList());
         }
 
-        public List<AreaCalculation> GetAllCalculations()
+        public List<ShapeCalculation> GetAllCalculations()
         {
             return _areaCalculationRepository.GetAll().ToList();
         }
@@ -56,7 +51,7 @@ namespace Database.Services
 
         public void UpdateCalculation(int id)
         {
-            AreaCalculation? entityToUpdate = _areaCalculationRepository.Get(id);
+            ShapeCalculation? entityToUpdate = _areaCalculationRepository.Get(id);
             var chosenProperty = PromptUpdate();
             if (entityToUpdate != null)
             {
@@ -71,7 +66,7 @@ namespace Database.Services
             }
         }
 
-        private void ChangeOption(int? choice, AreaCalculation entity)
+        private void ChangeOption(int? choice, ShapeCalculation entity)
         {
             switch (choice - 1)
             {
@@ -104,7 +99,7 @@ namespace Database.Services
             return UserInputValidation.MenuValidation(options, "Bajs 123456");
         }
 
-        private static void UpdateWidth(AreaCalculation entity)
+        private static void UpdateWidth(ShapeCalculation entity)
         {
             Console.Write("Enter the new width: ");
             if (double.TryParse(Console.ReadLine(), out double result))
@@ -117,7 +112,7 @@ namespace Database.Services
             }
         }
 
-        private static void UpdateHeight(AreaCalculation entity)
+        private static void UpdateHeight(ShapeCalculation entity)
         {
             Console.Write("Enter the new height: ");
             if (double.TryParse(Console.ReadLine(), out double result))
@@ -130,7 +125,7 @@ namespace Database.Services
             }
         }
 
-        private static void UpdateShape(AreaCalculation entity)
+        private static void UpdateShape(ShapeCalculation entity)
         {
             var listOfShapeNames = GetShapeNames();
             int? userChoice = UserInputValidation.MenuValidation(listOfShapeNames, "These are the available shapes to choose from.\n");
@@ -145,17 +140,17 @@ namespace Database.Services
             Console.ReadKey();
         }
 
-        public static ICalculation? CreateAreaCalculation(AreaCalculatorContext areaContext)
+        public static ICalculation? CreateAreaCalculation(ShapeContext shapeContext)
         {
-            PrintMessages.PrintNotification($"You chose {areaContext.ShapeName}.");
-            double[]? numbers = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
-            if (numbers == null) { return null; }
+            PrintMessages.PrintNotification($"You chose {shapeContext.ShapeName}.");
+            double[]? userInput = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
+            if (userInput == null) { return null; }
 
-            ICalculation calculation = new AreaCalculation
+            ICalculation calculation = new ShapeCalculation
             {
-                Width = numbers[0],
-                Height = numbers[1],
-                ShapeName = areaContext.ShapeName,
+                Width = userInput[0],
+                Height = userInput[1],
+                ShapeName = shapeContext.ShapeName,
             };
             return calculation;
         }
@@ -170,6 +165,39 @@ namespace Database.Services
             var shapeNames = shapeTypes.Select(t => (IShape)Activator.CreateInstance(t)).Select(s => s.Name).ToList();
 
             return shapeNames;
+        }
+
+        public void PrintShapeTable(IEnumerable<ShapeCalculation> allShapes)
+        {
+            if (allShapes == null || !allShapes.Any())
+            {
+                Console.WriteLine("No shapes to display.");
+                return;
+            }
+
+            string idHeader = "Id";
+            string shapeHeader = "Shape";
+            string widthHeader = "Width";
+            string heightHeader = "Height";
+            string areaHeader = "Area";
+            string circumferenceHeader = "Circumference";
+
+            int idColumnWidth = Math.Max(allShapes.Max(r => r.Id.ToString().Length), idHeader.Length);
+            int shapeColumnWidth = Math.Max(allShapes.Max(r => r.ShapeName.Length), shapeHeader.Length);
+            int widthColumnWidth = Math.Max(allShapes.Max(r => r.Width.ToString().Length), widthHeader.Length) + 2;
+            int heightColumnWidth = Math.Max(allShapes.Max(r => r.Height.ToString().Length), heightHeader.Length) + 2;
+            int areaColumnWidth = 20;
+            int circumferenceColumnWidth = 20;
+            int totalWidth = $"{idHeader} | {shapeHeader} | {widthHeader} | {heightHeader} | {areaHeader} | {circumferenceHeader}".Length + areaColumnWidth + circumferenceColumnWidth;
+
+            Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {shapeHeader.PadRight(shapeColumnWidth)} | {widthHeader.PadRight(widthColumnWidth)}  | {heightHeader.PadRight(heightColumnWidth)}  | {areaHeader.PadRight(areaColumnWidth)}   | {circumferenceHeader.PadRight(circumferenceColumnWidth)}");
+            Console.WriteLine(new string('-', totalWidth));
+            foreach (var shape in allShapes)
+            {
+                _context.SetStrategy(shape.ShapeName.ToString());
+                var (area, circumference) = _context.ExecuteStrategy(shape.Width, shape.Height);
+                Console.WriteLine($"{shape.Id.ToString().PadRight(idColumnWidth)} | {shape.ShapeName.PadRight(shapeColumnWidth)} | {shape.Width.ToString().PadRight(widthColumnWidth) + "m"} | {shape.Height.ToString().PadRight(heightColumnWidth) + "m"} | {area.ToString().PadRight(areaColumnWidth) + "m²"} | {circumference.ToString().PadRight(circumferenceColumnWidth) + "m"}");
+            }
         }
     }
 }

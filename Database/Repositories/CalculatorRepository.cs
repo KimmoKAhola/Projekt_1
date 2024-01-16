@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Database.Repositories
 {
-    public class CalculationRepository(DatabaseContext dbContext) : IRepository<MathCalculation>
+    public class CalculatorRepository(DatabaseContext dbContext) : IRepository<MathCalculation>
     {
         private readonly DatabaseContext _dbContext = dbContext;
         public void Add(MathCalculation entity)

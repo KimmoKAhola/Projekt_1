@@ -8,7 +8,7 @@ using Database.Interfaces;
 
 namespace Database.Models
 {
-    public class AreaCalculation : ICalculation, IDatabaseEntity
+    public class ShapeCalculation : ICalculation, IDatabaseEntity
     {
         public int Id { get; set; }
         public double Width { get; set; }
