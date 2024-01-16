@@ -78,6 +78,7 @@ namespace Projekt_1.Menus
                             DatabaseService.DeleteCalculation((int)idToDelete);
                         break;
                     case null:
+                        Display();
                         PrintMessages.PrintNotification("Returning back to the main menu.");
                         PrintMessages.PressAnyKeyToContinue();
                         return;

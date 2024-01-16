@@ -62,6 +62,7 @@ namespace Projekt_1.Menus
                         HighScoreService.ViewHighScore();
                         break;
                     case null:
+                        Display();
                         PrintMessages.PrintNotification("Returning back to the main menu.");
                         PrintMessages.PressAnyKeyToContinue();
                         return;

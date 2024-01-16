@@ -22,7 +22,7 @@ namespace InputValidationLibrary
         /// <returns></returns>
         public static int? ReturnNumberChoice(int maximumInput)
         {
-            Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit to the main menu: ");
+            Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit: ");
             while (true)
             {
                 string? input = Console.ReadLine();

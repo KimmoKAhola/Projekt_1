@@ -66,7 +66,7 @@ namespace Projekt_1.Menus
 
         public int? PromptUserForId()
         {
-            return UserInputValidation.MenuValidation(_menus, "Choose which game to start: ");
+            return UserInputValidation.MenuValidation(_menus, "\nThese are the available options. ");
         }
         public override string ToString()
         {
