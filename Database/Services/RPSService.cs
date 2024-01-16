@@ -61,6 +61,7 @@ namespace Database.Services
             {
                 Console.WriteLine($"{result.PlayerMove.PadRight(playerColumnWidth)} | {result.ComputerMove.PadRight(computerColumnWidth)} | {result.Outcome.PadRight(resultColumnWidth)} | {result.DateCreated.ToString().PadRight(datePlayedColumnWidth)}");
             }
+            Console.WriteLine();
         }
     }
 }
