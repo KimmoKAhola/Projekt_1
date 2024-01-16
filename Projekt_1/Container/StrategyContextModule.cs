@@ -12,8 +12,8 @@ namespace Projekt_1.Container
     {
         protected override void Load(ContainerBuilder myBuilder)
         {
-            myBuilder.RegisterType<MathContext>().AsSelf().SingleInstance();
-            myBuilder.RegisterType<AreaCalculatorContext>().AsSelf().SingleInstance();
+            myBuilder.RegisterType<CalculatorContext>().AsSelf().SingleInstance();
+            myBuilder.RegisterType<ShapeContext>().AsSelf().SingleInstance();
         }
     }
 }

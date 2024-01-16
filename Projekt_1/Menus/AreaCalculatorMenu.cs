@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, AreaCalculationService databaseService, AreaCalculation calculation) : IMenu
+    public class AreaCalculatorMenu(ShapeContext areaContext, ShapeCalculatorService databaseService, ShapeCalculation calculation) : IMenu
     {
-        public AreaCalculationService DatabaseService { get; set; } = databaseService;
-        public AreaCalculation Calculation { get; set; } = calculation;
-        public AreaCalculatorContext AreaContext { get; set; } = areaContext;
+        public ShapeCalculatorService DatabaseService { get; set; } = databaseService;
+        public ShapeCalculation Calculation { get; set; } = calculation;
+        public ShapeContext AreaContext { get; set; } = areaContext;
 
         public string MenuName => "Area Calculator";
 
@@ -51,7 +51,7 @@ namespace Projekt_1.Menus
                         {
                             var areaCalculation = GetStrategy();
                             if (areaCalculation != null)
-                                DatabaseService.AddCalculation((AreaCalculation)areaCalculation);
+                                DatabaseService.AddCalculation((ShapeCalculation)areaCalculation);
                             else
                             {
                                 PrintMessages.PrintErrorMessage("User chose to exit.");
@@ -62,7 +62,7 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAllCalculations();
+                        DatabaseService.ViewAllCalculations();
                         break;
                     case 3:
                         int? idToUpdate = PromptUserForId();
@@ -92,7 +92,7 @@ namespace Projekt_1.Menus
             string? chosenShape = MenuChoice.ChooseGeometricShape();
             AreaContext.SetStrategy(chosenShape);
             if (AreaContext.Strategy != null)
-                return AreaCalculationService.CreateAreaCalculation(AreaContext);
+                return ShapeCalculatorService.CreateAreaCalculation(AreaContext);
             else
                 return null;
         }

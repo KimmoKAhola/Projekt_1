@@ -60,7 +60,7 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAll();
+                        DatabaseService.ViewAll();
                         break;
                     case 3:
                         HighScoreService.ViewHighScore();
