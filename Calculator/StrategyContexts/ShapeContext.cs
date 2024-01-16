@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Calculations.StrategyContexts
 {
-    public class AreaCalculatorContext
+    public class ShapeContext
     {
         public IShape? Strategy { get; private set; } = null;
         public string ShapeName { get; private set; } = string.Empty;
@@ -35,7 +35,8 @@ namespace Calculations.StrategyContexts
 
         public (double area, double circumference) ExecuteStrategy(double width, double height)
         {
-            var (area, circumference) = Strategy.Calculate(width, height);
+            (Strategy.Width, Strategy.Height) = (width, height);
+            var (area, circumference) = Strategy.Calculate();
             return (Math.Round(area, 2), Math.Round(circumference, 2));
         }
     }

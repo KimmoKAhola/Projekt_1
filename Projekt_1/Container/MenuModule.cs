@@ -15,7 +15,7 @@ namespace Projekt_1.Container
         {
             myBuilder.RegisterType<MainMenu>().AsSelf();
             myBuilder.RegisterType<CalculatorMenu>().As<IMenu>();
-            myBuilder.RegisterType<AreaCalculatorMenu>().As<IMenu>();
+            myBuilder.RegisterType<ShapeCalculatorMenu>().As<IMenu>();
         }
     }
 }

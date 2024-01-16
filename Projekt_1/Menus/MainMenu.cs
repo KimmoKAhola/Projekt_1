@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class MainMenu(MathCalculationService mathService, AreaCalculationService areaService, RPSService rpsService) : IMenu
+    public class MainMenu(CalculatorService mathService, ShapeCalculatorService areaService, RPSService rpsService, HighScoreService highScoreService) : IMenu
     {
         private List<IMenu> _menus =
         [
-            new CalculatorMenu(new MathContext(), mathService, new MathCalculation()),
-            new AreaCalculatorMenu(new AreaCalculatorContext(), areaService, new AreaCalculation()),
-            new RockPaperScissorsMenu(rpsService, new Rock_Paper_Scissors.RockPaperScissors(new PlayerMoves())),
+            new CalculatorMenu(new CalculatorContext(), mathService, new MathCalculation()),
+            new ShapeCalculatorMenu(new ShapeContext(), areaService, new ShapeCalculation()),
+            new RockPaperScissorsMenu(rpsService, highScoreService, new Game(new PlayerMoves())),
         ];
 
         public string MenuName => "Main menu";

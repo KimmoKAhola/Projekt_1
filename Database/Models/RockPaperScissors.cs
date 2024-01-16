@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,6 @@ namespace Database.Models
 
         public string Outcome { get; set; } = null!;
 
-        [Required]
-        public Result Result { get; set; } = null!;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }

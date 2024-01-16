@@ -6,7 +6,7 @@ namespace Database.Interfaces
     {
         void AddCalculation(T calculation);
         void ReadCalculation(int id);
-        void ReadAllCalculations();
+        void ViewAllCalculations();
 
         List<T> GetAllCalculations();
         void UpdateCalculation(int id);

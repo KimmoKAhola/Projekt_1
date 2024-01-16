@@ -14,20 +14,20 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class AreaCalculatorMenu(AreaCalculatorContext areaContext, AreaCalculationService databaseService, AreaCalculation calculation) : IMenu
+    public class ShapeCalculatorMenu(ShapeContext shapeContext, ShapeCalculatorService databaseService, ShapeCalculation calculation) : IMenu
     {
-        public AreaCalculationService DatabaseService { get; set; } = databaseService;
-        public AreaCalculation Calculation { get; set; } = calculation;
-        public AreaCalculatorContext AreaContext { get; set; } = areaContext;
+        public ShapeCalculatorService DatabaseService { get; set; } = databaseService;
+        public ShapeCalculation Calculation { get; set; } = calculation;
+        public ShapeContext ShapeContext { get; set; } = shapeContext;
 
         public string MenuName => "Area Calculator";
 
         private readonly Dictionary<int, string> _menuChoices = new()
         {
-            {1, "Add" },
-            {2, "Read" },
-            {3, "Update" },
-            {4, "Delete" },
+            {1, "Add a new calculation." },
+            {2, "View all calculations." },
+            {3, "Update a calculation." },
+            {4, "Delete a calculation." },
         };
 
         public void Display()
@@ -42,7 +42,7 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "\nThese are your available options.\n");
                 Console.Clear();
                 switch (choice)
                 {
@@ -51,7 +51,7 @@ namespace Projekt_1.Menus
                         {
                             var areaCalculation = GetStrategy();
                             if (areaCalculation != null)
-                                DatabaseService.AddCalculation((AreaCalculation)areaCalculation);
+                                DatabaseService.AddCalculation((ShapeCalculation)areaCalculation);
                             else
                             {
                                 PrintMessages.PrintErrorMessage("User chose to exit.");
@@ -62,15 +62,14 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAllCalculations();
+                        DatabaseService.ViewAllCalculations();
                         break;
                     case 3:
                         int? idToUpdate = PromptUserForId();
                         if (idToUpdate != null)
-                            DatabaseService.UpdateCalculation((int)idToUpdate);
-                        else
                         {
-                            PrintMessages.PrintErrorMessage("User chose to exit.");
+                            Console.Clear();
+                            DatabaseService.UpdateCalculation((int)idToUpdate);
                         }
                         break;
                     case 4:
@@ -90,9 +89,9 @@ namespace Projekt_1.Menus
         private ICalculation? GetStrategy()
         {
             string? chosenShape = MenuChoice.ChooseGeometricShape();
-            AreaContext.SetStrategy(chosenShape);
-            if (AreaContext.Strategy != null)
-                return AreaCalculationService.CreateAreaCalculation(AreaContext);
+            ShapeContext.SetStrategy(chosenShape);
+            if (ShapeContext.Strategy != null)
+                return ShapeCalculatorService.CreateAreaCalculation(ShapeContext);
             else
                 return null;
         }
@@ -100,12 +99,16 @@ namespace Projekt_1.Menus
         public int? PromptUserForId()
         {
             var test = DatabaseService.GetAllCalculations();
-            int? userChoice = UserInputValidation.MenuValidation(test, "");
+            int? userChoice = UserInputValidation.MenuValidation(test, "\nThis is a list of all available calculations that can be updated.\n");
             if (userChoice != null)
             {
                 return test[(int)userChoice - 1].Id;
             }
-            return null;
+            else
+            {
+                PrintMessages.PrintErrorMessage("User chose to exit.");
+                return null;
+            }
         }
 
         public void Run()

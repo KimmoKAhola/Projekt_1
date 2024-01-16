@@ -13,9 +13,10 @@ namespace Projekt_1.Container
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<CalculationRepository>().AsSelf();
-            builder.RegisterType<AreaCalculationRepository>().AsSelf();
+            builder.RegisterType<CalculatorRepository>().AsSelf();
+            builder.RegisterType<ShapeCalculatorRepository>().AsSelf();
             builder.RegisterType<RPSRepository>().AsSelf();
+            builder.RegisterType<HighScoreRepository>().AsSelf();
         }
     }
 }

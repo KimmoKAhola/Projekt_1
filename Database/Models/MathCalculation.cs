@@ -21,18 +21,18 @@ namespace Database.Models
 
         public bool IsDeleted { get; set; } = false;
 
-        [Required]
-        public Result Result { get; set; } = null!;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateLastUpdated { get; set; }
 
         public override string ToString()
         {
             if (Operator != '√')
             {
-                return $"Id [{Id}]\t{FirstInput} {Operator} {SecondInput} = {Answer}";
+                return $"Id [{Id}] - {FirstInput} {Operator} {SecondInput,2} = {Answer,-5}";
             }
             else
             {
-                return $"Id [{Id}] ({Operator}{FirstInput})^(1/{SecondInput}) = {Answer}";
+                return $"Id [{Id}] - {FirstInput}^(1/{SecondInput}) = {Answer,-5}";
             }
         }
     }

@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Menus
 {
-    public class CalculatorMenu(MathContext mathContext, MathCalculationService databaseService, MathCalculation calculation) : IMenu
+    public class CalculatorMenu(CalculatorContext mathContext, CalculatorService databaseService, MathCalculation calculation) : IMenu
     {
-        public MathCalculationService DatabaseService { get; set; } = databaseService;
+        public CalculatorService DatabaseService { get; set; } = databaseService;
         public MathCalculation Calculation { get; set; } = calculation;
-        public MathContext MathContext { get; set; } = mathContext;
+        public CalculatorContext MathContext { get; set; } = mathContext;
 
         private readonly Dictionary<int, string> _menuChoices = new()
         {
-            {1, "Add" },
-            {2, "Read" },
-            {3, "Update" },
-            {4, "Delete" },
+            {1, "Add a new calculation." },
+            {2, "View all calculations." },
+            {3, "Update a calculation." },
+            {4, "Delete a calculation." },
         };
 
         public string MenuName => "Calculator";
@@ -40,7 +40,7 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "\nThese are your available options.\n");
                 Console.Clear();
                 switch (choice)
                 {
@@ -60,15 +60,14 @@ namespace Projekt_1.Menus
                         }
                         break;
                     case 2:
-                        DatabaseService.ReadAllCalculations();
+                        DatabaseService.ViewAllCalculations();
                         break;
                     case 3:
                         int? idToUpdate = PromptUserForId();
                         if (idToUpdate != null)
-                            DatabaseService.UpdateCalculation((int)idToUpdate);
-                        else
                         {
-                            PrintMessages.PrintErrorMessage("User chose to exit.");
+                            Console.Clear();
+                            DatabaseService.UpdateCalculation((int)idToUpdate);
                         }
                         break;
                     case 4:
@@ -89,7 +88,7 @@ namespace Projekt_1.Menus
             var chosenOperator = MenuChoice.ChooseMathOperator();
             MathContext.SetStrategy(chosenOperator);
             if (MathContext.Strategy != null)
-                return MathCalculationService.CreateMathCalculation(MathContext);
+                return CalculatorService.CreateMathCalculation(MathContext);
             else
                 return null;
         }
