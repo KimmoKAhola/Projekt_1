@@ -203,6 +203,7 @@ namespace Database.Services
                 var (area, circumference) = _context.ExecuteStrategy(shape.Width, shape.Height);
                 Console.WriteLine($"{shape.Id.ToString().PadRight(idColumnWidth)} | {shape.ShapeName.PadRight(shapeColumnWidth)} | {shape.Width.ToString().PadRight(widthColumnWidth) + "m"} | {shape.Height.ToString().PadRight(heightColumnWidth) + "m"} | {area.ToString().PadRight(areaColumnWidth) + "m²"} | {circumference.ToString().PadRight(circumferenceColumnWidth) + "m"}");
             }
+            Console.WriteLine();
         }
     }
 }

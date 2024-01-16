@@ -225,6 +225,7 @@ namespace Database.Services
                 var answer = _context.ExecuteStrategy(calculation.FirstInput, calculation.SecondInput);
                 Console.WriteLine($"{calculation.Id.ToString().PadRight(idColumnWidth)} | {calculation.FirstInput.ToString().PadRight(firstInputWidth)} | {calculation.Operator.ToString().PadRight(operatorInputWidth)} | {calculation.SecondInput.ToString().PadRight(secondInputWidth)} | {calculation.Answer.ToString().PadRight(answerColumnWidth)} | {calculation.DateCreated.ToString().PadRight(dateColumnWidth)} | {calculation.DateLastUpdated.ToString()?.PadRight(dateModifiedColumnWidth)}");
             }
+            Console.WriteLine();
         }
     }
 }

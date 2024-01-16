@@ -22,15 +22,14 @@ namespace Projekt_1.Menus
 
         private readonly Dictionary<int, string> _menuChoices = new()
         {
-            {1, "Play" },
-            {2, "Read" },
-            {3, "View Highscore" },
+            {1, "Play a game of Rock, paper, scissors." },
+            {2, "View your individual results of previous games." },
+            {3, "View your total W/L record." },
         };
         public void Display()
         {
             PrintBanner();
         }
-
 
         public void Menuchoice()
         {
@@ -38,20 +37,17 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "\nThese are your available options.\n");
                 Console.Clear();
                 switch (choice)
                 {
                     case 1:
                         while (true)
                         {
-                            Console.Clear();
-                            if (UserInputValidation.PromptYesOrNo("Press y to play a game, anything else to exit: "))
-                            {
-                                RockPaperScissors.RunGame();
-                                DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
-                            }
-                            else
+                            RockPaperScissors.RunGame();
+                            RockPaperScissors.PrintResultsTable();
+                            DatabaseService.AddRockPaperScissorsResult(RockPaperScissors);
+                            if (!UserInputValidation.PromptYesOrNo("\nPress y to play again.\nPress anything else to exit: "))
                             {
                                 PrintMessages.PrintNotification("User chose to exit.");
                                 HighScoreService.UpdateHighScore();
@@ -65,7 +61,9 @@ namespace Projekt_1.Menus
                     case 3:
                         HighScoreService.ViewHighScore();
                         break;
-                    default:
+                    case null:
+                        PrintMessages.PrintNotification("Returning back to the main menu.");
+                        PrintMessages.PressAnyKeyToContinue();
                         return;
                 }
                 PrintMessages.PressAnyKeyToContinue();
@@ -74,7 +72,7 @@ namespace Projekt_1.Menus
 
         public int? PromptUserForId()
         {
-            throw new NotImplementedException();
+            return -999; //Not implemented for this menu
         }
 
         public void Run()
@@ -85,32 +83,22 @@ namespace Projekt_1.Menus
         }
         public void PrintBanner()
         {
-            string banner = @" _____                                                              _____ 
-( ___ )                                                            ( ___ )
- |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | 
- |   |             ██████╗  ██████╗  ██████╗██╗  ██╗                |   | 
- |   |             ██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝                |   | 
- |   |             ██████╔╝██║   ██║██║     █████╔╝                 |   | 
- |   |             ██╔══██╗██║   ██║██║     ██╔═██╗                 |   | 
- |   |             ██║  ██║╚██████╔╝╚██████╗██║  ██╗                |   | 
- |   |             ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝                |   | 
- |   |                                                              |   | 
- |   |         ██████╗  █████╗ ██████╗ ███████╗██████╗              |   | 
- |   |         ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗             |   | 
- |   |         ██████╔╝███████║██████╔╝█████╗  ██████╔╝             |   | 
- |   |         ██╔═══╝ ██╔══██║██╔═══╝ ██╔══╝  ██╔══██╗             |   | 
- |   |         ██║     ██║  ██║██║     ███████╗██║  ██║             |   | 
- |   |         ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝             |   | 
- |   |                                                              |   | 
- |   | ███████╗ ██████╗██╗███████╗███████╗ ██████╗ ██████╗ ███████╗ |   | 
- |   | ██╔════╝██╔════╝██║██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝ |   | 
- |   | ███████╗██║     ██║███████╗███████╗██║   ██║██████╔╝███████╗ |   | 
- |   | ╚════██║██║     ██║╚════██║╚════██║██║   ██║██╔══██╗╚════██║ |   | 
- |   | ███████║╚██████╗██║███████║███████║╚██████╔╝██║  ██║███████║ |   | 
- |   | ╚══════╝ ╚═════╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ |   | 
- |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| 
-(_____)                                                            (_____)";
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            string banner = @"*************************************************************************************
+*██████╗  ██████╗  ██████╗██╗  ██╗       ██████╗  █████╗ ██████╗ ███████╗██████╗    *
+*██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝       ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗   *
+*██████╔╝██║   ██║██║     █████╔╝        ██████╔╝███████║██████╔╝█████╗  ██████╔╝   *
+*██╔══██╗██║   ██║██║     ██╔═██╗        ██╔═══╝ ██╔══██║██╔═══╝ ██╔══╝  ██╔══██╗   *
+*██║  ██║╚██████╔╝╚██████╗██║  ██╗▄█╗    ██║     ██║  ██║██║     ███████╗██║  ██║▄█╗*
+*╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝    ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝*
+*                                                                                   *
+*            ███████╗ ██████╗██╗███████╗███████╗ ██████╗ ██████╗ ███████╗           *
+*            ██╔════╝██╔════╝██║██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝           *
+*            ███████╗██║     ██║███████╗███████╗██║   ██║██████╔╝███████╗           *
+*            ╚════██║██║     ██║╚════██║╚════██║██║   ██║██╔══██╗╚════██║           *
+*            ███████║╚██████╗██║███████║███████║╚██████╔╝██║  ██║███████║           *
+*            ╚══════╝ ╚═════╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝           *
+*************************************************************************************";
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(banner);
             Console.ResetColor();
         }
