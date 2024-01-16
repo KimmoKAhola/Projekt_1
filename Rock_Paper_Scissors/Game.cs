@@ -32,6 +32,16 @@ namespace Rock_Paper_Scissors
             string computerHeader = "Computer's move";
             string resultHeader = "Result";
 
+            string banner = @" ██████╗  ██████╗  ██████╗ ██████╗      ██████╗  █████╗ ███╗   ███╗███████╗██╗
+██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██║
+██║  ███╗██║   ██║██║   ██║██║  ██║    ██║  ███╗███████║██╔████╔██║█████╗  ██║
+██║   ██║██║   ██║██║   ██║██║  ██║    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ╚═╝
+╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██╗
+ ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝";
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(banner + "\n");
+            Console.ResetColor();
+
             int playerColumnWidth = Math.Max(PlayerMove.ToString().Length, playerHeader.Length);
             int computerColumnWidth = Math.Max(ComputerMove.ToString().Length, computerHeader.Length);
             int resultColumnWidth = Math.Max(Outcome.ToString().Length, resultHeader.Length);

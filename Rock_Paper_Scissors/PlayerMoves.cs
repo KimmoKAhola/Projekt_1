@@ -18,9 +18,10 @@ namespace Rock_Paper_Scissors
 
         public Move GetPlayerMove()
         {
+            Console.Clear();
             Console.CursorVisible = false;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Player goes first, computer goes second.\nChoose a move: ");
+            Console.WriteLine("Player goes first, computer goes second.\nChoose a move with the arrow keys and press enter to confirm.\n");
             Console.ResetColor();
 
             Move[] playerMoves = [Move.Rock, Move.Paper, Move.Scissors,];
@@ -61,9 +62,6 @@ namespace Rock_Paper_Scissors
                         Move selectedMove = playerMoves[currentColumn];
                         Console.Clear();
                         Console.CursorVisible = true;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"You chose: {selectedMove}");
-                        Console.ResetColor();
                         return selectedMove;
                     default:
                         break;
