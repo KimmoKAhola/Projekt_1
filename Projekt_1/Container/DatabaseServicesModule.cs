@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_1.Container
 {
-    public class DatabaseModule : Module
+    public class DatabaseServicesModule : Module
     {
         protected override void Load(ContainerBuilder myBuilder)
         {
@@ -17,6 +17,7 @@ namespace Projekt_1.Container
             myBuilder.RegisterType<MathCalculationService>().AsSelf();
             myBuilder.RegisterType<AreaCalculationService>().AsSelf();
             myBuilder.RegisterType<RPSService>().AsSelf();
+            myBuilder.RegisterType<HighScoreService>().AsSelf();
         }
     }
 }

@@ -67,6 +67,7 @@ namespace Database.Services
                 if (!double.IsNaN(entityToUpdate.Answer))
                 {
                     _calculationRepository.Update(entityToUpdate);
+                    entityToUpdate.DateLastUpdated = DateTime.Now;
                     _calculationRepository.Save();
                 }
                 else
@@ -158,10 +159,6 @@ namespace Database.Services
                 SecondInput = numbers[1],
                 Answer = mathStrategy.ExecuteStrategy(numbers[0], numbers[1]),
                 Operator = mathStrategy.Operator,
-                Result = new Result
-                {
-                    ResultType = ResultTypes.MathCalculation.ToString(),
-                }
             };
             return calculation;
         }
