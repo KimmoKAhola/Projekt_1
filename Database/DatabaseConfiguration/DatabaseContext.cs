@@ -15,7 +15,8 @@ namespace Database.DatabaseConfiguration
         {
 
         }
-        public DbSet<AreaCalculation> ShapeCalculator { get; set; }
+
+        public DbSet<ShapeCalculation> ShapeCalculator { get; set; }
         public DbSet<MathCalculation> Calculator { get; set; }
         public DbSet<RockPaperScissors> RockPaperScissors { get; set; }
         public DbSet<HighScore> HighScore { get; set; }

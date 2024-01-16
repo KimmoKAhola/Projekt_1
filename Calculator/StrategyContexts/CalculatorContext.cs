@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Calculations.StrategyContexts
 {
-    public class MathContext
+    public class CalculatorContext
     {
         public IMathStrategy? Strategy { get; private set; } = null;
         public char Operator { get; private set; }

@@ -13,9 +13,9 @@ namespace Calculator.Shapes
         public double Height { get; set; }
         public string Name { get; set; } = "Parallelogram";
 
-        public (double area, double circumference) Calculate(double width, double height)
+        public (double area, double circumference) Calculate()
         {
-            return (width * height, (2 * width + 2 * height));
+            return (Width * Height, (2 * Width + 2 * Height));
         }
     }
 }

@@ -58,6 +58,7 @@ namespace InputValidationLibrary
         public static string? ChooseGeometricShape()
         {
             Console.CursorVisible = false;
+            PrintMessages.PrintNotification("Use the arrow keys to navigate and enter to confirm your choice.");
             Console.WriteLine("Choose a geometric shape, or pick 'E' to exit:");
             int yPos = Console.CursorTop;
             char[] operators = ['▬', '▲', 'P', '♦', 'E']; //▰

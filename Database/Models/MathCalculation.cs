@@ -8,7 +8,7 @@ using Database.Interfaces;
 
 namespace Database.Models
 {
-    public class MathCalculation : ICalculation, IDatabaseEntity
+    public class MathCalculation : ICalculation
     {
         public int Id { get; set; }
         [Required]

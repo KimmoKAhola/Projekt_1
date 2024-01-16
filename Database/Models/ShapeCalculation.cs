@@ -8,7 +8,7 @@ using Database.Interfaces;
 
 namespace Database.Models
 {
-    public class AreaCalculation : ICalculation, IDatabaseEntity
+    public class ShapeCalculation : ICalculation
     {
         public int Id { get; set; }
         public double Width { get; set; }
@@ -23,7 +23,7 @@ namespace Database.Models
 
         public override string ToString()
         {
-            return $"Id [{Id}] - {ShapeName}\tWidth: {Width}\tHeight: {Height}";
+            return $"Id [{Id}] - Shape: {ShapeName,-10} Width: {Width,-10} Height: {Height,-10}";
         }
     }
 }

@@ -3,19 +3,13 @@ using Database.Interfaces;
 using Database.Models;
 using InputValidationLibrary;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Database.Repositories
 {
-    public class AreaCalculationRepository(DatabaseContext dbContext) : IRepository<AreaCalculation>
+    public class CalculatorRepository(DatabaseContext dbContext) : IRepository<MathCalculation>
     {
         private readonly DatabaseContext _dbContext = dbContext;
-        public void Add(AreaCalculation entity)
+        public void Add(MathCalculation entity)
         {
             _dbContext.Add(entity);
         }
@@ -30,14 +24,14 @@ namespace Database.Repositories
             }
         }
 
-        public AreaCalculation? Get(int id)
+        public MathCalculation? Get(int id)
         {
-            return _dbContext.ShapeCalculator.Find(id);
+            return _dbContext.Calculator.Find(id);
         }
 
-        public IEnumerable<AreaCalculation> GetAll()
+        public IEnumerable<MathCalculation> GetAll()
         {
-            return _dbContext.ShapeCalculator.Where(x => !x.IsDeleted);
+            return _dbContext.Calculator.Where(x => !x.IsDeleted);
         }
 
         public void Save()
@@ -45,7 +39,7 @@ namespace Database.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(AreaCalculation entity)
+        public void Update(MathCalculation entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
