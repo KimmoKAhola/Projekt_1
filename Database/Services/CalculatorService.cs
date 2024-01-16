@@ -26,6 +26,7 @@ namespace Database.Services
             {
                 _calculationRepository.Add(calculation);
                 _calculationRepository.Save();
+                PrintMessages.PrintSuccessMessage("Save to database was successful.");
             }
             else
             {
@@ -37,11 +38,12 @@ namespace Database.Services
         {
             _calculationRepository.SoftDelete(id);
             _calculationRepository.Save();
+            PrintMessages.PrintNotification("Deletion was successful.");
         }
 
         public void ViewAllCalculations()
         {
-            _calculationRepository.GetAll().ToList().ForEach(Console.WriteLine);
+            PrintMathTable(_calculationRepository.GetAll());
         }
 
         public List<MathCalculation> GetAllCalculations()
@@ -58,6 +60,8 @@ namespace Database.Services
         public void UpdateCalculation(int id)
         {
             MathCalculation? entityToUpdate = _calculationRepository.Get(id);
+            Console.WriteLine("These are the properties you can update for your chosen entity:");
+            PrintMessages.PrintNotification($"\n{entityToUpdate}\n");
             int? chosenProperty = PromptUpdate();
             if (entityToUpdate != null)
             {
@@ -69,6 +73,7 @@ namespace Database.Services
                     _calculationRepository.Update(entityToUpdate);
                     entityToUpdate.DateLastUpdated = DateTime.Now;
                     _calculationRepository.Save();
+                    PrintMessages.PrintSuccessMessage("Update was successful.");
                 }
                 else
                 {
@@ -127,9 +132,8 @@ namespace Database.Services
 
         private static void UpdateOperator(MathCalculation entity)
         {
-            Console.Clear();
             var listOfOperators = GetMathOperators();
-            int? choice = UserInputValidation.MenuValidation(listOfOperators, "HEJ HOPP");
+            int? choice = UserInputValidation.MenuValidation(listOfOperators, "These are the operators you can choose from.\n");
             if (choice != null)
             {
                 var op = listOfOperators[(int)choice - 1];
@@ -147,11 +151,24 @@ namespace Database.Services
                 {3, "Operator input" },
                 {4, "Delete" },
             };
-            return UserInputValidation.MenuValidation(options, "TEMPORARY");
+            return UserInputValidation.MenuValidation(options, "\n");
         }
         public static ICalculation? CreateMathCalculation(CalculatorContext mathStrategy)
         {
-            double[]? numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers: ");
+            PrintMessages.PrintNotification($"You chose {mathStrategy.Operator}.");
+            double[]? numbers;
+            if (mathStrategy.Operator == '√')
+            {
+                PrintMessages.PrintNotification("You are about to calculate the nth root of a number." +
+                    "\nThe first number is the base and the second number is the inverse exponent." +
+                    "\nExample: 5 3 gives: (5)^(1/3)" +
+                    "\nand 4 2 gives: sqrt(4)");
+                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+            }
+            else
+            {
+                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+            }
             if (numbers == null) { return null; }
             ICalculation calculation = new MathCalculation
             {
