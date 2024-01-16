@@ -21,10 +21,10 @@ namespace Projekt_1.Menus
 
         private readonly Dictionary<int, string> _menuChoices = new()
         {
-            {1, "Add" },
-            {2, "Read" },
-            {3, "Update" },
-            {4, "Delete" },
+            {1, "Add a new calculation." },
+            {2, "View all calculations." },
+            {3, "Update a calculation." },
+            {4, "Delete a calculation." },
         };
 
         public string MenuName => "Calculator";
@@ -40,7 +40,7 @@ namespace Projekt_1.Menus
             {
                 Console.Clear();
                 Display();
-                int? choice = UserInputValidation.MenuValidation(_menuChoices, "These are your available options.\n");
+                int? choice = UserInputValidation.MenuValidation(_menuChoices, "\nThese are your available options.\n");
                 Console.Clear();
                 switch (choice)
                 {
