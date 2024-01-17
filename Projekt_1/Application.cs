@@ -21,14 +21,14 @@ namespace Projekt_1
         public void Run()
         {
             Console.OutputEncoding = Encoding.UTF8;
+            var config = Configuration.Configure();
 
             if (!(_databaseContext.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
             {
                 _databaseContext.Database.Migrate();
+                SeedData(config);
             }
 
-            var config = Configuration.Configure();
-            SeedData(config);
             using (var scope = config.BeginLifetimeScope())
             {
                 var menuService = scope.Resolve<MainMenu>();
