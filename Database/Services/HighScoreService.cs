@@ -83,14 +83,14 @@ namespace Database.Services
             string playerHeader = "Number of wins";
             string computerHeader = "Number of losses";
             string resultHeader = "Number of ties";
-            string winLossHeader = "Win/loss percentage";
+            string winLossHeader = "Win percentage";
 
             int winsColumnWidth = Math.Max(highScore.NumberOfWins.ToString().Length, playerHeader.Length);
             int lossColumnWidth = Math.Max(highScore.NumberOfLosses.ToString().Length, computerHeader.Length);
             int tiesColumnWidth = Math.Max(highScore.NumberOfTies.ToString().Length, resultHeader.Length);
             int winLossColumnWidth = Math.Max(highScore.AverageScore.ToString().Length, winLossHeader.Length);
 
-            int totalWidth = winsColumnWidth + lossColumnWidth + tiesColumnWidth + winLossColumnWidth + 6;
+            int totalWidth = winsColumnWidth + lossColumnWidth + tiesColumnWidth + winLossColumnWidth + 9;
             string banner = @"
 ██╗  ██╗██╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ ██████╗ ██████╗ ███████╗
 ██║  ██║██║██╔════╝ ██║  ██║    ██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝

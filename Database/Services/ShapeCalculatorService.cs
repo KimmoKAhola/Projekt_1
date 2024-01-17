@@ -186,22 +186,26 @@ namespace Database.Services
             string heightHeader = "Height";
             string areaHeader = "Area";
             string circumferenceHeader = "Circumference";
+            string dateHeader = "Date Created";
+            string dateModifiedHeader = "Date Last Modified";
 
             int idColumnWidth = Math.Max(allShapes.Max(r => r.Id.ToString().Length), idHeader.Length);
             int shapeColumnWidth = Math.Max(allShapes.Max(r => r.ShapeName.Length), shapeHeader.Length);
             int widthColumnWidth = Math.Max(allShapes.Max(r => r.Width.ToString().Length), widthHeader.Length) + 2;
             int heightColumnWidth = Math.Max(allShapes.Max(r => r.Height.ToString().Length), heightHeader.Length) + 2;
+            int dateColumnWidth = Math.Max(allShapes.Max(r => r.DateCreated.ToString().Length), dateHeader.Length);
+            int dateModifiedColumnWidth = Math.Max(allShapes.Max(r => (r.DateLastUpdated?.ToString().Length) ?? 0), dateModifiedHeader.Length);
             int areaColumnWidth = 20;
             int circumferenceColumnWidth = 20;
-            int totalWidth = $"{idHeader} | {shapeHeader} | {widthHeader} | {heightHeader} | {areaHeader} | {circumferenceHeader}".Length + areaColumnWidth + circumferenceColumnWidth;
+            int totalWidth = $"{idHeader} | {shapeHeader} | {widthHeader} | {heightHeader} | {areaHeader} | {circumferenceHeader}".Length + areaColumnWidth + circumferenceColumnWidth + dateColumnWidth + dateModifiedColumnWidth;
 
-            Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {shapeHeader.PadRight(shapeColumnWidth)} | {widthHeader.PadRight(widthColumnWidth)}  | {heightHeader.PadRight(heightColumnWidth)}  | {areaHeader.PadRight(areaColumnWidth)}   | {circumferenceHeader.PadRight(circumferenceColumnWidth)}");
+            Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {shapeHeader.PadRight(shapeColumnWidth)} | {widthHeader.PadRight(widthColumnWidth)}  | {heightHeader.PadRight(heightColumnWidth)}  | {areaHeader.PadRight(areaColumnWidth)}   | {circumferenceHeader.PadRight(circumferenceColumnWidth)}  | {dateHeader.PadRight(dateColumnWidth)} | {dateModifiedHeader.PadRight(dateModifiedColumnWidth)}");
             Console.WriteLine(new string('-', totalWidth));
             foreach (var shape in allShapes)
             {
                 _context.SetStrategy(shape.ShapeName.ToString());
                 var (area, circumference) = _context.ExecuteStrategy(shape.Width, shape.Height);
-                Console.WriteLine($"{shape.Id.ToString().PadRight(idColumnWidth)} | {shape.ShapeName.PadRight(shapeColumnWidth)} | {shape.Width.ToString().PadRight(widthColumnWidth) + "m"} | {shape.Height.ToString().PadRight(heightColumnWidth) + "m"} | {area.ToString().PadRight(areaColumnWidth) + "m²"} | {circumference.ToString().PadRight(circumferenceColumnWidth) + "m"}");
+                Console.WriteLine($"{shape.Id.ToString().PadRight(idColumnWidth)} | {shape.ShapeName.PadRight(shapeColumnWidth)} | {shape.Width.ToString().PadRight(widthColumnWidth) + "m"} | {shape.Height.ToString().PadRight(heightColumnWidth) + "m"} | {area.ToString().PadRight(areaColumnWidth) + "m²"} | {circumference.ToString().PadRight(circumferenceColumnWidth) + "m"} | {shape.DateCreated.ToString().PadRight(dateColumnWidth)} | {shape.DateLastUpdated?.ToString().PadRight(dateModifiedColumnWidth)}");
             }
             Console.WriteLine();
         }
