@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Database.DatabaseConfiguration;
+using Database.DatabaseSeeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -20,17 +21,27 @@ namespace Projekt_1
         public void Run()
         {
             Console.OutputEncoding = Encoding.UTF8;
+            var config = Configuration.Configure();
 
             if (!(_databaseContext.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
             {
                 _databaseContext.Database.Migrate();
+                SeedData(config);
             }
 
-            var config = Configuration.Configure();
             using (var scope = config.BeginLifetimeScope())
             {
                 var menuService = scope.Resolve<MainMenu>();
                 menuService.Run();
+            }
+        }
+
+        private void SeedData(IContainer config)
+        {
+            using (var scope = config.BeginLifetimeScope())
+            {
+                var seeding = scope.Resolve<ShapeSeeding>();
+                seeding.SeedData();
             }
         }
     }
