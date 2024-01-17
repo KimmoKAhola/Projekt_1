@@ -22,9 +22,9 @@ namespace InputValidationLibrary
         /// <returns></returns>
         public static int? ReturnNumberChoice(int maximumInput)
         {
-            Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit: ");
             while (true)
             {
+                Console.Write($"Enter a number between 1 and {maximumInput}, or press 'e' to exit: ");
                 string? input = Console.ReadLine();
                 if (input?.ToLower() == "e")
                 {
@@ -38,21 +38,21 @@ namespace InputValidationLibrary
                     }
                     else
                     {
-                        Console.WriteLine($"Please enter a number between 1 and {maximumInput}.");
+                        PrintMessages.PrintErrorMessage($"Please enter a number between 1 and {maximumInput}.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number or 'e' to exit.");
+                    PrintMessages.PrintErrorMessage("Invalid input. Please enter a valid number or 'e' to exit.");
                 }
             }
         }
 
         public static int? ReturnNumberChoice()
         {
-            Console.Write($"Enter a positive number, or press 'e' to exit to the main menu: ");
             while (true)
             {
+                Console.Write($"Enter a positive number, or press 'e' to exit to the main menu: ");
                 string? input = Console.ReadLine();
                 if (input?.ToLower() == "e")
                 {
@@ -66,12 +66,12 @@ namespace InputValidationLibrary
                     }
                     else
                     {
-                        Console.WriteLine($"Please enter a positive number.");
+                        PrintMessages.PrintErrorMessage($"Please enter a positive number.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number or 'e' to exit.");
+                    PrintMessages.PrintErrorMessage("Invalid input. Please enter a valid number or 'e' to exit.");
                 }
             }
         }
