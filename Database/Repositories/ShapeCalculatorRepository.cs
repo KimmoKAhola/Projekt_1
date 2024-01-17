@@ -49,6 +49,7 @@ namespace Database.Repositories
             catch (Exception ex)
             {
                 PrintMessages.PrintErrorMessage($"Something went wrong: {ex.Message}");
+                PrintMessages.PressAnyKeyToContinue();
             }
         }
 

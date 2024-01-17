@@ -115,7 +115,7 @@ namespace InputValidationLibrary
                 string[] userInput = input.Split(' ');
                 if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && double.TryParse(userInput[1], out double second))
                 {
-                    numbers = [first, second];
+                    numbers = [Math.Round(first, 2), Math.Round(second, 2)];
                     return numbers;
                 }
                 else

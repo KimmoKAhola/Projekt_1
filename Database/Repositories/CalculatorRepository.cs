@@ -36,7 +36,15 @@ namespace Database.Repositories
 
         public void Save()
         {
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                PrintMessages.PrintErrorMessage($"Something went wrong: {ex.Message}");
+                PrintMessages.PressAnyKeyToContinue();
+            }
         }
 
         public void Update(MathCalculation entity)

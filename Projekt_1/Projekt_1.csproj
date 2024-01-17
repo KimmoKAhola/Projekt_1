@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Rock_Paper_Scissors\Rock_Paper_Scissors.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extra_Files_For_Richard\" />
+  </ItemGroup>
+
 </Project>

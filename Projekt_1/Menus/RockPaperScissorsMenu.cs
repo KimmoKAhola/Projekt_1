@@ -25,6 +25,7 @@ namespace Projekt_1.Menus
             {1, "Play a game of Rock, paper, scissors." },
             {2, "View your individual results of previous games." },
             {3, "View your total W/L record." },
+            {4, "View rules" },
         };
         public void Display()
         {
@@ -61,6 +62,9 @@ namespace Projekt_1.Menus
                     case 3:
                         HighScoreService.ViewHighScore();
                         break;
+                    case 4:
+                        ViewRules();
+                        break;
                     case null:
                         Display();
                         PrintMessages.PrintNotification("Returning back to the main menu.");
@@ -69,6 +73,16 @@ namespace Projekt_1.Menus
                 }
                 PrintMessages.PressAnyKeyToContinue();
             }
+        }
+
+        private static void ViewRules()
+        {
+            string rules = "The basic rules are as follows:" +
+                "\nRock wins against Scissors." +
+                "\nScissors wins against Paper.\n" +
+                "Paper wins against Rock." +
+                "\n\nIn this implementation the player chooses a move first and the computer goes second.";
+            Console.WriteLine(rules);
         }
 
         public int? PromptUserForId()
