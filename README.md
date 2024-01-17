@@ -41,6 +41,8 @@ Användaren ska kunna spela Sten, Sax, Påse mot datorn.
 - Resultatet (Vinst, förlust, oavgjort), datum då spelet ägde rum och genomsnittet av hur många gånger du har vunnit mot datorn (genomsnittet av samtliga spel som någonsin har spelats) ska sparas i en ny tabell i samma databas som de andra två tidigare uppgifter.
 -	Det behövs ingen CRUD funktionalitet på denna del men användaren ska kunna välja att se en lista (R) över alla tidigare spel. Spelarens drag, datorns drag, om det var en vinst eller förlust och datumet då spelet ägde rum.
 
+### Inga ändringar har gjorts mer än att jag har lagt till en sida med reglerna för spelet.
+
 # Designval för projektet
 Hela projektet har lösts på ett objektorienterat sätt. För att underlätta kodningsprocessen har jag valt att endast ha menyer, autofac samt interfaces som hör till dessa i själva huvudprojektet. Alla andra klasser har lagts i separata bibliotek för att programmet ska bli mer modulärt och uppstyrt. Beräkningarna för miniräknaren och formerna har lagts i samma bibliotek då dessa har mycket gemensamt. Jag har valt att hålla samtliga tabeller skilda från varandra då de inte har någon logisk koppling till varandra. Mer om detta val står i dagboken.
 
