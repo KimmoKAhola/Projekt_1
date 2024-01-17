@@ -13,6 +13,7 @@ Användaren ska kunna mata in en form och area och omkrets ska räknas fram. Des
 
 ### Ändringar jag har gjort (med kundens godkännande)
 Area och omkrets sparas inte till databasen utan dessa räknas ut vid behov då användaren väljer att visa alla uträkningar. Denna ändring gjordes för att uppfylla 3NF, dvs att om en kolumn ändras ska detta inte påverka någon annan kolumn. Om vi låter Area om Omkrets vara en del av tabellen bryter vi mot detta eftersom både Area och Omkrets är en funktion av bredd och höjd. Om vi då ändrar på bredd eller höjd måste vi även uppdatera andra kolumner. I Del 2 - miniräknaren sparades dock svaret i en egen kolumn, trots att det bryter mot 3NF, då detta var en explicit formulering i specen.
+Jag gör också antagandet att trianglarna är liksidiga och att ingen felhantering behövs för att kontrollera att formerna i sig är verkliga (alltså att den ska gå att rita på riktigt).
 
 ## Del 2 - Miniräknare
 Användaren ska kunna mata in två tal och sedan bestämmer vilken operator ska användas. 
