@@ -23,7 +23,7 @@ namespace Database.Models
 
         public override string ToString()
         {
-            return $"Id [{Id}] - Shape: {ShapeName,-10} Width: {Width,-10} Height: {Height,-10}";
+            return $"\tId: {Id,3} - Shape: {ShapeName,-15} Width: {Width,-10} Height: {Height,-10}";
         }
     }
 }
