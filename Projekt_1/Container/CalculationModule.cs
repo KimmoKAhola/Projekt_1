@@ -13,8 +13,8 @@ namespace Projekt_1.Container
     {
         protected override void Load(ContainerBuilder myBuilder)
         {
-            myBuilder.RegisterType<MathCalculation>().As<ICalculation>();
-            myBuilder.RegisterType<ShapeCalculation>().As<ICalculation>();
+            myBuilder.RegisterType<MathCalculation>().As<IEntity>();
+            myBuilder.RegisterType<ShapeCalculation>().As<IEntity>();
         }
     }
 }

@@ -155,7 +155,7 @@ namespace Database.Services
             };
             return UserInputValidation.MenuValidation(options, "\n");
         }
-        public static ICalculation? CreateMathCalculation(CalculatorContext mathStrategy)
+        public static IEntity? CreateMathCalculation(CalculatorContext mathStrategy)
         {
             PrintMessages.PrintNotification($"You chose {mathStrategy.Operator}");
             double[]? numbers;
@@ -172,7 +172,7 @@ namespace Database.Services
                 numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
             }
             if (numbers == null) { return null; }
-            ICalculation calculation = new MathCalculation
+            IEntity calculation = new MathCalculation
             {
                 FirstInput = numbers[0],
                 SecondInput = numbers[1],
@@ -184,12 +184,12 @@ namespace Database.Services
 
         public static List<char> GetMathOperators()
         {
-            var shapeInterfaceType = typeof(IMathStrategy);
-            var shapeTypes = Assembly.GetAssembly(typeof(IMathStrategy)).GetTypes()
+            var shapeInterfaceType = typeof(IMath);
+            var shapeTypes = Assembly.GetAssembly(typeof(IMath)).GetTypes()
                 .Where(t => shapeInterfaceType.IsAssignableFrom(t) && !t.IsInterface)
                 .ToList();
 
-            var operatorNames = shapeTypes.Select(t => (IMathStrategy)Activator.CreateInstance(t)).Select(s => s.Operator).ToList();
+            var operatorNames = shapeTypes.Select(t => (IMath)Activator.CreateInstance(t)).Select(s => s.Operator).ToList();
 
             return operatorNames;
         }

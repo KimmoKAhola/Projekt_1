@@ -86,7 +86,7 @@ namespace Projekt_1.Menus
                 PrintMessages.PressAnyKeyToContinue();
             }
         }
-        private ICalculation? GetStrategy()
+        private IEntity? GetStrategy()
         {
             var chosenOperator = MenuChoice.ChooseMathOperator();
             MathContext.SetStrategy(chosenOperator);

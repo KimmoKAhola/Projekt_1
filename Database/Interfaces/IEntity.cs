@@ -1,6 +1,6 @@
 ﻿namespace Database.Interfaces
 {
-    public interface ICalculation
+    public interface IEntity
     {
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }

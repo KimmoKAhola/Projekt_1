@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Mathematics.Operations
 {
-    public class Division : IMathStrategy
+    public class Division : IMath
     {
         public char Operator => '÷';
         public double Calculate(double first, double second)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Mathematics.Operations
 {
-    public class Multiplication : IMathStrategy
+    public class Multiplication : IMath
     {
         public char Operator => '*';
         public double Calculate(double first, double second)

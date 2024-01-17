@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Database.Interfaces
 {
-    public interface IRepository<T> where T : ICalculation
+    public interface IRepository<T> where T : IEntity
     {
         T? Get(int id);
         IEnumerable<T> GetAll();
