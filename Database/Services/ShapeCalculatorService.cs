@@ -206,7 +206,7 @@ namespace Database.Services
             int dateModifiedColumnWidth = Math.Max(allShapes.Max(r => (r.DateLastUpdated?.ToString().Length) ?? 0), dateModifiedHeader.Length);
             int areaColumnWidth = 20;
             int circumferenceColumnWidth = 20;
-            int totalWidth = $"{idHeader} | {shapeHeader} | {widthHeader} | {heightHeader} | {areaHeader} | {circumferenceHeader}".Length + areaColumnWidth + circumferenceColumnWidth + dateColumnWidth + dateModifiedColumnWidth;
+            int totalWidth = $"{idHeader} | {shapeHeader} | {widthHeader} | {heightHeader} | {areaHeader} | {circumferenceHeader}".Length + areaColumnWidth + circumferenceColumnWidth + dateColumnWidth + dateModifiedColumnWidth + 6;
 
             Console.WriteLine($"{idHeader.PadRight(idColumnWidth)} | {shapeHeader.PadRight(shapeColumnWidth)} | {widthHeader.PadRight(widthColumnWidth)}  | {heightHeader.PadRight(heightColumnWidth)}  | {areaHeader.PadRight(areaColumnWidth)}   | {circumferenceHeader.PadRight(circumferenceColumnWidth)}  | {dateHeader.PadRight(dateColumnWidth)} | {dateModifiedHeader.PadRight(dateModifiedColumnWidth)}");
             Console.WriteLine(new string('-', totalWidth));
