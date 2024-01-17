@@ -28,11 +28,11 @@ namespace Database.Models
         {
             if (Operator != '√')
             {
-                return $"\tId{Id,3} - {FirstInput} {Operator} {SecondInput,2} = {Answer,-5}";
+                return $"\tId{Id,3}: {FirstInput} {Operator} {SecondInput,2} = {Answer,-5}";
             }
             else
             {
-                return $"\tId{Id,3} - {FirstInput}^(1/{SecondInput}) = {Answer,-5}";
+                return $"\tId{Id,3}: {FirstInput}^(1/{SecondInput}) = {Answer,-5}";
             }
         }
     }

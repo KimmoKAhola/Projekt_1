@@ -123,7 +123,14 @@ namespace Database.Services
             Console.Write("Enter the new input: ");
             if (double.TryParse(Console.ReadLine(), out double result))
             {
-                entity.SecondInput = result;
+                if (entity.Operator == '√' && result <= 0)
+                {
+                    PrintMessages.PrintErrorMessage("The input has to be positive for the '√' operator.");
+                }
+                else
+                {
+                    entity.SecondInput = result;
+                }
             }
             else
             {
