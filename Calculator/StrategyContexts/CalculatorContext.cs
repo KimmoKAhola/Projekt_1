@@ -11,13 +11,13 @@ namespace Calculations.StrategyContexts
 {
     public class CalculatorContext
     {
-        public CalculatorContext(IMathStrategy? strategy)
+        public CalculatorContext(IMath? strategy)
         {
             Strategy = strategy;
         }
-        public IMathStrategy? Strategy { get; private set; }
+        public IMath? Strategy { get; private set; }
         public char Operator { get; private set; }
-        private static IMathStrategy? CreateStrategy(char choice)
+        private static IMath? CreateStrategy(char choice)
         {
             return choice switch
             {

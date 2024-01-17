@@ -2,7 +2,7 @@
 
 namespace Calculator.Mathematics.Operations
 {
-    public class Addition : IMathStrategy
+    public class Addition : IMath
     {
         public char Operator => '+';
 
