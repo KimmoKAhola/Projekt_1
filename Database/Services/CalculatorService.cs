@@ -127,6 +127,10 @@ namespace Database.Services
                 {
                     PrintMessages.PrintErrorMessage("The input has to be positive for the '√' operator.");
                 }
+                else if (entity.Operator == '÷' && result == 0)
+                {
+                    PrintMessages.PrintErrorMessage("Can not divide by 0.");
+                }
                 else
                 {
                     entity.SecondInput = result;
