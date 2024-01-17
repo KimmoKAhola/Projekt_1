@@ -4,6 +4,7 @@ using Calculator.Mathematics;
 using Calculator.Mathematics.Operations;
 using Calculator.Shapes;
 using Database.DatabaseConfiguration;
+using Database.DatabaseSeeding;
 using Database.Interfaces;
 using Database.Models;
 using Database.Services;
@@ -34,6 +35,7 @@ namespace Projekt_1.Container
             myBuilder.RegisterModule<RepositoryModule>();
 
             myBuilder.RegisterType<Application>().SingleInstance();
+            myBuilder.RegisterType<ShapeSeeding>().SingleInstance();
 
             return myBuilder.Build();
         }

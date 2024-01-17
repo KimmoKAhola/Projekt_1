@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Database.DatabaseConfiguration;
+using Database.DatabaseSeeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -27,10 +28,20 @@ namespace Projekt_1
             }
 
             var config = Configuration.Configure();
+            SeedData(config);
             using (var scope = config.BeginLifetimeScope())
             {
                 var menuService = scope.Resolve<MainMenu>();
                 menuService.Run();
+            }
+        }
+
+        private void SeedData(IContainer config)
+        {
+            using (var scope = config.BeginLifetimeScope())
+            {
+                var seeding = scope.Resolve<ShapeSeeding>();
+                seeding.SeedData();
             }
         }
     }
