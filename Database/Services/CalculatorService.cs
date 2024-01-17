@@ -25,10 +25,7 @@ namespace Database.Services
             if (!double.IsNaN(calculation.Answer))
             {
                 _calculationRepository.Add(calculation);
-                _calculationRepository.Save();
-                Console.Clear();
-                Console.WriteLine($"Your calculation: {calculation.FirstInput} {calculation.Operator} {calculation.SecondInput} = {calculation.Answer}");
-                PrintMessages.PrintSuccessMessage("Save to database was successful.");
+
             }
             else
             {
@@ -39,7 +36,6 @@ namespace Database.Services
         public void DeleteCalculation(int id)
         {
             _calculationRepository.SoftDelete(id);
-            _calculationRepository.Save();
             PrintMessages.PrintNotification("Deletion was successful.");
         }
 
@@ -176,11 +172,11 @@ namespace Database.Services
                     "\nThe first number is the base and the second number is the inverse exponent." +
                     "\nExample: 5 3 gives: (5)^(1/3)" +
                     "\nand 4 2 gives: sqrt(4)");
-                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+                numbers = UserInputValidation.ReturnTwoNumbersForMath($"Enter two numbers, less than {1E100}, separated by a space: ");
             }
             else
             {
-                numbers = UserInputValidation.ReturnTwoNumbersForMath("Enter two numbers, separated by a space: ");
+                numbers = UserInputValidation.ReturnTwoNumbersForMath($"Enter two numbers, less than {1E100}, separated by a space: ");
             }
             if (numbers == null) { return null; }
             IEntity calculation = new MathCalculation

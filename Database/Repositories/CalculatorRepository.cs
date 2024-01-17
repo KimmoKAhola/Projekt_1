@@ -12,6 +12,10 @@ namespace Database.Repositories
         public void Add(MathCalculation entity)
         {
             _dbContext.Add(entity);
+            Save();
+            Console.Clear();
+            Console.WriteLine($"Your calculation: {entity.FirstInput} {entity.Operator} {entity.SecondInput} = {entity.Answer}");
+            PrintMessages.PrintSuccessMessage("Save to database was successful.");
         }
 
         public void SoftDelete(int id)
@@ -21,6 +25,7 @@ namespace Database.Repositories
             {
                 entityToDelete.IsDeleted = true;
                 entityToDelete.DateLastUpdated = DateTime.Now;
+                Save();
             }
         }
 
@@ -36,15 +41,7 @@ namespace Database.Repositories
 
         public void Save()
         {
-            try
-            {
-                _dbContext.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                PrintMessages.PrintErrorMessage($"Something went wrong: {ex.Message}");
-                PrintMessages.PressAnyKeyToContinue();
-            }
+            _dbContext.SaveChanges();
         }
 
         public void Update(MathCalculation entity)

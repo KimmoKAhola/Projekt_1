@@ -90,8 +90,15 @@ namespace InputValidationLibrary
                 string[] userInput = input.Split(' ');
                 if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && first > 0 && double.TryParse(userInput[1], out double second) && second > 0)
                 {
-                    numbers = [Math.Round(first, 2), Math.Round(second, 2)];
-                    return numbers;
+                    if (first > 1E100 || second > 1E100)
+                    {
+                        PrintMessages.PrintErrorMessage($"We do not allow math operations with numbers above {1E100}");
+                    }
+                    else
+                    {
+                        numbers = [Math.Round(first, 2), Math.Round(second, 2)];
+                        return numbers;
+                    }
                 }
                 else
                 {
@@ -115,8 +122,15 @@ namespace InputValidationLibrary
                 string[] userInput = input.Split(' ');
                 if (userInput.Length == 2 && double.TryParse(userInput[0], out double first) && double.TryParse(userInput[1], out double second))
                 {
-                    numbers = [Math.Round(first, 2), Math.Round(second, 2)];
-                    return numbers;
+                    if (first > 1E100 || second > 1E100)
+                    {
+                        PrintMessages.PrintErrorMessage($"We do not allow math operations with numbers above {1E100}");
+                    }
+                    else
+                    {
+                        numbers = [Math.Round(first, 2), Math.Round(second, 2)];
+                        return numbers;
+                    }
                 }
                 else
                 {

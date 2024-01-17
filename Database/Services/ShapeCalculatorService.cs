@@ -157,7 +157,7 @@ namespace Database.Services
         public static IEntity? CreateAreaCalculation(ShapeContext shapeContext)
         {
             PrintMessages.PrintNotification($"You chose {shapeContext.ShapeName}.");
-            double[]? userInput = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
+            double[]? userInput = UserInputValidation.ReturnTwoNumbersForShapes($"Enter two positive numbers, less than {1E100}, for width and height, separated by a space: ");
             if (userInput == null) { return null; }
 
             IEntity calculation = new ShapeCalculation
