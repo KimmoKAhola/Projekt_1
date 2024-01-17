@@ -11,7 +11,11 @@ namespace Calculations.StrategyContexts
 {
     public class CalculatorContext
     {
-        public IMathStrategy? Strategy { get; private set; } = null;
+        public CalculatorContext(IMathStrategy? strategy)
+        {
+            Strategy = strategy;
+        }
+        public IMathStrategy? Strategy { get; private set; }
         public char Operator { get; private set; }
         private static IMathStrategy? CreateStrategy(char choice)
         {

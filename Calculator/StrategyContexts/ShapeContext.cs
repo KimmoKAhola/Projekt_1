@@ -11,7 +11,11 @@ namespace Calculations.StrategyContexts
 {
     public class ShapeContext
     {
-        public IShape? Strategy { get; private set; } = null;
+        public ShapeContext(IShape? strategy)
+        {
+            Strategy = strategy;
+        }
+        public IShape? Strategy { get; private set; }
         public string ShapeName { get; private set; } = string.Empty;
         private static IShape? CreateStrategy(string? choice)
         {
