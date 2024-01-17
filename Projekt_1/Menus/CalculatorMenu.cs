@@ -49,13 +49,15 @@ namespace Projekt_1.Menus
                         {
                             var mathCalculation = GetStrategy();
                             if (mathCalculation != null)
+                            {
                                 DatabaseService.AddCalculation((MathCalculation)mathCalculation);
+                                LoadingBar();
+                            }
                             else
                             {
                                 PrintMessages.PrintErrorMessage("User chose to exit.");
                                 break;
                             }
-                            Thread.Sleep(1500);
                             Console.Clear();
                         }
                         break;
@@ -92,6 +94,15 @@ namespace Projekt_1.Menus
                 return CalculatorService.CreateMathCalculation(MathContext);
             else
                 return null;
+        }
+
+        private static void LoadingBar()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(250);
+            }
         }
         public int? PromptUserForId()
         {

@@ -19,8 +19,8 @@ namespace Projekt_1.Menus
     {
         private List<IMenu> _menus =
         [
-            new CalculatorMenu(new CalculatorContext(), mathService, new MathCalculation()),
-            new ShapeCalculatorMenu(new ShapeContext(), areaService, new ShapeCalculation()),
+            new CalculatorMenu(new CalculatorContext(null), mathService, new MathCalculation()),
+            new ShapeCalculatorMenu(new ShapeContext(null), areaService, new ShapeCalculation()),
             new RockPaperScissorsMenu(rpsService, highScoreService, new Game(new PlayerMoves())),
         ];
 

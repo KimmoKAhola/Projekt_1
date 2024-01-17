@@ -5,6 +5,7 @@ using Database.Interfaces;
 using Database.Models;
 using Database.Services;
 using InputValidationLibrary;
+using Microsoft.IdentityModel.Tokens;
 using Projekt_1.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -51,13 +52,15 @@ namespace Projekt_1.Menus
                         {
                             var areaCalculation = GetStrategy();
                             if (areaCalculation != null)
+                            {
                                 DatabaseService.AddCalculation((ShapeCalculation)areaCalculation);
+                                LoadingBar();
+                            }
                             else
                             {
                                 PrintMessages.PrintErrorMessage("User chose to exit.");
                                 break;
                             }
-                            Thread.Sleep(1500);
                             Console.Clear();
                         }
                         break;
@@ -84,6 +87,15 @@ namespace Projekt_1.Menus
                         return;
                 }
                 PrintMessages.PressAnyKeyToContinue();
+            }
+        }
+
+        private static void LoadingBar()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(250);
             }
         }
 
