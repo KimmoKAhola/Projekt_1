@@ -154,13 +154,13 @@ namespace Database.Services
             }
         }
 
-        public static ICalculation? CreateAreaCalculation(ShapeContext shapeContext)
+        public static IEntity? CreateAreaCalculation(ShapeContext shapeContext)
         {
             PrintMessages.PrintNotification($"You chose {shapeContext.ShapeName}.");
             double[]? userInput = UserInputValidation.ReturnTwoNumbersForShapes("Enter two positive numbers for width and height, separated by a space: ");
             if (userInput == null) { return null; }
 
-            ICalculation calculation = new ShapeCalculation
+            IEntity calculation = new ShapeCalculation
             {
                 Width = userInput[0],
                 Height = userInput[1],

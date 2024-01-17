@@ -14,12 +14,12 @@ namespace Projekt_1.Container
     {
         protected override void Load(ContainerBuilder myBuilder)
         {
-            myBuilder.RegisterType<Addition>().As<IMathStrategy>();
-            myBuilder.RegisterType<Subtraction>().As<IMathStrategy>();
-            myBuilder.RegisterType<Multiplication>().As<IMathStrategy>();
-            myBuilder.RegisterType<Division>().As<IMathStrategy>();
-            myBuilder.RegisterType<Modulus>().As<IMathStrategy>();
-            myBuilder.RegisterType<SquareRoot>().As<IMathStrategy>();
+            myBuilder.RegisterType<Addition>().As<IMath>();
+            myBuilder.RegisterType<Subtraction>().As<IMath>();
+            myBuilder.RegisterType<Multiplication>().As<IMath>();
+            myBuilder.RegisterType<Division>().As<IMath>();
+            myBuilder.RegisterType<Modulus>().As<IMath>();
+            myBuilder.RegisterType<SquareRoot>().As<IMath>();
         }
     }
 }

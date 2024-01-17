@@ -99,7 +99,7 @@ namespace Projekt_1.Menus
             }
         }
 
-        private ICalculation? GetStrategy()
+        private IEntity? GetStrategy()
         {
             string? chosenShape = MenuChoice.ChooseGeometricShape();
             ShapeContext.SetStrategy(chosenShape);
