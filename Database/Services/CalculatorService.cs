@@ -26,6 +26,8 @@ namespace Database.Services
             {
                 _calculationRepository.Add(calculation);
                 _calculationRepository.Save();
+                Console.Clear();
+                Console.WriteLine($"Your calculation: {calculation.FirstInput} {calculation.Operator} {calculation.SecondInput} = {calculation.Answer}");
                 PrintMessages.PrintSuccessMessage("Save to database was successful.");
             }
             else
@@ -73,7 +75,7 @@ namespace Database.Services
                     _calculationRepository.Update(entityToUpdate);
                     entityToUpdate.DateLastUpdated = DateTime.Now;
                     _calculationRepository.Save();
-                    PrintMessages.PrintSuccessMessage("Update was successful.");
+                    PrintMessages.PrintSuccessMessage("The database has been updated.");
                 }
                 else
                 {
@@ -155,7 +157,7 @@ namespace Database.Services
         }
         public static ICalculation? CreateMathCalculation(CalculatorContext mathStrategy)
         {
-            PrintMessages.PrintNotification($"You chose {mathStrategy.Operator}.");
+            PrintMessages.PrintNotification($"You chose {mathStrategy.Operator}");
             double[]? numbers;
             if (mathStrategy.Operator == '√')
             {

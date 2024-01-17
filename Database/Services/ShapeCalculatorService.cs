@@ -25,6 +25,8 @@ namespace Database.Services
         {
             _areaCalculationRepository.Add(calculation);
             _areaCalculationRepository.Save();
+            Console.Clear();
+            Console.WriteLine($"Your shape: {calculation.ShapeName} with width {calculation.Width} and height {calculation.Height}");
             PrintMessages.PrintSuccessMessage("Save to database was successful.");
         }
 
@@ -63,7 +65,7 @@ namespace Database.Services
                 _areaCalculationRepository.Update(entityToUpdate);
                 entityToUpdate.DateLastUpdated = DateTime.Now;
                 _areaCalculationRepository.Save();
-                PrintMessages.PrintSuccessMessage("Update was successful.");
+                PrintMessages.PrintSuccessMessage("The database has been updated.");
             }
             else
             {
@@ -106,27 +108,35 @@ namespace Database.Services
 
         private static void UpdateWidth(ShapeCalculation entity)
         {
-            Console.Write("Enter the new width: ");
-            if (double.TryParse(Console.ReadLine(), out double result))
+            while (true)
             {
-                entity.Width = result;
-            }
-            else
-            {
-                Console.WriteLine("Error");
+                Console.Write("Enter a positive number for the new width: ");
+                if (double.TryParse(Console.ReadLine(), out double result) && result > 0)
+                {
+                    entity.Width = result;
+                    break;
+                }
+                else
+                {
+                    PrintMessages.PrintErrorMessage("Invalid input");
+                }
             }
         }
 
         private static void UpdateHeight(ShapeCalculation entity)
         {
-            Console.Write("Enter the new height: ");
-            if (double.TryParse(Console.ReadLine(), out double result))
+            while (true)
             {
-                entity.Height = result;
-            }
-            else
-            {
-                Console.WriteLine("Error");
+                Console.Write("Enter a positive number for the new width: ");
+                if (double.TryParse(Console.ReadLine(), out double result) && result > 0)
+                {
+                    entity.Height = result;
+                    break;
+                }
+                else
+                {
+                    PrintMessages.PrintErrorMessage("Invalid input");
+                }
             }
         }
 
@@ -140,9 +150,8 @@ namespace Database.Services
             }
             else
             {
-                Console.WriteLine("ERRORRR");
+                PrintMessages.PrintErrorMessage("User chose to exit.");
             }
-            Console.ReadKey();
         }
 
         public static ICalculation? CreateAreaCalculation(ShapeContext shapeContext)
